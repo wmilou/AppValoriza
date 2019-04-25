@@ -5,24 +5,24 @@
       </ion-buttons>
       <ion-title>
         Controle
+     
       </ion-title>
+      
+      
     </ion-toolbar>
   </ion-header>
   
   <ion-content>
+      <ion-searchbar (ionInput)="getData($event)">
 
-  
-    <ion-list >
-      <ion-item-sliding *ngFor="let data of consulta">
-        <ion-item >
-            <p >{{data.NomeCliente}} </p>
-           
+        </ion-searchbar>
+        
+
+    
+        <ion-item *ngFor="let cliente of clientes">
+            <p >Cliente : {{cliente.NomeCliente}} </p> 
         </ion-item>
-        <ion-item-options side="end">
-          <ion-item-option (click)="unread(item)">Excluir</ion-item-option>
-        </ion-item-options>
-      </ion-item-sliding>
-      </ion-list>
+        <p>Nao Foram Encontrados nunhum Cliente</p>
 
    
 

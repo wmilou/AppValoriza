@@ -9,7 +9,7 @@ import { map } from 'rxjs/operators';
 })
 export class ProviderService {
 
-  url: string = "http://192.168.15.16/PhpValoriza/";
+  url: string = "http://192.168.15.11/PhpValoriza/";
 
 
   constructor(public http: Http) { }
