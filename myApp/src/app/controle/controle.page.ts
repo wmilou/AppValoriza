@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ProviderService } from '../provider.service'
 import { Subscriber } from 'rxjs';
 @Component({
   selector: 'app-controle',
@@ -13,37 +12,11 @@ export class ControlePage implements OnInit {
   clientes: Array <{Codigo: any; NomeEmpresa: string; Telefone:string; NomeCliente:string;}>
   clientesTodos: Array <{Codigo: any; NomeEmpresa: string; Telefone:string; NomeCliente:string;}>
 
-  constructor(public servidor: ProviderService) {
-    this.clientes = [];
-    this.getRetornar();
+  constructor() {
   }
 
 
-  getRetornar(){
-    
-    this.servidor.getPegar()
-    .subscribe(
-      data => {
-        
-        this.clientes = data;
-        
-        for(let i = 0; i < data.lenght; i++){
-          this.clientes.push({
-            Codigo: data[i]["Codigo"],
-            NomeEmpresa: data[i]["NomeEmpresa"],
-            Telefone: data[i]["Telefone"],
-            NomeCliente: data[i]["NomeCliente"]
-            
-          });
-        }
-        
-        this.clientesTodos = this.clientes;
-        
-      }
 
-      )
-        err => console.log(err);
-  }
 
 
   getData(event: any){

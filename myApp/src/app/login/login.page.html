@@ -15,13 +15,13 @@
   <ion-list >
       <ion-item>
          <ion-label position="floating">Email</ion-label>
-          <ion-input type="text"></ion-input>
+          <ion-input type="email" [(ngModel)] = "loginForm.email"></ion-input>
       </ion-item>
 
 
       <ion-item>
          <ion-label position="floating">Senha</ion-label>
-          <ion-input type="password"></ion-input>
+          <ion-input type="password" [(ngModel)] = "loginForm.password" ></ion-input>
       </ion-item>
 
     </ion-list>
@@ -29,7 +29,7 @@
 
 
   <div class="padding-40">
-  <div class="botoes centro" (click) = "logar()"  >
+  <div class="botoes centro" (click) = "fazerLogin()"  >
 
             Entrar
   </div>
@@ -40,7 +40,7 @@
 </div>
 </div>
 
-<div *ngIf="cadastro">
+<div *ngIf="cadastro" >
 <div class="centro mg-top-30">
     <img src="assets/Logo_Valoriza.png" class="logo">
 </div>
@@ -51,19 +51,19 @@
 
     <ion-item>
         <ion-label position="floating">Nome</ion-label>
-         <ion-input type="text"></ion-input>
+         <ion-input type="text" [(ngModel)] = "cadastroForm.nome"></ion-input>
      </ion-item>
  
 
     <ion-item>
        <ion-label position="floating">Email</ion-label>
-        <ion-input type="text"></ion-input>
+        <ion-input type="text" [(ngModel)] = "cadastroForm.email"></ion-input>
     </ion-item>
 
 
     <ion-item>
        <ion-label position="floating">Senha</ion-label>
-        <ion-input type="password"></ion-input>
+        <ion-input type="password" [(ngModel)] = "cadastroForm.password"></ion-input>
     </ion-item>
 
   </ion-list>
@@ -71,7 +71,7 @@
 
 
 <div class="padding-40">
-<div class="botoes centro">
+<div class="botoes centro" (click) = "criarNovaConta()">
 
           Cadastrar-se
 </div>
