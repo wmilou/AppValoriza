@@ -13,6 +13,10 @@ import {firebaseConfig} from './configs/firebase';
 import {AuthProvider } from './providers/auth';
 import {FirebaseProvider } from './providers/firebase';
 
+//Plugins
+
+import { IonicStorageModule } from '@ionic/storage';
+
 
 @NgModule({
   declarations: [AppComponent],
@@ -20,6 +24,7 @@ import {FirebaseProvider } from './providers/firebase';
   imports: [
     BrowserModule,
     IonicModule.forRoot(),
+    IonicStorageModule.forRoot(),
     AppRoutingModule,
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFirestoreModule,

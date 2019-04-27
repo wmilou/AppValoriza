@@ -7,19 +7,21 @@ import { AlertController } from '@ionic/angular';
 import { Storage } from '@ionic/storage'
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.page.html',
-  styleUrls: ['./login.page.scss'],
+  selector: 'app-cadastro',
+  templateUrl: './cadastro.page.html',
+  styleUrls: ['./cadastro.page.scss'],
 })
 
 
+export class CadastroPage implements OnInit {
 
-export class LoginPage implements OnInit {
+
 
 //Decreta Campos Nos Formularios
-loginForm = {
-  email: '',
-  password:''
+cadastroForm = {
+  email:'',
+  password:'',
+  nome:''
 }
 
 
@@ -34,32 +36,42 @@ loginForm = {
     ) {
    
    }
- 
 
-  // Faz Login Com FireBase
-  fazerLogin(){  
-    this.presentLoadingWithOptions();
-    this.authProvider.login(this.loginForm)
-    .then ((res) =>{
-      let uid = res.user.uid;
-      this.firebaseProvider.getUser(uid)
-      .then((res)=>{
-        let data = res.data();
-        this.storage.set('usuario', data)
-        .then(()=>{
-          this.router.navigate(['home']);
-        })
-      }) 
-    })
-    .catch ((err) =>{
-      var alerta = 1;
+
+ //criaNovaConta
+ criarNovaConta(){
+  this.presentLoadingWithOptions();
+   this.authProvider.register(this.cadastroForm)
+   .then ((res) =>{
+
+      var alerta;
+      alerta = 2;
       this.presentAlert(alerta);
-     
-    })
+
+      // Coloca Campos No DB
+      let uid = res.user.uid;
+      let data = {
+          uid: uid,
+          nome:this.cadastroForm.nome,
+          email:this.cadastroForm.email
+     };
+
+     this.firebaseProvider.postUser(data)
+     .then(() =>{
+      
+          this.storage.set('usuario',data)
+          .then(()=>{
+          })
+        }) 
+      })
     
+   .catch ((err) =>{
+    var alerta;
+    alerta = 3;
+    this.presentAlert(alerta);
+    
+  }) 
  }
-
-
 
 
 
@@ -81,10 +93,19 @@ loginForm = {
   //Alerta De Sucesso ou Nao
   async presentAlert(alerta) {
     switch(alerta){
-      case 1:{
+      case 2:{
+        const alert = await this.alertController.create({
+          header: 'Sucesso',
+          message:'Usuario Criado Com Sucesso',
+          buttons: ['OK']
+        });
+        await alert.present();
+        break;
+      }
+      case 3:{
         const alert = await this.alertController.create({
           header: 'Ops',
-          message:'Credenciais Incorretas',
+          message:'Essa Conta Ja Existe',
           buttons: ['OK']
         });
         await alert.present();

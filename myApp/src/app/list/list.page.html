@@ -3,25 +3,40 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title>
-      List
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content>
-  <ion-list>
-    <ion-item *ngFor="let item of items">
-      <ion-icon [name]="item.icon" slot="start"></ion-icon>
-      {{item.title}}
-      <div class="item-note" slot="end">
-        {{item.note}}
+    <div *ngIf="cadastro" >
+      <div class="centro mg-top-30">
+          <img src="assets/Logo_Valoriza.png" class="logo">
       </div>
-    </ion-item>
-  </ion-list>
-  <!--
-    <div *ngIf="selectedItem" padding>
-      You navigated here from <b>{{selectedItem.title }}</b>
-    </div>
-  -->
+      
+      
+      <div class="padding-40">
+      <ion-list >
+      
+          <ion-item>
+              <ion-label position="floating">Nome</ion-label>
+               <ion-input type="text" [(ngModel)] = "cadastroForm.nome"></ion-input>
+           </ion-item>
+       
+      
+          <ion-item>
+             <ion-label position="floating">Email</ion-label>
+              <ion-input type="text" [(ngModel)] = "cadastroForm.email"></ion-input>
+          </ion-item>
+      
+      
+          <ion-item>
+             <ion-label position="floating">Senha</ion-label>
+              <ion-input type="password" [(ngModel)] = "cadastroForm.password"></ion-input>
+          </ion-item>
+      
+        </ion-list>
+      </div>
+      
+      
+      <div class="padding-40">
+      <div class="botoes centro" (click) = "criarNovaConta()">
+                Cadastrar-se
+      </div>
+      </div>
+      </div>
 </ion-content>
