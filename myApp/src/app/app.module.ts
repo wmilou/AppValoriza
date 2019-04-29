@@ -14,7 +14,6 @@ import {AuthProvider } from './providers/auth';
 import {FirebaseProvider } from './providers/firebase';
 
 //Plugins
-
 import { IonicStorageModule } from '@ionic/storage';
 
 

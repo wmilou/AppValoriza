@@ -15,8 +15,6 @@ import { Storage } from '@ionic/storage'
 
 export class CadastroPage implements OnInit {
 
-
-
 //Decreta Campos Nos Formularios
 cadastroForm = {
   email:'',
@@ -58,7 +56,6 @@ cadastroForm = {
 
      this.firebaseProvider.postUser(data)
      .then(() =>{
-      
           this.storage.set('usuario',data)
           .then(()=>{
           })

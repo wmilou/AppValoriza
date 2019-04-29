@@ -1,30 +1,43 @@
+<ion-app>
 <ion-header>
-    <ion-toolbar>
-      <ion-buttons slot="start">
-        <ion-menu-button></ion-menu-button>
-      </ion-buttons>
-      <ion-title class="title">
-        Controle
-     
-      </ion-title>
-      
-      
-    </ion-toolbar>
-  </ion-header>
+  <ion-toolbar>
+
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+          
+    <ion-title class="title">
+       Controle Empresas
+    </ion-title>
+          
+  </ion-toolbar>
+</ion-header>
   
-  <ion-content>
-      <ion-searchbar (ionInput)="getData($event)">
+<ion-content>
+<div>
 
-        </ion-searchbar>
-        
+<div>
+    <ion-searchbar placeholder="Digite o nome da Empresa..."      
+      [(ngModel)]="queryText"
+      (ionInput)="filterEmpresa($event)"
+      clearInput>
+    </ion-searchbar>
+</div>
 
-    
-        <ion-item *ngFor="let cliente of clientes">
-            <p >Cliente : {{cliente.NomeCliente}} </p> 
-        </ion-item>
+<ion-list>
+  <ion-item class="list-margin" *ngFor="let e of empresas">
 
-        <p class="centro">Nao Foram Encontrados Clientes</p>
+    <ion-avatar slot="start" class="border-image">
+     <img [src]="e.image">
+    </ion-avatar>
 
-   
+    <ion-label>
+      <p>{{e.name}}</p>
+      <p>CNPJ:{{e.cnpj}}</p>
+    </ion-label>
 
+  </ion-item>
+</ion-list>
+</div>
 </ion-content>
+</ion-app>

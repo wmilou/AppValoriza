@@ -38,10 +38,10 @@ export class AppComponent {
     this.initializeApp();
   }
 
+  // Decide para onde vai o usuario
   initializeApp() {
       this.storage.get('usuario')
       .then((usuario) => {
-        console.log(usuario);
           if(usuario){
             this.router.navigate(['home']); 
           }else{

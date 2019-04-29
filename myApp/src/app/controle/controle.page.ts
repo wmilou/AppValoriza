@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Subscriber } from 'rxjs';
+import { FirebaseProvider } from '../providers/firebase';
+
+import _ from 'lodash';
+
 @Component({
   selector: 'app-controle',
   templateUrl: './controle.page.html',
@@ -7,36 +10,46 @@ import { Subscriber } from 'rxjs';
 })
 export class ControlePage implements OnInit {
 
-  consulta: any;
+  queryText : String;
+  allEmpresas: any;
+  empresas: any;
+  
+  
 
-  clientes: Array <{Codigo: any; NomeEmpresa: string; Telefone:string; NomeCliente:string;}>
-  clientesTodos: Array <{Codigo: any; NomeEmpresa: string; Telefone:string; NomeCliente:string;}>
-
-  constructor() {
-  }
-
-
-
-
-
-  getData(event: any){
-    const val = event.target.value;
-    
-    if (val && val.trim() != ''){
-      this.clientes = this.clientesTodos.filter((consulta) => {
-        return (consulta.NomeCliente.toLowerCase().indexOf(val.toLowerCase()) > -1);
-       
-      })
-    }else{
-      this.clientes = this.clientesTodos;
+  constructor(private firebaseProvider: FirebaseProvider
+    ) {
+      this.getEmpresas();this.queryText = '';
+    }
       
+
+    
+    // Recupera Dados Das Empresas Do firebase
+    getEmpresas(){
+      this.firebaseProvider.getEmpresas()
+      .then((r) =>{
+      this.empresas = r;
+      this.allEmpresas = this.empresas;
+      })
     }
 
+    //Barra De Pesquisa
+    filterEmpresa(event : any){
+      const val = event.target.value;
+
+      if(val && val.trim() != ''){
+        
+        this.empresas = this.allEmpresas.filter((empresas)=>{
+          return(empresas.name.toLowerCase().indexOf(val.toLowerCase()) > - 1);
+        })
+      }else{
+        this.empresas = this.allEmpresas;
+      }
+    }
+ 
+  
+
+
+    ngOnInit() {
+    }
 
   }
-
-  ngOnInit() {
-  }
-
-}
-
