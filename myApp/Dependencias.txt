@@ -1,0 +1,17 @@
+// Dependencias 
+ 
+ - Firebase
+	ionic cordova plugin add cordova-plugin-firebase
+	npm install @ionic-native/firebase
+	
+ - RXJS
+	npm install rxjs
+	
+ - Storage 
+	ionic cordova plugin add cordova-sqlite-storage
+	npm install --save @ionic/storage
+	
+ - AngularFire2
+	npm install angularfire2
+	
+	
