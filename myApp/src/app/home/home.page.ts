@@ -23,7 +23,6 @@ export class HomePage {
      this.storage.get('usuario')
      .then((res) => {
         this.usuario = res.nome; 
-        console.log(this.usuario);
       })
     }
   }
