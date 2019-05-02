@@ -23,7 +23,8 @@ const routes: Routes = [
   },
   { path: 'cadastro', 
     loadChildren: './cadastro/cadastro.module#CadastroPageModule' 
-  }
+  },
+  { path: 'cadastro-empresa', loadChildren: './cadastro-empresa/cadastro-empresa.module#CadastroEmpresaPageModule' }
 ];
 
 @NgModule({

@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FirebaseProvider } from '../providers/firebase';
 
-import _ from 'lodash';
-
 @Component({
   selector: 'app-controle',
   templateUrl: './controle.page.html',
@@ -14,6 +12,8 @@ export class ControlePage implements OnInit {
   allEmpresas: any;
   empresas: any;
   
+  //Variavel Para Parar Spinner
+  spinner = true;
   
 
   constructor(private firebaseProvider: FirebaseProvider
@@ -29,6 +29,7 @@ export class ControlePage implements OnInit {
       .then((r) =>{
       this.empresas = r;
       this.allEmpresas = this.empresas;
+      this.pararSpinner();
       })
     }
 
@@ -39,14 +40,17 @@ export class ControlePage implements OnInit {
       if(val && val.trim() != ''){
         
         this.empresas = this.allEmpresas.filter((empresas)=>{
-          return(empresas.name.toLowerCase().indexOf(val.toLowerCase()) > - 1);
+          return(empresas.cnpj.toLowerCase().indexOf(val.toLowerCase()) > - 1);
         })
       }else{
         this.empresas = this.allEmpresas;
       }
     }
- 
-  
+
+    //Para Loading Da Pagina
+    pararSpinner(){
+      this.spinner = false;
+    }
 
 
     ngOnInit() {

@@ -1,23 +1,23 @@
 import { Injectable } from "@angular/core";
 import { AngularFirestore } from "angularfire2/firestore";
-import { getDefaultService } from 'selenium-webdriver/edge';
+
 
 @Injectable()
 export class FirebaseProvider {
   constructor(private afs: AngularFirestore) { }
 
-//Create user on firestore
+//Cria usuario no firebase
 postUser = data =>
   this.afs
     .collection("Users")
     .doc(data.uid)
     .set(data);
 
+//Puxa Usuario Do firebase
 getUser(uid){
   return this.afs.firestore.collection('Users').doc(uid)
   .get();
 }
-
 // Puxa Os Dados Das Empresas
 getEmpresas(){
   return new Promise((resolve, reject) =>{
@@ -35,6 +35,10 @@ getEmpresas(){
       })
     })
   }
+
+  // Metodo Cadastra Empresa
+  postEmpresa = data =>
+  this.afs.firestore.collection('Empresas').doc(data.cnpj).set(data);
 }
 
 

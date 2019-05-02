@@ -22,9 +22,14 @@ export class AppComponent {
       icon: 'stats'
     },
     {
-      title:'Cadastro',
+      title:'Cadastro Usuario',
       url: '/cadastro',
       icon:'person-add'
+    },
+    {
+      title:'Cadastro Empresa',
+      url:'/cadastro-empresa',
+      icon:'add'
     }
   ];
 
@@ -49,11 +54,10 @@ export class AppComponent {
           }
       })
 
-
-
+      
       this.platform.ready().then(() => {
-        this.statusBar.overlaysWebView(true);
-        this.statusBar.backgroundColorByHexString('#36FF33');
+      //Muda Cor da Barra De Status
+      this.statusBar.backgroundColorByHexString('#36FF33');
       this.splashScreen.hide();
     });
   }
