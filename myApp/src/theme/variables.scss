@@ -75,7 +75,44 @@
   --ion-color-light-shade: #d7d8da;
   --ion-color-light-tint: #f5f6f9;
 
-  --ion-toolbar-background:#03e430;
+  --ion-toolbar-background:#17b336;
+
+  ion-spinner {
+    width: 90px !important;
+    height: 90px !important;
+  }
+  // Variaveis Globais
+.title{
+  color: #fff;
+}
+.centro{
+  text-align: center;
+}
+.padding-40{
+  padding: 40px
+}
+.botoes{
+  padding: 10px;
+  border-radius: 100px;
+  color:#ffffff;
+  background: #3880ff
+}
+.mg-top-5{
+  margin-top: 5px;
+  }
+.mg-top-10{
+  margin-top: 10px;
+  }
+.mg-top-30{
+  margin-top: 200px;
+  }
+.mg-top-20{
+  margin-top: 20px;
+  }
+.mg-top-40{
+  margin-top: 40px;
+}
+
 
 }
 

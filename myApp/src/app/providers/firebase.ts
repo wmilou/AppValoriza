@@ -29,9 +29,7 @@ getEmpresas(){
         item.id =  d.id;
         array.push(item);
         });
-
-        resolve(array);
-          
+        resolve(array);    
       })
     })
   }

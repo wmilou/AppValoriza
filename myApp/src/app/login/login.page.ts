@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { LoadingController } from '@ionic/angular';
 import { Router } from "@angular/router"
 import { AuthProvider} from '../providers/auth';
 import { FirebaseProvider } from '../providers/firebase';
@@ -16,6 +15,10 @@ import { Storage } from '@ionic/storage'
 
 export class LoginPage implements OnInit {
 
+  login = true;
+  spinner = false;
+  
+
 //Decreta Campos Nos Formularios
 loginForm = {
   email: '',
@@ -28,7 +31,6 @@ loginForm = {
     private router: Router,
     private authProvider: AuthProvider,
     private firebaseProvider: FirebaseProvider,
-    public loadingController: LoadingController,
     public alertController: AlertController,
     private storage : Storage
     ) {
@@ -38,7 +40,7 @@ loginForm = {
 
   // Faz Login Com FireBase
   fazerLogin(){  
-    this.presentLoadingWithOptions();
+    this.rodarSpinner();
     this.authProvider.login(this.loginForm)
     .then ((res) =>{
       let uid = res.user.uid;
@@ -54,26 +56,21 @@ loginForm = {
     .catch ((err) =>{
       var alerta = 1;
       this.presentAlert(alerta);
+      this.paraSpinner();
      
     })
     
  }
 
-
-
-
-
   // Loading 
-  async presentLoadingWithOptions() {
-    const loading = await this.loadingController.create({
-      duration: 3000,
-      spinner:"lines-small",
-      message: 'Aguarde um Momento ...',
-      translucent: true,
-      cssClass: 'custom-class custom-loading'
-    });
-    return await loading.present();
-    
+ rodarSpinner(){
+  this.login = false;
+  this.spinner = true;
+}
+  //Parar Loading
+paraSpinner(){
+  this.login = true;
+  this.spinner = false;
   }
 
 

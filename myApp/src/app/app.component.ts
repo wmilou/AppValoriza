@@ -57,7 +57,7 @@ export class AppComponent {
       
       this.platform.ready().then(() => {
       //Muda Cor da Barra De Status
-      this.statusBar.backgroundColorByHexString('#36FF33');
+      this.statusBar.backgroundColorByHexString('#17b336');
       this.splashScreen.hide();
     });
   }

@@ -1,10 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { LoadingController } from '@ionic/angular';
-import { Router } from "@angular/router"
-import { AuthProvider} from '../providers/auth';
 import { FirebaseProvider } from '../providers/firebase';
 import { AlertController } from '@ionic/angular';
-import { Storage } from '@ionic/storage'
+
 
 @Component({
   selector: 'app-cadastro-empresa',
@@ -15,23 +12,23 @@ import { Storage } from '@ionic/storage'
 export class CadastroEmpresaPage implements OnInit {
  //Imagem Que Vai Aparecer nos Resultados
   image = 'https://www.visaopontocom.com/wp-content/uploads/2017/02/icone-empresa.png'
+  cadastro = true;
+  spinner = false;
+  
+
 
 //Decreta Campos Nos Formularios
 cadastroEmpresaForm = {
   nome:'',
-  cnpj:'',
-  local:''
+  cnpj:''
 }
 
 
   // Construtor
-  constructor(
-    private router: Router,
-    private authProvider: AuthProvider,
+  constructor(   
     private firebaseProvider: FirebaseProvider,
-    public loadingController: LoadingController,
     public alertController: AlertController,
-    private storage : Storage
+    
     ) {
    
    }
@@ -39,13 +36,12 @@ cadastroEmpresaForm = {
 
  //criaNovaEmpresa 
  criarNovaEmpresa(){
-  this.presentLoadingWithOptions();
+  this.rodarSpinner();
    
   // Coloca Campos No DB
   let data = {
       image:this.image,
       name:this.cadastroEmpresaForm.nome,
-      local:this.cadastroEmpresaForm.local,
       cnpj:this.cadastroEmpresaForm.cnpj
 
   };
@@ -55,29 +51,30 @@ cadastroEmpresaForm = {
        var alerta;
        alerta = 2;
        this.presentAlert(alerta); 
+       this.paraSpinner();
         })   
     
     .catch ((err) =>{
       var alerta;
       alerta = 3;
-      this.presentAlert(alerta);    
+      this.presentAlert(alerta);  
+      this.paraSpinner();  
   }) 
  }
 
-
-
   // Loading 
-  async presentLoadingWithOptions() {
-    const loading = await this.loadingController.create({
-      duration: 3000,
-      spinner:"lines-small",
-      message: 'Aguarde um Momento ...',
-      translucent: true,
-      cssClass: 'custom-class custom-loading'
-    });
-    return await loading.present();
-    
+  rodarSpinner(){
+    this.cadastro = false;
+    this.spinner = true;
   }
+    //Parar Loading
+  paraSpinner(){
+    this.cadastro = true;
+    this.spinner = false;
+    }
+  
+
+
 
 
 

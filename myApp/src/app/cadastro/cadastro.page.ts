@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { LoadingController } from '@ionic/angular';
 import { Router } from "@angular/router"
 import { AuthProvider} from '../providers/auth';
 import { FirebaseProvider } from '../providers/firebase';
@@ -14,6 +13,9 @@ import { Storage } from '@ionic/storage'
 
 
 export class CadastroPage implements OnInit {
+  cadastro = true;
+  spinner = false;
+  
 
 //Decreta Campos Nos Formularios
 cadastroForm = {
@@ -28,7 +30,6 @@ cadastroForm = {
     private router: Router,
     private authProvider: AuthProvider,
     private firebaseProvider: FirebaseProvider,
-    public loadingController: LoadingController,
     public alertController: AlertController,
     private storage : Storage
     ) {
@@ -38,14 +39,13 @@ cadastroForm = {
 
  //criaNovaConta
  criarNovaConta(){
-  this.presentLoadingWithOptions();
+  this.rodarSpinner();
    this.authProvider.register(this.cadastroForm)
    .then ((res) =>{
 
       var alerta;
       alerta = 2;
       this.presentAlert(alerta);
-
       // Coloca Campos No DB
       let uid = res.user.uid;
       let data = {
@@ -56,9 +56,7 @@ cadastroForm = {
 
      this.firebaseProvider.postUser(data)
      .then(() =>{
-          this.storage.set('usuario',data)
-          .then(()=>{
-          })
+       this.paraSpinner();
         }) 
       })
     
@@ -66,24 +64,23 @@ cadastroForm = {
     var alerta;
     alerta = 3;
     this.presentAlert(alerta);
-    
+    this.paraSpinner();
   }) 
  }
 
 
-
   // Loading 
-  async presentLoadingWithOptions() {
-    const loading = await this.loadingController.create({
-      duration: 3000,
-      spinner:"lines-small",
-      message: 'Aguarde um Momento ...',
-      translucent: true,
-      cssClass: 'custom-class custom-loading'
-    });
-    return await loading.present();
-    
+  rodarSpinner(){
+    this.cadastro = false;
+    this.spinner = true;
   }
+    //Parar Loading
+  paraSpinner(){
+    this.cadastro = true;
+    this.spinner = false;
+    }
+  
+
 
 
 
