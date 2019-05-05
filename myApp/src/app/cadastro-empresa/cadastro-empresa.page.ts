@@ -13,14 +13,17 @@ export class CadastroEmpresaPage implements OnInit {
  //Imagem Que Vai Aparecer nos Resultados
   image = 'https://www.visaopontocom.com/wp-content/uploads/2017/02/icone-empresa.png'
   cadastro = true;
+  campos = false;
   spinner = false;
-  
+  camposocultar = true;
 
 
 //Decreta Campos Nos Formularios
 cadastroEmpresaForm = {
   nome:'',
-  cnpj:''
+  cnpj:'',
+  local:'',
+  comentario:''
 }
 
 
@@ -42,7 +45,9 @@ cadastroEmpresaForm = {
   let data = {
       image:this.image,
       name:this.cadastroEmpresaForm.nome,
-      cnpj:this.cadastroEmpresaForm.cnpj
+      cnpj:this.cadastroEmpresaForm.cnpj,
+      local:this.cadastroEmpresaForm.local,
+      comentario:this.cadastroEmpresaForm.comentario
 
   };
    
@@ -65,13 +70,26 @@ cadastroEmpresaForm = {
   // Loading 
   rodarSpinner(){
     this.cadastro = false;
+    this.campos = false;
     this.spinner = true;
   }
     //Parar Loading
   paraSpinner(){
     this.cadastro = true;
+    this.campos = true;
     this.spinner = false;
     }
+  
+  //Mostrar Demais Campos Do Formulario  
+  mostrarCampos(){
+    this.campos = true;
+    this.camposocultar = false;
+  }
+  ocultarCampos(){
+    this.campos = false;
+    this.camposocultar = true;
+
+  }
   
 
 

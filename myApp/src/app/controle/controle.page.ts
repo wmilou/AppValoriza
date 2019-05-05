@@ -40,7 +40,7 @@ export class ControlePage implements OnInit {
       if(val && val.trim() != ''){
         
         this.empresas = this.allEmpresas.filter((empresas)=>{
-          return(empresas.cnpj.toLowerCase().indexOf(val.toLowerCase()) > - 1);
+          return(empresas.name.toLowerCase().indexOf(val.toLowerCase()) > - 1);
         })
       }else{
         this.empresas = this.allEmpresas;

@@ -17,7 +17,7 @@ export class AppComponent {
       icon: 'home'
     },
     {
-      title: 'Controle',
+      title: 'Consulta Empresas',
       url: '/controle',
       icon: 'stats'
     },

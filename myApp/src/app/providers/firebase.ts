@@ -36,7 +36,7 @@ getEmpresas(){
 
   // Metodo Cadastra Empresa
   postEmpresa = data =>
-  this.afs.firestore.collection('Empresas').doc(data.cnpj).set(data);
+  this.afs.firestore.collection('Empresas').add(data);
 }
 
 

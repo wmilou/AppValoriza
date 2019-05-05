@@ -33,16 +33,59 @@
           <ion-input type="text" [(ngModel)] = "cadastroEmpresaForm.cnpj"></ion-input>
       </ion-item>
 
+      <ion-item *ngIf = "campos">
+          <ion-label position="floating">Estado</ion-label>
+           <ion-input type="text" [(ngModel)] = "cadastroEmpresaForm.estado"></ion-input>
+       </ion-item>
+       
+       <ion-item *ngIf = "campos">
+           <ion-label position="floating">Comentario</ion-label>
+           <ion-input type="text" [(ngModel)] = "cadastroEmpresaForm.comentario"></ion-input>
+       </ion-item>
     </ion-list>
-  </div>
-  
-  
-  <div class="padding-40">
-  <div class="botoes centro" (click) = "criarNovaEmpresa()">
-    Cadastrar Empresa
-  </div>
-  </div>
-  </div>
+
+
+
+
+
+
+
+
+
+
+
+    
+    <div class="centro" (click) = "ocultarCampos()" *ngIf="campos">
+      <ion-icon class="seta" name="arrow-dropup" ></ion-icon>
+    </div>
+    <div class="centro" (click) = "mostrarCampos()" *ngIf = "camposocultar">
+      <ion-icon class="seta" name="arrow-dropdown" ></ion-icon>
+    </div>
+
+    <div class="padding-20" *ngIf="campos" >  
+      <div class="botoes centro" (click) = "criarNovaEmpresa()">
+         Cadastrar Empresa
+      </div> 
+    </div>
+
+
+ 
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   <div class="centro" *ngIf = "spinner">
       <div class="centro mg-top-30">
@@ -53,4 +96,7 @@
     <ion-spinner name="crescent" color="success"></ion-spinner>
   </div>
   </div>
+
+
+
 </ion-content>
