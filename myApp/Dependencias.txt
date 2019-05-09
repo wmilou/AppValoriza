@@ -1,15 +1,20 @@
 // Dependencias 
- 
+	
+ - Ionic
+	npm i -g ionic
+ - Cordova
+	npm i -g cordova  
+
  - Firebase
-	ionic cordova plugin add cordova-plugin-firebase
 	npm install @ionic-native/firebase
+	ionic cordova plugin add cordova-plugin-firebase
 	
  - RXJS
 	npm install rxjs
 	
  - Storage 
-	ionic cordova plugin add cordova-sqlite-storage
 	npm install --save @ionic/storage
+	ionic cordova plugin add cordova-sqlite-storage
 	
  - AngularFire2
 	npm install angularfire2
