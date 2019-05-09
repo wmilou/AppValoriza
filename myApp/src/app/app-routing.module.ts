@@ -24,8 +24,14 @@ const routes: Routes = [
   { path: 'cadastro', 
     loadChildren: './cadastro/cadastro.module#CadastroPageModule' 
   },
-  { path: 'cadastro-empresa',
-    loadChildren: './cadastro-empresa/cadastro-empresa.module#CadastroEmpresaPageModule' }
+  { 
+    path: 'cadastro-empresa',
+    loadChildren: './cadastro-empresa/cadastro-empresa.module#CadastroEmpresaPageModule' 
+  },
+  { 
+    path: 'home-funcionario', 
+    loadChildren: './home-funcionario/home-funcionario.module#HomeFuncionarioPageModule' 
+}
 ];
 
 @NgModule({

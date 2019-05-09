@@ -48,15 +48,23 @@ loginForm = {
       .then((res)=>{
         let data = res.data();
         this.storage.set('usuario', data)
-        .then(()=>{
+        .then((data)=>{
+          if(data.adm == true){
+          this.paraSpinner();
           this.router.navigate(['home']);
+        }else{
+          this.paraSpinner();
+          this.router.navigate(['home-funcionario']);
+        }
+
         })
       }) 
     })
     .catch ((err) =>{
+      this.paraSpinner();
       var alerta = 1;
       this.presentAlert(alerta);
-      this.paraSpinner();
+      
      
     })
     

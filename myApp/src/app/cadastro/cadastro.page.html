@@ -8,7 +8,7 @@
       </ion-title>
     </ion-toolbar>
   </ion-header>
-
+<!--Cadastra novo usuario-->
 <ion-content>
   <div *ngIf="cadastro">
     <div class="centro mg-top-30">
@@ -18,10 +18,15 @@
         <h3 class="centro">Cadastrar Novo Usuario</h3>
     </div>
       
-    
+
+    <!--Formulario-->
     <div class="padding-40">
     <ion-list >
-    
+        <ion-item>
+          <ion-label>Administrador </ion-label>
+          <ion-toggle [(ngModel)] = "cadastroForm.adm"></ion-toggle>
+        </ion-item>
+
         <ion-item>
             <ion-label position="floating">Nome</ion-label>
              <ion-input type="text" [(ngModel)] = "cadastroForm.nome"></ion-input>
@@ -43,6 +48,7 @@
     </div>
     
     
+    <!--Botao cadastre-se -->
     <div class="padding-40">
     <div class="botoes centro" (click) = "criarNovaConta()">
       Cadastrar-se
@@ -50,6 +56,8 @@
     </div>
     </div>
 
+
+    <!--Tela De loading-->
     <div class="centro" *ngIf = "spinner">
         <div class="centro mg-top-30">
             <img src="assets/Logo_Valoriza.png" class="logo">

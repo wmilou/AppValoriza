@@ -47,9 +47,12 @@ export class AppComponent {
   initializeApp() {
       this.storage.get('usuario')
       .then((usuario) => {
-          if(usuario){
+          if(usuario.adm == true){
             this.router.navigate(['home']); 
           }else{
+            if(usuario.adm == false){
+              this.router.navigate(['home-funcionario'])
+            }else
             this.router.navigate(['login'])
           }
       })

@@ -1,0 +1,61 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title class="title">Lancador De Peso</ion-title>
+     <!-- Botao de logout -->
+    <ion-buttons slot="primary" class="title">
+        <ion-button (click)="signOut()">
+          Sair
+          <ion-icon slot="end" name="close" (click)="signOut()"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    <!--<ion-icon name="close" (click)="signOut()"></ion-icon>-->
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!--Lanca Pesos-->
+  <div class="centro mg-top-30">
+      <img src="assets/Logo_Valoriza.png" class="logo">
+  </div>
+  <div class="mg-top-30">
+    <h3 class="centro">Lançar Pesos</h3>
+</div>
+ <!--Formulario-->
+ <div class="padding-40">
+        
+  <ion-list >
+
+
+      <ion-item>
+          <ion-label position="floating">Placa</ion-label>
+           <ion-input type="text" [(ngModel)] = "funcionarioForm.placa"></ion-input>
+       </ion-item>
+   
+       <ion-item>
+          <ion-label position="floating">Nome</ion-label>
+           <ion-input type="text" disabled="true" value={{usuario}} [(ngModel)] = "funcionarioForm.nome"></ion-input>
+       </ion-item>
+
+      <ion-item>
+         <ion-label position="floating">Cnpj Gestora</ion-label>
+          <ion-input type="number" [(ngModel)] = "funcionarioForm.cnpj"></ion-input>
+      </ion-item>
+  
+  
+      <ion-item>
+         <ion-label position="floating">Estado</ion-label>
+          <ion-input type="password" [(ngModel)] = "funcionarioForm.estado"></ion-input>
+      </ion-item>
+  
+    </ion-list>
+  </div>
+ 
+  <div class="centro">
+    <ion-button class="botao centro" (click) = "criarNovaConta()">
+      Enviar
+    </ion-button>
+  <ion-button class= "botao centro" (click) = "Limpar()">
+      Limpar
+  </ion-button>
+  </div>
+</ion-content>

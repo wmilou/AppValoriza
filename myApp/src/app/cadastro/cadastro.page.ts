@@ -15,13 +15,14 @@ import { Storage } from '@ionic/storage'
 export class CadastroPage implements OnInit {
   cadastro = true;
   spinner = false;
-  
+
 
 //Decreta Campos Nos Formularios
 cadastroForm = {
   email:'',
   password:'',
-  nome:''
+  nome:'',
+  adm:false
 }
 
 
@@ -51,7 +52,8 @@ cadastroForm = {
       let data = {
           uid: uid,
           nome:this.cadastroForm.nome,
-          email:this.cadastroForm.email
+          email:this.cadastroForm.email,
+          adm:this.cadastroForm.adm
      };
 
      this.firebaseProvider.postUser(data)
