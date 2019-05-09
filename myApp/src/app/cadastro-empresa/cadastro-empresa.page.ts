@@ -22,8 +22,23 @@ export class CadastroEmpresaPage implements OnInit {
 cadastroEmpresaForm = {
   nome:'',
   cnpj:'',
-  local:'',
-  comentario:''
+  estado:'',
+  municipio:'',
+  endereco:'',
+  numero:'',
+  bairro:'',
+  cep:'',
+  telefone:'',
+  contato:'',
+  email:'',
+  ramo:'',
+  bandeira:'',
+  potencial:'',
+  prestador:'',
+  representante:'',
+  plano:'',
+  datainicio:'',
+  datatermino:''
 }
 
 
@@ -46,9 +61,23 @@ cadastroEmpresaForm = {
       image:this.image,
       name:this.cadastroEmpresaForm.nome,
       cnpj:this.cadastroEmpresaForm.cnpj,
-      local:this.cadastroEmpresaForm.local,
-      comentario:this.cadastroEmpresaForm.comentario
-
+      estado:this.cadastroEmpresaForm.estado,
+      municipio:this.cadastroEmpresaForm.municipio,
+      endereco:this.cadastroEmpresaForm.endereco,
+      numero:this.cadastroEmpresaForm.numero,
+      bairro:this.cadastroEmpresaForm.bairro,
+      cep:this.cadastroEmpresaForm.cep,
+      telefone:this.cadastroEmpresaForm.telefone,
+      contato:this.cadastroEmpresaForm.contato,
+      email:this.cadastroEmpresaForm.email,
+      ramo:this.cadastroEmpresaForm.email,
+      bandeira:this.cadastroEmpresaForm.bandeira,
+      potencial:this.cadastroEmpresaForm.potencial,
+      prestador:this.cadastroEmpresaForm.prestador,
+      representante:this.cadastroEmpresaForm.representante,
+      plano:this.cadastroEmpresaForm.plano,
+      datainicio:this.cadastroEmpresaForm.datainicio,
+      datatermino:this.cadastroEmpresaForm.datatermino
   };
    
      this.firebaseProvider.postEmpresa(data)
