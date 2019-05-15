@@ -8,7 +8,9 @@
       </ion-header>
       <ion-content>
         <ion-list>
-          <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages">
+
+      <div *ngFor="let p of appPages">
+          <ion-menu-toggle auto-hide="false" *ngIf="!p.children">
             <ion-item [routerDirection]="'root'" [routerLink]="[p.url]">
               <ion-icon slot="start" [name]="p.icon"></ion-icon>
               <ion-label>
@@ -16,6 +18,40 @@
               </ion-label>
             </ion-item>
           </ion-menu-toggle>
+
+          <ion-item button *ngIf="p.children"  (click)="p.open = !p.open"
+            [class.active-aparent]="p.open" detail="false">
+            <ion-icon slot="start" name="arrow-forward" *ngIf="!p.open"></ion-icon>
+            <ion-icon slot="start" name="arrow-down" *ngIf="p.open"></ion-icon>
+            <ion-label>{{p.title}}</ion-label>
+          </ion-item>
+
+
+          <ion-list *ngIf="p.open" >
+              <ion-menu-toggle auto-hide="false">
+                  <ion-item *ngFor="let sub of p.children" [routerDirection]="'root'" [routerLink]="[sub.url]">
+                    <ion-icon  slot="start" [name]="sub.icon"></ion-icon>
+                    <ion-label >
+                      {{sub.title}}
+                    </ion-label>
+                  </ion-item>
+          </ion-menu-toggle>
+
+
+        </ion-list>
+
+        </div>
+        <div>
+          <ion-list>
+            <ion-menu-toggle auto-hide="false">
+            <ion-item  (click) = "signOut()">
+                <ion-icon name="close-circle-outline"></ion-icon>
+                <ion-label style="margin-left: 33px;">Sair</ion-label>
+            </ion-item>
+            </ion-menu-toggle>
+          </ion-list>
+        </div>
+
         </ion-list>
       </ion-content>
     </ion-menu>

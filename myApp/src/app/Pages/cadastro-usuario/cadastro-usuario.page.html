@@ -1,0 +1,70 @@
+<ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <ion-title class="title">
+        Cadastro Usuario
+      </ion-title>
+    </ion-toolbar>
+  </ion-header>
+<!--Cadastra novo usuario-->
+<ion-content>
+  <div *ngIf="cadastro">
+    <div class="centro mg-top-30">
+        <img src="assets/Logo_Valoriza.png" class="logo">
+    </div>
+    <div class="mg-top-30">
+        <h3 class="centro">Cadastrar Novo Usuario</h3>
+    </div>
+      
+
+    <!--Formulario-->
+    <div class="padding-40">
+    <ion-list >
+        <ion-item>
+          <ion-label>Administrador </ion-label>
+          <ion-toggle [(ngModel)] = "cadastroForm.adm"></ion-toggle>
+        </ion-item>
+
+        <ion-item>
+            <ion-label position="floating">Nome</ion-label>
+             <ion-input type="text" [(ngModel)] = "cadastroForm.nome"></ion-input>
+         </ion-item> 
+     
+    
+        <ion-item>
+           <ion-label position="floating">Email</ion-label>
+            <ion-input type="text" [(ngModel)] = "cadastroForm.email"></ion-input>
+        </ion-item>
+    
+    
+        <ion-item>
+           <ion-label position="floating">Senha</ion-label>
+            <ion-input type="password" [(ngModel)] = "cadastroForm.password"></ion-input>
+        </ion-item>
+    
+      </ion-list>
+    </div>
+    
+    
+    <!--Botao cadastre-se -->
+    <div class="padding-40">
+    <div class="botoes centro" (click) = "criarNovaConta()">
+      Cadastrar-se
+    </div>
+    </div>
+    </div>
+
+
+    <!--Tela De loading-->
+    <div class="centro" *ngIf = "spinner">
+        <div class="centro mg-top-30">
+            <img src="assets/Logo_Valoriza.png" class="logo">
+        </div>
+    <div class="mg-top-30">  
+      <h2 >Aguarde Um Momento ...</h2>
+      <ion-spinner name="crescent" color="success"></ion-spinner>
+    </div>
+    </div>
+</ion-content>

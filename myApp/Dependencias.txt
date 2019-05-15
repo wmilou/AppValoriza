@@ -1,5 +1,10 @@
 // Dependencias 
- 
+ - ionic
+	npm i -g ionic
+
+ - Cordova
+	npm i -g cordova
+
  - Firebase
 	ionic cordova plugin add cordova-plugin-firebase
 	npm install @ionic-native/firebase
@@ -14,4 +19,5 @@
  - AngularFire2
 	npm install angularfire2
 	
-	
+ - Mascara
+	npm install @pluritech/ion-mask --save	

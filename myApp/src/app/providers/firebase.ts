@@ -33,11 +33,61 @@ getEmpresas(){
       })
     })
   }
+   // Puxa Os Id Das Empresas
+  getIdEmpresas(){
+    return new Promise((resolve, reject) =>{
+      this.afs.firestore.collection('Empresas').get()
+      .then((r) =>{
+        let array = [];
+          r.forEach((d) => {
+          let item = d.data();
+          item.id =  d.id;
+          array.push(item);
+          });
+          resolve(array);
+          return array;    
+        })
+      })
+    }
 
+ 
+getIdResiduo(){
+  return new Promise((resolve, reject) =>{
+    this.afs.firestore.collection('Empresas').get()
+    .then((r) =>{
+      let array = [];
+        r.forEach((d) => {
+        let item = d.data();
+        item.id =  d.id;
+        array.push(item);
+        });
+        resolve(array);    
+      })
+    })
+  }
+
+  // Metodo Cadastra Plano
+  postPlano = data =>
+  this.afs.firestore.collection('Tipos-Planos').add(data);
+
+  // Metodo Cadastra Residuo
+  postResiduo = data =>
+  this.afs.firestore.collection('Tipos-Residuo').add(data);
+  
   // Metodo Cadastra Empresa
   postEmpresa = data =>
   this.afs.firestore.collection('Empresas').add(data);
+
+  // Metodo Cadastra Representante
+  postRepresentante = data =>
+  this.afs.firestore.collection('Representantes').add(data);
+
+  // Metodo Cadastra Prestador
+  postPrestador = data =>
+  this.afs.firestore.collection('Prestador-Servico').add(data);
 }
+
+
 
 
 

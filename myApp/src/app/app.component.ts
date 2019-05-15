@@ -4,12 +4,14 @@ import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Router } from '@angular/router'
-
+import { AngularFireAuth } from '@angular/fire/auth';
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html'
 })
 export class AppComponent {
+  subPageCadastro;
+
   public appPages = [
     {
       title: 'Home',
@@ -17,20 +19,50 @@ export class AppComponent {
       icon: 'home'
     },
     {
-      title: 'Consulta Empresas',
+      title:'Cadastros',
+      children:[
+        {
+          title:'Cadastro Usuario',
+          url:'/cadastro-usuario',
+          icon:'arrow-dropright'
+        },
+        {
+          title:'Cadastro Cliente',
+          url:'/cadastro-empresa',
+          icon:'arrow-dropright'
+        },
+        {
+          title:'Cadastro Prest. Servico',
+          url:'/cadastro-prestador-servico',
+          icon:'arrow-dropright'
+        },
+        {
+          title:'Cadastro Representante',
+          url:'/cadastro-representante-comercial',
+          icon:'arrow-dropright'
+        },
+        {
+          title:'Cadastro Residuo',
+          url:'/cadastro-residuo',
+          icon:'arrow-dropright'
+        },
+        {
+          title:'Cadastro Tipos De Planos',
+          url:'/cadastro-tipos-planos',
+          icon:'arrow-dropright'
+        }
+      ]
+    },
+    {
+      title: 'Consulta Clientes',
       url: '/controle',
       icon: 'stats'
     },
-    {
-      title:'Cadastro Usuario',
-      url: '/cadastro',
-      icon:'person-add'
-    },
-    {
-      title:'Cadastro Empresa',
-      url:'/cadastro-empresa',
-      icon:'add'
-    }
+    
+    
+    
+   
+    
   ];
 
   constructor(
@@ -38,7 +70,8 @@ export class AppComponent {
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
     private storage: Storage,
-    private router: Router
+    private router: Router,
+    private afAuth: AngularFireAuth,
   ) {
     this.initializeApp();
   }
@@ -63,5 +96,12 @@ export class AppComponent {
       this.statusBar.backgroundColorByHexString('#17b336');
       this.splashScreen.hide();
     });
+
+    
   }
+  signOut(){
+    this.afAuth.auth.signOut();
+    this.router.navigate(['login'])
+    }
+
 }
