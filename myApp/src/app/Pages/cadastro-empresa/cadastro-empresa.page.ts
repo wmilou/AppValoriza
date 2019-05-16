@@ -17,6 +17,7 @@ export class CadastroEmpresaPage implements OnInit {
   spinner = false;
   camposocultar = true;
   empresas;
+  
 
 //Decreta Campos Nos Formularios
 cadastroEmpresaForm = {
