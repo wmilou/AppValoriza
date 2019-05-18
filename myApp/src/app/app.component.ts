@@ -54,9 +54,14 @@ export class AppComponent {
       ]
     },
     {
-      title: 'Consulta Clientes',
-      url: '/controle',
-      icon: 'stats'
+      title: 'Consulta',
+      children:[
+        {
+          title:'Consulta Clientes', 
+          url: '/controle',
+          icon: 'arrow-dropright'
+        }
+      ],
     },
     
     

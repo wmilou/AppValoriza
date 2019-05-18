@@ -1,6 +1,6 @@
 <ion-app>
   <ion-split-pane>
-    <ion-menu>
+    <ion-menu >
       <ion-header>
         <ion-toolbar>
           <ion-title class="title">Menu</ion-title>
@@ -9,6 +9,7 @@
       <ion-content>
         <ion-list>
 
+<!--Modificado Para Mostrar SubMenu(Drop Down)-->
       <div *ngFor="let p of appPages">
           <ion-menu-toggle auto-hide="false" *ngIf="!p.children">
             <ion-item [routerDirection]="'root'" [routerLink]="[p.url]">
@@ -19,6 +20,7 @@
             </ion-item>
           </ion-menu-toggle>
 
+<!-- Mostra Apenas Se Tiver Um Atributo "children" -->
           <ion-item button *ngIf="p.children"  (click)="p.open = !p.open"
             [class.active-aparent]="p.open" detail="false">
             <ion-icon slot="start" name="arrow-forward" *ngIf="!p.open"></ion-icon>
@@ -26,7 +28,7 @@
             <ion-label>{{p.title}}</ion-label>
           </ion-item>
 
-
+<!-- Mostra Sub Categorias das Opçoes -->
           <ion-list *ngIf="p.open" >
               <ion-menu-toggle auto-hide="false">
                   <ion-item *ngFor="let sub of p.children" [routerDirection]="'root'" [routerLink]="[sub.url]">
@@ -36,11 +38,10 @@
                     </ion-label>
                   </ion-item>
           </ion-menu-toggle>
-
-
         </ion-list>
-
         </div>
+        
+<!-- Botão Sair -->
         <div>
           <ion-list>
             <ion-menu-toggle auto-hide="false">
@@ -51,7 +52,6 @@
             </ion-menu-toggle>
           </ion-list>
         </div>
-
         </ion-list>
       </ion-content>
     </ion-menu>

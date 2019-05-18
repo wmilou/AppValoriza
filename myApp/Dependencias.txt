@@ -20,4 +20,4 @@
 	npm install angularfire2
 	
  - Mascara
-	npm install @pluritech/ion-mask --save	
+	npm install br-mask --save -E

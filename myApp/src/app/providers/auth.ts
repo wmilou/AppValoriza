@@ -9,9 +9,9 @@ export class AuthProvider {
   ) {
   }
 
-  //Create user
+  //Metodo Cria Usuario
   register = (data) => this.afAuth.auth.createUserWithEmailAndPassword(data.email, data.password);
 
-  //Login
+  //Loga Usuario
   login = (data) => this.afAuth.auth.signInWithEmailAndPassword(data.email, data.password);
 }

@@ -24,13 +24,14 @@
       <!--Campos Do formulario -->
       <ion-item>
           <ion-label position="floating">Empresa</ion-label>
-           <ion-input type="text" [(ngModel)] = "cadastroEmpresaForm.nome"></ion-input>
+           <ion-input type="text" [(ngModel)] = "cadastroEmpresaForm.nome" ></ion-input>
        </ion-item>
    
   
       <ion-item>
          <ion-label position="floating">Cnpj</ion-label>
-          <ion-input type="number" [(ngModel)] = "cadastroEmpresaForm.cnpj"></ion-input>
+         <ion-input type="text" name="cpf" [brmasker]="{person: true}" [(ngModel)] = "cadastroEmpresaForm.cnpj"></ion-input>
+
       </ion-item>
 
       <ion-item *ngIf = "campos">
@@ -59,12 +60,12 @@
       </ion-item>
       <ion-item *ngIf = "campos">
         <ion-label position="floating">CEP</ion-label>
-         <ion-input type="text" [(ngModel)] = "cadastroEmpresaForm.cep"></ion-input>
+         <ion-input type="text" [(ngModel)] = "cadastroEmpresaForm.cep" [brmasker]="{mask: '00.000-00', type:num, len:9}"></ion-input>
      </ion-item>
 
      <ion-item *ngIf = "campos">
          <ion-label position="floating">Telefone</ion-label>
-          <ion-input type="number" [(ngModel)] = "cadastroEmpresaForm.telefone"></ion-input>
+          <ion-input type="text" [(ngModel)] = "cadastroEmpresaForm.telefone" [brmasker]="{phone: true}"></ion-input>
       </ion-item>
       <ion-item *ngIf = "campos">
         <ion-label position="floating">Contato</ion-label>
@@ -103,13 +104,12 @@
 
      <ion-item *ngIf = "campos">
          <ion-label position="floating">Data Inicio Contrato</ion-label>
-          <ion-input type="text" [(ngModel)] = "cadastroEmpresaForm.datainicio"></ion-input>
-      </ion-item>
-      <ion-item *ngIf = "campos">
-        <ion-label position="floating">Data Termino Contrato</ion-label>
-         <ion-input type="text" [(ngModel)] = "cadastroEmpresaForm.datatermino"></ion-input>
+         <ion-datetime display-format="MM/DD/YYYY" [(ngModel)] = "cadastroEmpresaForm.datainicio"></ion-datetime>
      </ion-item>
-       
+     <ion-item *ngIf="campos">
+        <ion-label position="floating">Data Termino Contrato</ion-label>
+        <ion-datetime display-format="MM/DD/YYYY" [(ngModel)] = "cadastroEmpresaForm.datatermino"></ion-datetime>
+     </ion-item>    
     </ion-list>
 
 

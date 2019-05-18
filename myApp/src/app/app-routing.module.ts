@@ -49,8 +49,7 @@ const routes: Routes = [
   { 
     path: 'cadastro-representante-comercial', 
    loadChildren: './Pages/cadastro-representante-comercial/cadastro-representante-comercial.module#CadastroRepresentanteComercialPageModule'
- }
-
+  },
 ];
 
 @NgModule({

@@ -15,7 +15,8 @@
   
 <ion-content>
 <div>
-
+<div *ngIf="lista">
+ <!--Barra De Pesquisa --> 
 <div>
     <ion-searchbar placeholder="Digite o nome do Cliente..."      
       [(ngModel)]="queryText"
@@ -23,21 +24,43 @@
       clearInput>
     </ion-searchbar>
 </div>
-
-<ion-list>
-  <ion-item class="list-margin" *ngFor="let e of empresas">
-
+<!--Lista De Empresas-->
+<ion-list >
+  <ion-item class="list-margin" *ngFor="let e of empresas" (click)="verInfo(e)">
     <ion-avatar slot="start" class="border-image">
      <img [src]="e.image">
     </ion-avatar>
-
     <ion-label>
       <p>{{e.name}}</p>
       <p>CNPJ:{{e.cnpj}}</p>
     </ion-label>
-
   </ion-item>
 </ion-list>
+
+
+
+<!--Dados Da Empresa-->
+</div>
+  <div *ngIf="dadosEmpresa">
+    <ion-list>
+        <ion-item>Nome: {{informacao.name}}</ion-item>
+        <ion-item>Cnpj: {{informacao.cnpj}}</ion-item>
+        <ion-item>Email: {{informacao.email}}</ion-item>
+        <ion-item>Telefone: {{informacao.telefone}}</ion-item>
+        <ion-item>Ramo: {{informacao.ramo}}</ion-item>
+        <ion-item>Estado: {{informacao.estado}}</ion-item>
+        <ion-item>Bairro: {{informacao.bairro}}</ion-item>
+        <ion-item>Endereço: {{informacao.endereco}}</ion-item>
+        <ion-item>Plano: {{informacao.plano}}</ion-item>
+   </ion-list>
+   <div class="padding-40">
+      <div class="botoes centro" (click) = "voltarConsulta()">
+        Voltar
+      </div>
+      </div>
+  </div>
+
+<!--Spinner De Carregamento-->  
   <div class="centro" *ngIf = "spinner">
     <ion-spinner color="success" ></ion-spinner>
   </div>

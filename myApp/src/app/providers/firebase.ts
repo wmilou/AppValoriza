@@ -18,6 +18,7 @@ getUser(uid){
   return this.afs.firestore.collection('Users').doc(uid)
   .get();
 }
+
 // Puxa Os Dados Das Empresas
 getEmpresas(){
   return new Promise((resolve, reject) =>{
@@ -33,7 +34,8 @@ getEmpresas(){
       })
     })
   }
-   // Puxa Os Id Das Empresas
+
+// Puxa Os Id Das Empresas
   getIdEmpresas(){
     return new Promise((resolve, reject) =>{
       this.afs.firestore.collection('Empresas').get()
@@ -50,7 +52,7 @@ getEmpresas(){
       })
     }
 
- 
+//Pega Informaçoes Do Residuo no Banco
 getIdResiduo(){
   return new Promise((resolve, reject) =>{
     this.afs.firestore.collection('Empresas').get()

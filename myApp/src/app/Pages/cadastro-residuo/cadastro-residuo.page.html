@@ -28,11 +28,14 @@
            <ion-input type="text" [(ngModel)] = "cadastroForm.nome"></ion-input>
        </ion-item> 
    
-  
-      <ion-item>
-         <ion-label position="floating">Tipo</ion-label>
-          <ion-input type="text" [(ngModel)] = "cadastroForm.tipo"></ion-input>
-      </ion-item>
+ 
+          <ion-item>
+              <ion-label>Tipo</ion-label>
+              <ion-select placeholder="Selecione" okText="OK" cancelText="Cancelar">
+                <ion-select-option value="liquido">Liquido</ion-select-option>
+                <ion-select-option value="solido">Solido</ion-select-option>
+              </ion-select>
+            </ion-item>
   
     </ion-list>
   </div>
