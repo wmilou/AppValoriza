@@ -87,11 +87,14 @@ export class AppComponent {
       .then((usuario) => {
           if(usuario.adm == true){
             this.router.navigate(['home']); 
+            this.splashScreen.hide();
           }else{
             if(usuario.adm == false){
-              this.router.navigate(['home-funcionario'])
+              this.router.navigate(['home-funcionario']);
+              this.splashScreen.hide();
             }else
-            this.router.navigate(['login'])
+            this.router.navigate(['login']);
+            this.splashScreen.hide();
           }
       })
 
@@ -99,7 +102,7 @@ export class AppComponent {
       this.platform.ready().then(() => {
       //Muda Cor da Barra De Status
       this.statusBar.backgroundColorByHexString('#17b336');
-      this.splashScreen.hide();
+      
     });
 
     

@@ -18,7 +18,8 @@ export class CadastroEmpresaPage implements OnInit {
   campos = false;
   spinner = false;
   camposocultar = true;
-  condicao;
+  condicao = false;
+
 // Variavel Para Armazenamento Das Empresas
   empresas;
 
@@ -53,7 +54,7 @@ cadastroEmpresaForm = {
     public alertController: AlertController,
     
     ) {
-
+      this.getIdEmpresas();
    
    }
 
@@ -73,26 +74,29 @@ verifica(){
     let alerta = 1; 
     this.presentAlert(alerta)
   }else{
-    this.getIdEmpresas();
-      for(let i in this.empresas){
+
+for(let i in this.empresas){
         if(this.cadastroEmpresaForm.cnpj == this.empresas[i]){
-          this.condicao = true
+          this.condicao = true;
       }else{
         this.condicao = false;
       }
       if(this.condicao == true){
         break;
-      }
-  }
-    if (this.condicao == false){
-      this.criarNovaEmpresa();
-      this.getIdEmpresas();
-    }else{
-      let alerta = 3;
-      this.presentAlert(alerta);
+    }
   }
 }
+
+
+if (this.condicao == false){
+  this.criarNovaEmpresa();
+  this.getIdEmpresas();
+}else{
+  let alerta = 3;
+  this.presentAlert(alerta);
 }
+}
+
 
 //Metodo Cria Nova Empresa 
  criarNovaEmpresa(){
