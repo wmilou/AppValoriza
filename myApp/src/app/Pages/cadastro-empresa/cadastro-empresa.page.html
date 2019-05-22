@@ -23,7 +23,7 @@
   <ion-list >
       <!--Campos Do formulario -->
       <ion-item>
-          <ion-label position="floating">Empresa</ion-label>
+          <ion-label position="floating">Nome Empresa</ion-label>
            <ion-input type="text" [(ngModel)] = "cadastroEmpresaForm.nome" ></ion-input>
        </ion-item>
    
@@ -104,11 +104,11 @@
 
      <ion-item *ngIf = "campos">
          <ion-label position="floating">Data Inicio Contrato</ion-label>
-         <ion-datetime display-format="MM/DD/YYYY" [(ngModel)] = "cadastroEmpresaForm.datainicio"></ion-datetime>
+         <ion-datetime display-format="MM/DD/YYYY"  max="2050-12-31" [(ngModel)] = "cadastroEmpresaForm.datainicio"></ion-datetime>
      </ion-item>
      <ion-item *ngIf="campos">
         <ion-label position="floating">Data Termino Contrato</ion-label>
-        <ion-datetime display-format="MM/DD/YYYY" [(ngModel)] = "cadastroEmpresaForm.datatermino"></ion-datetime>
+        <ion-datetime display-format="MM/DD/YYYY"   max="2050-12-31"[(ngModel)] = "cadastroEmpresaForm.datatermino"></ion-datetime>
      </ion-item>    
     </ion-list>
 

@@ -10,20 +10,16 @@ import { AlertController } from '@ionic/angular';
 })
 
 export class CadastroEmpresaPage implements OnInit {
- //Imagem Que Vai Aparecer nos Resultados
+//Imagem Que Vai Aparecer nos Resultados
   image = 'https://www.visaopontocom.com/wp-content/uploads/2017/02/icone-empresa.png'
-
 // Mostra Ou Oculta Os Campos Do Formualrio
   cadastro = true;
   campos = false;
   spinner = false;
   camposocultar = true;
-  condicao = false;
-
+  condicao;
 // Variavel Para Armazenamento Das Empresas
   empresas;
-
-
 //Decreta Campos Nos Formularios
 cadastroEmpresaForm = {
   nome:'',
@@ -47,18 +43,16 @@ cadastroEmpresaForm = {
   datatermino:''
 }
 
-
-  // Construtor
+// Construtor
   constructor(   
     private firebaseProvider: FirebaseProvider,
     public alertController: AlertController,
     
     ) {
       this.getIdEmpresas();
-   
    }
 
-//puxa Empresas
+//Puxa Empresas
 getIdEmpresas(){
     this.firebaseProvider.getIdEmpresas()
     .then((array) =>{
@@ -68,63 +62,155 @@ getIdEmpresas(){
     }})
   }
 
-//Verifica Se Empresa Ja Esta Cadastarda(Falta Terminar)
+//Verificacoes 
 verifica(){
+  //Verifica Se Os Campos Estao Preenchidos
   if(this.cadastroEmpresaForm.cnpj == ''){
     let alerta = 1; 
     this.presentAlert(alerta)
+  }else
+  {
+  if(this.cadastroEmpresaForm.nome == ''){
+    let alerta = 1; 
+    this.presentAlert(alerta)
   }else{
-
-for(let i in this.empresas){
-        if(this.cadastroEmpresaForm.cnpj == this.empresas[i]){
-          this.condicao = true;
+    if(this.cadastroEmpresaForm.estado == ''){
+      let alerta = 1; 
+      this.presentAlert(alerta)
+    }
+    else{
+      if(this.cadastroEmpresaForm.municipio == ''){
+        let alerta = 1; 
+        this.presentAlert(alerta)
       }else{
-        this.condicao = false;
+        if(this.cadastroEmpresaForm.endereco == ''){
+          let alerta = 1; 
+          this.presentAlert(alerta)
+        }else{
+          if(this.cadastroEmpresaForm.numero == ''){
+            let alerta = 1; 
+            this.presentAlert(alerta)
+          }else{
+            if(this.cadastroEmpresaForm.bairro == ''){
+              let alerta = 1; 
+              this.presentAlert(alerta)
+            }else{
+              if(this.cadastroEmpresaForm.cep == ''){
+                let alerta = 1; 
+                this.presentAlert(alerta)
+              }else{
+                if(this.cadastroEmpresaForm.telefone == ''){
+                  let alerta = 1; 
+                  this.presentAlert(alerta)
+                }else{
+                  if(this.cadastroEmpresaForm.contato == ''){
+                    let alerta = 1; 
+                    this.presentAlert(alerta)
+                  }else{
+                    if(this.cadastroEmpresaForm.email == ''){
+                      let alerta = 1; 
+                      this.presentAlert(alerta)
+                    }else{
+                      if(this.cadastroEmpresaForm.ramo == ''){
+                        let alerta = 1; 
+                        this.presentAlert(alerta)
+                      }else{
+                        if(this.cadastroEmpresaForm.bandeira == ''){
+                          let alerta = 1; 
+                          this.presentAlert(alerta)
+                        }else{
+                          if(this.cadastroEmpresaForm.potencial == ''){
+                            let alerta = 1; 
+                            this.presentAlert(alerta)
+                          }else{
+                            if(this.cadastroEmpresaForm.prestador == ''){
+                              let alerta = 1; 
+                              this.presentAlert(alerta)
+                            }else{
+                              if(this.cadastroEmpresaForm.representante == ''){
+                                let alerta = 1; 
+                                this.presentAlert(alerta)
+                              }else{
+                                if(this.cadastroEmpresaForm.plano == ''){
+                                  let alerta = 1; 
+                                  this.presentAlert(alerta)
+                                }else{ if(this.cadastroEmpresaForm.datainicio == ''){
+                                  let alerta = 1; 
+                                  this.presentAlert(alerta)
+                                }else{
+                                  if(this.cadastroEmpresaForm.datatermino == ''){
+                                    let alerta = 1; 
+                                    this.presentAlert(alerta)
+                                  }else{
+                                    for(let i in this.empresas){
+                                          if(this.cadastroEmpresaForm.cnpj == this.empresas[i]){
+                                            this.condicao = true;
+                                        }else{
+                                          this.condicao = false;
+                                        }
+                                        if(this.condicao == true){
+                                          break;
+                                       }
+                                     }
+                                     this.verificaEmpresa();
+                                   }
+                                 }
+                               }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
       }
-      if(this.condicao == true){
-        break;
     }
   }
 }
+}
 
-
+//Verifica Se A Empresa Ja Esta Cadastrada 
+verificaEmpresa(){
 if (this.condicao == false){
   this.criarNovaEmpresa();
   this.getIdEmpresas();
-}else{
+}else{if(this.condicao = true){
   let alerta = 3;
   this.presentAlert(alerta);
-}
-}
-
+}}}
 
 //Metodo Cria Nova Empresa 
- criarNovaEmpresa(){
-  //Chama Metodo Rodas Spinner
+criarNovaEmpresa(){
+//Chama Metodo Rodas Spinner
   this.rodarSpinner();
    
-  // Coloca Valores Dos Formularios nos devidos campos Do Firebase
+// Coloca Valores Dos Formularios nos devidos campos Do Firebase
    let data = {
-      image:this.image,
-      name:this.cadastroEmpresaForm.nome,
-      cnpj:this.cadastroEmpresaForm.cnpj,
-      estado:this.cadastroEmpresaForm.estado,
-      municipio:this.cadastroEmpresaForm.municipio,
-      endereco:this.cadastroEmpresaForm.endereco,
-      numero:this.cadastroEmpresaForm.numero,
-      bairro:this.cadastroEmpresaForm.bairro,
-      cep:this.cadastroEmpresaForm.cep,
-      telefone:this.cadastroEmpresaForm.telefone,
-      contato:this.cadastroEmpresaForm.contato,
-      email:this.cadastroEmpresaForm.email,
-      ramo:this.cadastroEmpresaForm.email,
-      bandeira:this.cadastroEmpresaForm.bandeira,
-      potencial:this.cadastroEmpresaForm.potencial,
-      prestador:this.cadastroEmpresaForm.prestador,
-      representante:this.cadastroEmpresaForm.representante,
-      plano:this.cadastroEmpresaForm.plano,
-      datainicio:this.cadastroEmpresaForm.datainicio,
-      datatermino:this.cadastroEmpresaForm.datatermino
+     image:this.image,
+     name:this.cadastroEmpresaForm.nome,
+     cnpj:this.cadastroEmpresaForm.cnpj,
+     estado:this.cadastroEmpresaForm.estado,
+     municipio:this.cadastroEmpresaForm.municipio,
+     endereco:this.cadastroEmpresaForm.endereco,
+     numero:this.cadastroEmpresaForm.numero,
+     bairro:this.cadastroEmpresaForm.bairro,
+     cep:this.cadastroEmpresaForm.cep,
+     telefone:this.cadastroEmpresaForm.telefone,
+     contato:this.cadastroEmpresaForm.contato,
+     email:this.cadastroEmpresaForm.email,
+     ramo:this.cadastroEmpresaForm.ramo,
+     bandeira:this.cadastroEmpresaForm.bandeira,
+     potencial:this.cadastroEmpresaForm.potencial,
+     prestador:this.cadastroEmpresaForm.prestador,
+     representante:this.cadastroEmpresaForm.representante,
+     plano:this.cadastroEmpresaForm.plano,
+     datainicio:this.cadastroEmpresaForm.datainicio,
+     datatermino:this.cadastroEmpresaForm.datatermino
   };
 
     //Manda Dados Para O servidor
@@ -165,11 +251,11 @@ if (this.condicao == false){
     this.campos = true;
     this.camposocultar = false;
   }
+
   //OCultar Campos Do Formulario
   ocultarCampos(){
     this.campos = false;
     this.camposocultar = true;
-
   }
 
   //Alertas
@@ -178,7 +264,7 @@ if (this.condicao == false){
       case 1:{
         const alert = await this.alertController.create({
           header: 'Obrigatorio',
-          message:'Campo De Cnpj Obrigatorio',
+          message:'Todos Campos São Obrigatorio',
           buttons: ['OK']
         });
         await alert.present();
@@ -213,7 +299,6 @@ if (this.condicao == false){
       }
       }
     }
-
   ngOnInit() {
   }
 }
