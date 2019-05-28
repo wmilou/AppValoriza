@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
 import { Storage } from '@ionic/storage';
-import { AngularFireAuth } from '@angular/fire/auth';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -13,14 +11,12 @@ export class HomePage {
   usuario: String;
 
   constructor(
-    private storage: Storage,
-    public afAuth: AngularFireAuth,
-    private router: Router
+    private storage: Storage
     ) {
       this.getUsuario();
     }
       
-    // Recupera Dados Das Empresas Do firebase
+    // Recupera Dados Do Usuario No Firebase
     getUsuario(){
      this.storage.get('usuario')
      .then((res) => {

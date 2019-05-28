@@ -2,9 +2,12 @@ import { Injectable } from "@angular/core";
 import { AngularFirestore } from "angularfire2/firestore";
 
 
+
 @Injectable()
 export class FirebaseProvider {
-  constructor(private afs: AngularFirestore) { }
+  constructor(private afs: AngularFirestore) {
+    
+   }
 
 //Cria usuario no firebase
 postUser = data =>
@@ -19,6 +22,7 @@ getUser(uid){
   .get();
 }
 
+//Metodos De Consulta
 // Puxa Os Dados Das Empresas
 getEmpresas(){
   return new Promise((resolve, reject) =>{
@@ -34,6 +38,38 @@ getEmpresas(){
       })
     })
   }
+
+  //Retorna Os Residuos Do Banco 
+  getResiduos(){
+    return new Promise((resolve, reject) =>{
+      this.afs.firestore.collection('Tipos-Residuo').get()
+      .then((r) =>{
+        let array = [];
+          r.forEach((d) => {
+          let item = d.data();
+          item.id =  d.id;
+          array.push(item);
+          });
+          resolve(array);    
+        })
+      })
+    }
+
+  //Retorna Os Residuos Do Banco 
+  getPlanos(){
+    return new Promise((resolve, reject) =>{
+      this.afs.firestore.collection('Tipos-Planos').get()
+      .then((r) =>{
+        let array = [];
+          r.forEach((d) => {
+          let item = d.data();
+          item.id =  d.id;
+          array.push(item);
+          });
+          resolve(array);    
+        })
+      })
+    }
 
 // Puxa Os Id Das Empresas
   getIdEmpresas(){
@@ -68,6 +104,7 @@ getIdResiduo(){
     })
   }
 
+//Metodos Posts Para Inserçao De Dados  
   // Metodo Cadastra Plano
   postPlano = data =>
   this.afs.firestore.collection('Tipos-Planos').add(data);

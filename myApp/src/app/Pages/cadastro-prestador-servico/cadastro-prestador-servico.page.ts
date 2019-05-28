@@ -36,9 +36,12 @@ cadastroEmpresaForm = {
   potencial:'',
   prestador:'',
   representante:'',
+  cadri:'',
+  terminolicenca:'',
   plano:'',
   datainicio:'',
-  datatermino:''
+  datatermino:'',
+  
 }
 
 
@@ -75,6 +78,8 @@ cadastroEmpresaForm = {
       potencial:this.cadastroEmpresaForm.potencial,
       prestador:this.cadastroEmpresaForm.prestador,
       representante:this.cadastroEmpresaForm.representante,
+      cadri:this.cadastroEmpresaForm.cadri,
+      dataTerminoLicenca:this.cadastroEmpresaForm.terminolicenca,
       plano:this.cadastroEmpresaForm.plano,
       datainicio:this.cadastroEmpresaForm.datainicio,
       datatermino:this.cadastroEmpresaForm.datatermino

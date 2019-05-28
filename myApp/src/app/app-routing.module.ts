@@ -50,6 +50,8 @@ const routes: Routes = [
     path: 'cadastro-representante-comercial', 
    loadChildren: './Pages/cadastro-representante-comercial/cadastro-representante-comercial.module#CadastroRepresentanteComercialPageModule'
   },
+  { path: 'consulta-residuo', loadChildren: './Pages/consulta-residuo/consulta-residuo.module#ConsultaResiduoPageModule' },
+  { path: 'consulta-plano', loadChildren: './Pages/consulta-plano/consulta-plano.module#ConsultaPlanoPageModule' },
 ];
 
 @NgModule({

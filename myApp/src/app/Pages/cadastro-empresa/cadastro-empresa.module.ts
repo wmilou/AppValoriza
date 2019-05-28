@@ -4,7 +4,6 @@ import { FormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 import { BrMaskerModule } from 'br-mask';
-
 import { CadastroEmpresaPage } from './cadastro-empresa.page';
 
 const routes: Routes = [

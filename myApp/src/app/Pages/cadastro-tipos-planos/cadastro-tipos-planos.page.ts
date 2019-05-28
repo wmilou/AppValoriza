@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from "@angular/router"
 import { AuthProvider} from '../../providers/auth';
 import { FirebaseProvider } from '../../providers/firebase';
 import { AlertController } from '@ionic/angular';
-import { Storage } from '@ionic/storage'
 
 @Component({
   selector: 'app-cadastro-tipos-planos',
@@ -21,26 +19,35 @@ cadastroForm = {
   valor:'',
   validade:'',
   nome:'',
-
 }
-
-
   // Construtor
   constructor(
     private authProvider: AuthProvider,
     private firebaseProvider: FirebaseProvider,
     public alertController: AlertController,  
-    ) {
-   
-   }
+    ) {}
 
+
+  //Verifica Campos 
+  verifica(){
+      if(this.cadastroForm.nome == ''){
+        this.presentAlert(1);
+      }else{
+       if(this.cadastroForm.validade == ''){
+         this.presentAlert(1);
+       }else{
+         if(this.cadastroForm.valor == ''){
+           this.presentAlert(1);
+         }else{
+           this.criarNovoPlano();
+         }
+       }
+      }
+    }
 
  //criaNovaConta
- criarNovaConta(){
+ criarNovoPlano(){
   this.rodarSpinner();
-      var alerta;
-      alerta = 2;
-      this.presentAlert(alerta);
       // Coloca Campos No DB
       let data = {
           nome:this.cadastroForm.nome,
@@ -51,18 +58,12 @@ cadastroForm = {
      this.firebaseProvider.postPlano(data)
      .then(() =>{
        this.paraSpinner();
-        }) 
-    
-    
-   .catch ((err) =>{
-    var alerta;
-    alerta = 3;
-    this.presentAlert(alerta);
-    this.paraSpinner();
-  }) 
+      }) 
+     .catch (() =>{
+        this.presentAlert(3);
+        this.paraSpinner();
+      }) 
  }
-
-
   // Loading 
   rodarSpinner(){
     this.cadastro = false;
@@ -73,14 +74,18 @@ cadastroForm = {
     this.cadastro = true;
     this.spinner = false;
     }
-  
-
-
-
-
   //Alerta De Sucesso ou Nao
   async presentAlert(alerta) {
     switch(alerta){
+      case 1:{
+        const alert = await this.alertController.create({
+          header: 'Obrigatorio',
+          message: 'Por Favor Preencha Todos Os Campos',
+          buttons: ['OK']
+        });
+        await alert.present();
+        break;
+      }
       case 2:{
         const alert = await this.alertController.create({
           header: 'Sucesso',
@@ -93,7 +98,7 @@ cadastroForm = {
       case 3:{
         const alert = await this.alertController.create({
           header: 'Ops',
-          message:'Essa Plano ja Existe',
+          message:'Não Foi Possivel Cadastrar Este Plano',
           buttons: ['OK']
         });
         await alert.present();

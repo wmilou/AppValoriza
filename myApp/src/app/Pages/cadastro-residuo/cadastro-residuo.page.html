@@ -31,9 +31,9 @@
  
           <ion-item>
               <ion-label>Tipo</ion-label>
-              <ion-select placeholder="Selecione" okText="OK" cancelText="Cancelar">
-                <ion-select-option value="liquido">Liquido</ion-select-option>
-                <ion-select-option value="solido">Solido</ion-select-option>
+              <ion-select placeholder="Selecione" okText="OK" cancelText="Cancelar" [(ngModel)] = "cadastroForm.tipo" >
+                <ion-select-option value="Liquido">Liquido</ion-select-option>
+                <ion-select-option value="Solido">Solido</ion-select-option>
               </ion-select>
             </ion-item>
   

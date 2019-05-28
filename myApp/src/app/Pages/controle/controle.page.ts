@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FirebaseProvider } from '../../providers/firebase';
-import {Router} from '@angular/router'
-
 
 @Component({
   selector: 'app-controle',
@@ -19,12 +17,9 @@ export class ControlePage implements OnInit {
   spinner = true;
   dadosEmpresa= false;
   lista = true;
-
-  
+ 
   constructor(private firebaseProvider: FirebaseProvider,
-     
-    private router:Router
-    ) {
+     ) {
       this.getEmpresas();
       this.queryText = '';
     }

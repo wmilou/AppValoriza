@@ -34,7 +34,7 @@ loginForm = {
     public alertController: AlertController,
     private storage : Storage
     ) {
-   
+      
    }
  
 
@@ -62,10 +62,7 @@ loginForm = {
     })
     .catch ((err) =>{
       this.paraSpinner();
-      var alerta = 1;
-      this.presentAlert(alerta);
-      
-     
+      this.presentAlert(1);
     })
     
  }
@@ -79,10 +76,7 @@ loginForm = {
 paraSpinner(){
   this.login = true;
   this.spinner = false;
-  }
-
-
-
+}
   //Alerta De Sucesso ou Nao
   async presentAlert(alerta) {
     switch(alerta){

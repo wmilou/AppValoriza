@@ -49,15 +49,17 @@
          <ion-label position="floating">Endereço</ion-label>
           <ion-input type="text" [(ngModel)] = "cadastroEmpresaForm.endereco"></ion-input>
       </ion-item>
-      <ion-item *ngIf = "campos">
-        <ion-label position="floating">Numero</ion-label>
-         <ion-input type="number" [(ngModel)] = "cadastroEmpresaForm.numero"></ion-input>
-     </ion-item>
 
      <ion-item *ngIf = "campos">
          <ion-label position="floating">Bairro</ion-label>
           <ion-input type="text" [(ngModel)] = "cadastroEmpresaForm.bairro"></ion-input>
       </ion-item>
+
+      <ion-item *ngIf = "campos">
+          <ion-label position="floating">Numero</ion-label>
+           <ion-input type="number" [(ngModel)] = "cadastroEmpresaForm.numero"></ion-input>
+       </ion-item>
+
       <ion-item *ngIf = "campos">
         <ion-label position="floating">CEP</ion-label>
          <ion-input type="text" [(ngModel)] = "cadastroEmpresaForm.cep" [brmasker]="{mask: '00.000-00', type:num, len:9}"></ion-input>
@@ -98,9 +100,11 @@
           <ion-input type="text" [(ngModel)] = "cadastroEmpresaForm.representante"></ion-input>
       </ion-item>
       <ion-item *ngIf = "campos">
-        <ion-label position="floating">Plano</ion-label>
-         <ion-input type="text" [(ngModel)] = "cadastroEmpresaForm.plano"></ion-input>
-     </ion-item>
+          <ion-label>Plano</ion-label>
+          <ion-select placeholder="Selecione" [(ngModel)]="cadastroEmpresaForm.plano" >
+            <ion-select-option *ngFor="let p of planos" value="{{p.nome}}">{{p.nome}}</ion-select-option>
+          </ion-select>
+        </ion-item>
 
      <ion-item *ngIf = "campos">
          <ion-label position="floating">Data Inicio Contrato</ion-label>
@@ -108,7 +112,7 @@
      </ion-item>
      <ion-item *ngIf="campos">
         <ion-label position="floating">Data Termino Contrato</ion-label>
-        <ion-datetime display-format="MM/DD/YYYY"   max="2050-12-31"[(ngModel)] = "cadastroEmpresaForm.datatermino"></ion-datetime>
+        <ion-datetime display-format="MM/DD/YYYY"   max="2050-12-31" [(ngModel)] = "cadastroEmpresaForm.datatermino"></ion-datetime>
      </ion-item>    
     </ion-list>
 

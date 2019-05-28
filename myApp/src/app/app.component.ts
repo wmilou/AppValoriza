@@ -60,7 +60,13 @@ export class AppComponent {
           title:'Consulta Clientes', 
           url: '/controle',
           icon: 'arrow-dropright'
-        }
+        },
+        {
+          title:'Consulta Residuo', 
+          url: '/consulta-residuo',
+          icon: 'arrow-dropright'
+        },
+
       ],
     },
     

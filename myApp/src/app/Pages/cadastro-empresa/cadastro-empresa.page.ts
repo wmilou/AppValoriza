@@ -20,6 +20,10 @@ export class CadastroEmpresaPage implements OnInit {
   condicao;
 // Variavel Para Armazenamento Das Empresas
   empresas;
+
+//Variaveis Para Tratar Os Planos
+  planos;
+
 //Decreta Campos Nos Formularios
 cadastroEmpresaForm = {
   nome:'',
@@ -50,6 +54,7 @@ cadastroEmpresaForm = {
     
     ) {
       this.getIdEmpresas();
+      this.getPlanos();
    }
 
 //Puxa Empresas
@@ -62,85 +67,92 @@ getIdEmpresas(){
     }})
   }
 
+  // Recupera Dados Das Empresas Do firebase
+  getPlanos(){
+      this.firebaseProvider.getPlanos()
+      .then((r) =>{
+      this. planos = r;
+      })
+    }
+
+
 //Verificacoes 
 verifica(){
   //Verifica Se Os Campos Estao Preenchidos
-  if(this.cadastroEmpresaForm.cnpj == ''){
-    let alerta = 1; 
-    this.presentAlert(alerta)
-  }else
-  {
   if(this.cadastroEmpresaForm.nome == ''){
-    let alerta = 1; 
-    this.presentAlert(alerta)
-  }else{
+    this.presentAlert(1,'Preencha o Campo Nome')
+    }else{
+    if(this.cadastroEmpresaForm.cnpj == ''){ 
+    this.presentAlert(1,'Preencha o Campo Cnpj')
+    }else
+    {
     if(this.cadastroEmpresaForm.estado == ''){
-      let alerta = 1; 
-      this.presentAlert(alerta)
+
+      this.presentAlert(1,'Preencha o Campo Estado')
     }
     else{
       if(this.cadastroEmpresaForm.municipio == ''){
-        let alerta = 1; 
-        this.presentAlert(alerta)
+  
+        this.presentAlert(1,'Preencha o Campo Municipio')
       }else{
         if(this.cadastroEmpresaForm.endereco == ''){
-          let alerta = 1; 
-          this.presentAlert(alerta)
+    
+          this.presentAlert(1,'Preencha o Campo Endereço')
         }else{
           if(this.cadastroEmpresaForm.numero == ''){
-            let alerta = 1; 
-            this.presentAlert(alerta)
+      
+            this.presentAlert(1,'Preencha o Campo Numero')
           }else{
             if(this.cadastroEmpresaForm.bairro == ''){
-              let alerta = 1; 
-              this.presentAlert(alerta)
+        
+              this.presentAlert(1,'Preencha o Campo Bairro')
             }else{
               if(this.cadastroEmpresaForm.cep == ''){
-                let alerta = 1; 
-                this.presentAlert(alerta)
+          
+                this.presentAlert(1,'Preencha o Campo CEP')
               }else{
                 if(this.cadastroEmpresaForm.telefone == ''){
-                  let alerta = 1; 
-                  this.presentAlert(alerta)
+            
+                  this.presentAlert(1,'Preencha o Campo Telefone')
                 }else{
                   if(this.cadastroEmpresaForm.contato == ''){
-                    let alerta = 1; 
-                    this.presentAlert(alerta)
+              
+                    this.presentAlert(1,'Preencha o Campo Contato')
                   }else{
                     if(this.cadastroEmpresaForm.email == ''){
-                      let alerta = 1; 
-                      this.presentAlert(alerta)
+                
+                      this.presentAlert(1,'Preencha o Campo Email')
                     }else{
                       if(this.cadastroEmpresaForm.ramo == ''){
-                        let alerta = 1; 
-                        this.presentAlert(alerta)
+                  
+                        this.presentAlert(1,'Preencha o Campo Ramo')
                       }else{
                         if(this.cadastroEmpresaForm.bandeira == ''){
-                          let alerta = 1; 
-                          this.presentAlert(alerta)
+                    
+                          this.presentAlert(1,'Preencha o Campo Bandeira')
                         }else{
                           if(this.cadastroEmpresaForm.potencial == ''){
-                            let alerta = 1; 
-                            this.presentAlert(alerta)
+                      
+                            this.presentAlert(1,'Preencha o Campo Potencial')
                           }else{
                             if(this.cadastroEmpresaForm.prestador == ''){
-                              let alerta = 1; 
-                              this.presentAlert(alerta)
+                        
+                              this.presentAlert(1,'Preencha o Campo Prestador')
                             }else{
                               if(this.cadastroEmpresaForm.representante == ''){
-                                let alerta = 1; 
-                                this.presentAlert(alerta)
+                          
+                                this.presentAlert(1,'Preencha o Campo Representante')
                               }else{
                                 if(this.cadastroEmpresaForm.plano == ''){
-                                  let alerta = 1; 
-                                  this.presentAlert(alerta)
+                            
+                                  this.presentAlert(1,'Preencha o Campo Plano')
                                 }else{ if(this.cadastroEmpresaForm.datainicio == ''){
-                                  let alerta = 1; 
-                                  this.presentAlert(alerta)
+                            
+                                  this.presentAlert(1,'Preencha o Campo Data Inicio!')
                                 }else{
                                   if(this.cadastroEmpresaForm.datatermino == ''){
-                                    let alerta = 1; 
-                                    this.presentAlert(alerta)
+                              
+                                    this.presentAlert(1,'Preencha o Campo Data Termino')
                                   }else{
                                     for(let i in this.empresas){
                                           if(this.cadastroEmpresaForm.cnpj == this.empresas[i]){
@@ -180,8 +192,7 @@ if (this.condicao == false){
   this.criarNovaEmpresa();
   this.getIdEmpresas();
 }else{if(this.condicao = true){
-  let alerta = 3;
-  this.presentAlert(alerta);
+  this.presentAlert(3,null);
 }}}
 
 //Metodo Cria Nova Empresa 
@@ -218,7 +229,7 @@ criarNovaEmpresa(){
      .then(() =>{
        var alerta = 2;
        //Apresenta Alerta
-       this.presentAlert(alerta);
+       this.presentAlert(alerta ,null);
        //Para A Tela De Loading 
        this.paraSpinner();
         })   
@@ -226,7 +237,7 @@ criarNovaEmpresa(){
      .catch ((err) =>{
       var alerta = 3;
       //Apresenta Alerta De Erro
-      this.presentAlert(alerta); 
+      this.presentAlert(alerta,null); 
       //Para Spinner De Loading
       this.paraSpinner();  
   }) 
@@ -259,12 +270,12 @@ criarNovaEmpresa(){
   }
 
   //Alertas
-  async presentAlert(alerta) {
+  async presentAlert(alerta, mensagem) {
     switch(alerta){
       case 1:{
         const alert = await this.alertController.create({
           header: 'Obrigatorio',
-          message:'Todos Campos São Obrigatorio',
+          message:mensagem,
           buttons: ['OK']
         });
         await alert.present();

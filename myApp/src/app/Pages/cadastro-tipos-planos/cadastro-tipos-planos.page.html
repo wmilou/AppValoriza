@@ -22,37 +22,31 @@
   <!--Formulario-->
   <div class="padding-40">
   <ion-list >
-
       <ion-item>
           <ion-label position="floating">Nome</ion-label>
            <ion-input type="text" [(ngModel)] = "cadastroForm.nome"></ion-input>
        </ion-item> 
-   
-  
-      <ion-item>
-         <ion-label position="floating">Validade (Em meses)</ion-label>
-          <ion-input type="number" [(ngModel)] = "cadastroForm.validade"></ion-input>
+    
+       <ion-item >
+        <ion-label position="floating">Tempo De Contrato</ion-label>
+        <ion-datetime display-format="YY/MM/DD"  max="0010-12-31" min="0001-00-00" [(ngModel)] = "cadastroForm.validade"></ion-datetime>
       </ion-item>
-  
-  
+ 
       <ion-item>
          <ion-label position="floating">Valor</ion-label>
-          <ion-input type="text" [(ngModel)] = "cadastroForm.valor"></ion-input>
-      </ion-item>
-  
+          <ion-input name="money" [(ngModel)] = "cadastroForm.valor" placeholder="(R$) Real" [brmasker]="{money: true, decimal: 2,len:7}"></ion-input>
+      </ion-item>  
     </ion-list>
   </div>
   
-  
   <!--Botao cadastre-se -->
   <div class="padding-40">
-  <div class="botoes centro" (click) = "criarNovaConta()">
+  <div class="botoes centro" (click) = "verifica()">
     Cadastrar Plano
   </div>
   </div>
   </div>
-
-
+  
   <!--Tela De loading-->
   <div class="centro" *ngIf = "spinner">
       <div class="centro mg-top-30">

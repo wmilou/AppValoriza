@@ -18,7 +18,6 @@ export class CadastroResiduoPage implements OnInit {
 cadastroForm = {
   tipo:'',
   nome:'',
-
 }
 
 
@@ -44,7 +43,7 @@ cadastroForm = {
       let data = {
 
           nome:this.cadastroForm.nome,
-          validade:this.cadastroForm.tipo
+          tipo:this.cadastroForm.tipo
      };
 
      this.firebaseProvider.postResiduo(data)
