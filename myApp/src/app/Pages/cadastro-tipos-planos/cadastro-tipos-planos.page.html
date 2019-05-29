@@ -29,7 +29,12 @@
     
        <ion-item >
         <ion-label position="floating">Tempo De Contrato</ion-label>
-        <ion-datetime display-format="YY/MM/DD"  max="0010-12-31" min="0001-00-00" [(ngModel)] = "cadastroForm.validade"></ion-datetime>
+      <ion-grid>
+        <ion-row>
+        <ion-col><ion-input placeholder="Anos" [(ngModel)] = "cadastroForm.validadeAnos"></ion-input></ion-col>
+        <ion-col><ion-input placeholder="Meses" [(ngModel)] = "cadastroForm.validadeMeses"></ion-input></ion-col>
+       </ion-row>
+      </ion-grid>
       </ion-item>
  
       <ion-item>

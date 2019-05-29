@@ -1,9 +1,66 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>consultaPlano</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-app>
+  <ion-header>
+    <ion-toolbar>
+  
+      <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+            
+      <ion-title class="title">
+         Consulta Plano
+      </ion-title>
+            
+    </ion-toolbar>
+  </ion-header>
+    
+  <ion-content>
+  <div>
+  <div *ngIf="lista">
+   <!--Barra De Pesquisa --> 
+  <div>
+      <ion-searchbar placeholder="Digite o nome do Plano..."      
+        [(ngModel)]="queryText"
+        (ionInput)="filterResiduo($event)"
+        clearInput>
+      </ion-searchbar>
+  </div>
+  <!--Lista De Planos-->
+  <ion-list >
+    <ion-item class="list-margin" *ngFor="let p of Planos" (click)="verInfo(p)">
+      <ion-label>
+        <p>{{p.nome}}</p>
+        <p>Valor  R$ {{p.valor}}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+  
 
-<ion-content>
-
-</ion-content>
+  <!--Dados Do Plano-->
+  </div>
+    <div *ngIf="dadosPlano">
+        <div class="centro mg-top-30">
+            <img src="assets/Logo_Valoriza.png" class="logo">
+        </div>
+        <div class="mg-top-30">
+            <h3 class="centro">Informaçoes Do Plano</h3>
+        </div>
+      <ion-list>
+          <ion-item>Nome : {{informacao.nome}}</ion-item>
+          <ion-item>Valor  R$ {{informacao.valor}}</ion-item>
+          <ion-item>Validade: {{informacao.validadeAnos}} Anos e {{informacao.validadeMeses}} Meses</ion-item>
+     </ion-list>
+     <div class="padding-40">
+        <div class="botoes centro" (click) = "voltarConsulta()">
+          Voltar
+        </div>
+        </div>
+    </div>
+  
+  <!--Spinner De Carregamento-->  
+    <div class="centro" *ngIf = "spinner">
+      <ion-spinner color="success" ></ion-spinner>
+    </div>
+  </div>
+  </ion-content>
+  </ion-app>
+  

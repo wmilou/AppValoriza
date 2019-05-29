@@ -12,6 +12,7 @@ import { HomePage } from './home.page';
     FormsModule,
     IonicModule,
     HttpModule,
+    IonicModule.forRoot({hardwareBackButton: false}),
     RouterModule.forChild([
       {
         path: '',

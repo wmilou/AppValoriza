@@ -15,7 +15,7 @@ export class ConsultaResiduoPage implements OnInit {
 
   //Variavel Para Mudar Pagina
   spinner = true;
-  dadosEmpresa= false;
+  dadosResiduo = false;
   lista = true;
 
   
@@ -37,12 +37,12 @@ export class ConsultaResiduoPage implements OnInit {
     //Metodo Para Ver Informacao Da Empresa Selecionada
     verInfo(r){
       this.informacao = r; 
-      this.dadosEmpresa = true;
+      this.dadosResiduo = true;
       this.lista = false;
     }
     //Botao Voltar Para Consulta
     voltarConsulta(){
-      this.dadosEmpresa = false;
+      this.dadosResiduo = false;
       this.lista = true;
     }
 

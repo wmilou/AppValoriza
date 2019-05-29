@@ -5,12 +5,12 @@ import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Router } from '@angular/router'
 import { AngularFireAuth } from '@angular/fire/auth';
+
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html'
 })
 export class AppComponent {
-  subPageCadastro;
 
   public appPages = [
     {
@@ -64,6 +64,11 @@ export class AppComponent {
         {
           title:'Consulta Residuo', 
           url: '/consulta-residuo',
+          icon: 'arrow-dropright'
+        },
+        {
+          title:'Consulta Plano', 
+          url: '/consulta-plano',
           icon: 'arrow-dropright'
         },
 

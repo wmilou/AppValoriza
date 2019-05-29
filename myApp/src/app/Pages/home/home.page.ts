@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Storage } from '@ionic/storage';
+import {Platform} from '@ionic/angular'
 
 @Component({
   selector: 'app-home',
@@ -11,7 +12,8 @@ export class HomePage {
   usuario: String;
 
   constructor(
-    private storage: Storage
+    private storage: Storage,
+    private platform:Platform,
     ) {
       this.getUsuario();
     }

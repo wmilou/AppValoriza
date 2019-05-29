@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthProvider} from '../../providers/auth';
 import { FirebaseProvider } from '../../providers/firebase';
 import { AlertController } from '@ionic/angular';
 
@@ -17,12 +16,13 @@ export class CadastroTiposPLanosPage implements OnInit{
 //Decreta Campos Nos Formularios
 cadastroForm = {
   valor:'',
-  validade:'',
+  validadeAnos:'',
+  validadeMeses:'',
   nome:'',
+
 }
   // Construtor
   constructor(
-    private authProvider: AuthProvider,
     private firebaseProvider: FirebaseProvider,
     public alertController: AlertController,  
     ) {}
@@ -33,14 +33,18 @@ cadastroForm = {
       if(this.cadastroForm.nome == ''){
         this.presentAlert(1);
       }else{
-       if(this.cadastroForm.validade == ''){
+       if(this.cadastroForm.validadeAnos == ''){
          this.presentAlert(1);
        }else{
          if(this.cadastroForm.valor == ''){
            this.presentAlert(1);
          }else{
+           if(this.cadastroForm.validadeMeses == ''){
+             this.presentAlert(1);
+          }else{
            this.criarNovoPlano();
          }
+        }
        }
       }
     }
@@ -51,13 +55,15 @@ cadastroForm = {
       // Coloca Campos No DB
       let data = {
           nome:this.cadastroForm.nome,
-          validade:this.cadastroForm.validade,
+          validadeAnos:this.cadastroForm.validadeAnos,
+          validadeMeses:this.cadastroForm.validadeMeses,
           valor:this.cadastroForm.valor
      };
 
      this.firebaseProvider.postPlano(data)
      .then(() =>{
        this.paraSpinner();
+       this.presentAlert(2);
       }) 
      .catch (() =>{
         this.presentAlert(3);
