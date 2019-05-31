@@ -71,6 +71,12 @@ export class AppComponent {
           url: '/consulta-plano',
           icon: 'arrow-dropright'
         },
+        {
+          title:'Consulta Tempo Real', 
+          url: '/realtime-logs',
+          icon: 'arrow-dropright'
+        },
+
 
       ],
     },

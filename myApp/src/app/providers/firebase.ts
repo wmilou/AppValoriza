@@ -18,26 +18,26 @@ postUser = data =>
 
 //Puxa Usuario Do firebase
 getUser(uid){
-  return this.afs.firestore.collection('Users').doc(uid)
-  .get();
+   return this.afs.firestore.collection('Users').doc(uid)
+   .get();
 }
 
-//Metodos De Consulta
-// Puxa Os Dados Das Empresas
-getEmpresas(){
-  return new Promise((resolve, reject) =>{
-    this.afs.firestore.collection('Empresas').get()
-    .then((r) =>{
-      let array = [];
-        r.forEach((d) => {
-        let item = d.data();
-        item.id =  d.id;
-        array.push(item);
-        });
-        resolve(array);    
-      })
-    })
-  }
+  //Metodos De Get DO Banco
+  // Puxa Os Dados Das Empresas
+  getEmpresas(){
+    return new Promise((resolve, reject) =>{
+      this.afs.firestore.collection('Empresas').get()
+      .then((r) =>{
+       let array = [];
+       r.forEach((d) => {
+         let item = d.data();
+         item.id =  d.id;
+         array.push(item);
+       });
+         resolve(array);    
+       })
+     })
+   }
 
   //Retorna Os Residuos Do Banco 
   getResiduos(){
@@ -104,7 +104,29 @@ getIdResiduo(){
     })
   }
 
-//Metodos Posts Para Inserçao De Dados  
+  //Pega Informaçoes Do Residuo no Banco
+getIdlogs(){
+  return new Promise((resolve, reject) =>{
+    this.afs.firestore.collection('logs').get()
+    .then((r) =>{
+      let array = [];
+        r.forEach((d) => {
+        let item = d.data();
+        item.id =  d.id;
+        array.push(item);
+        });
+        resolve(array);    
+      })
+    })
+  }
+
+//Metodos Posts Para Inserçao De Dados
+
+  // Metodo Cadastra Plano
+  postPeso = data =>
+  this.afs.firestore.collection('logs').add(data);
+
+
   // Metodo Cadastra Plano
   postPlano = data =>
   this.afs.firestore.collection('Tipos-Planos').add(data);

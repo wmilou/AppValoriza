@@ -19,7 +19,8 @@ export class CadastroUsuarioPage implements OnInit {
   email:'',
   password:'',
   nome:'',
-  adm:false
+  adm:true,
+  cnpj:''
  }
 
 
@@ -32,21 +33,21 @@ export class CadastroUsuarioPage implements OnInit {
    
    
    //Verifica Campos 
-   verifica(){
-     if(this.cadastroForm.email == ''){
-       this.presentAlert(1);
-     }else{
-      if(this.cadastroForm.nome == ''){
-        this.presentAlert(1);
-      }else{
-        if(this.cadastroForm.password == ''){
-          this.presentAlert(1);
-        }else{
-          this.criarNovaConta();
-        }
-      }
-     }
-   }
+   // verifica(){
+   //   if(this.cadastroForm.email == ''){
+   //     this.presentAlert(1);
+   //   }else{
+   //     if(this.cadastroForm.nome == ''){
+   //       this.presentAlert(1);
+   //     }else{
+   //       if(this.cadastroForm.password == ''){
+   //         this.presentAlert(1);
+   //       }else{
+   //         this.criarNovaConta();
+   //       }
+   //     }
+   //   }
+   // }
 
    //criaNovaConta
    criarNovaConta(){
@@ -60,7 +61,8 @@ export class CadastroUsuarioPage implements OnInit {
           uid: uid,
           nome:this.cadastroForm.nome,
           email:this.cadastroForm.email,
-          adm:this.cadastroForm.adm
+          adm:this.cadastroForm.adm,
+          cnpj:this.cadastroForm.cnpj
      };
 
      this.firebaseProvider.postUser(data)

@@ -14,42 +14,66 @@
 
 <ion-content>
   <!--Lanca Pesos-->
-  <div class="centro mg-top-30">
+  <div class="centro mg-top-30" *ngIf="lanca">
       <img src="assets/Logo_Valoriza.png" class="logo">
   </div>
   <div class="mg-top-30">
     <h3 class="centro">Lançar Pesos</h3>
 </div>
  <!--Formulario-->
- <div class="padding-40">
+ <div class="padding-40" *ngIf="lanca">
         
   <ion-list >
 
 
       <ion-item>
           <ion-label position="floating">Placa</ion-label>
-           <ion-input type="text" [(ngModel)] = "funcionarioForm.placa"></ion-input>
+           <ion-input type="text" [(ngModel)] = "funcionarioForm.placa" [brmasker]="{mask: 'AAA-0000',len:'8'}"></ion-input>
        </ion-item>
-   
+       
        <ion-item>
-          <ion-label position="floating">Nome</ion-label>
-           <ion-input type="text" value={{usuario}} [(ngModel)] = "funcionarioForm.nome"></ion-input>
+          <ion-label position="floating">Nome Funcionario</ion-label>
+           <ion-input type="text" [(ngModel)] = "funcionarioForm.nome"></ion-input>
+       </ion-item>
+         
+       <ion-item>
+          <ion-label position="floating">Nome Empresa</ion-label>
+           <ion-input type="text" value={{empresa}} [(ngModel)] = "funcionarioForm.nomeEmpresa"></ion-input>
        </ion-item>
          
       <ion-item>
-         <ion-label position="floating">Estado</ion-label>
-          <ion-input type="text" [(ngModel)] = "funcionarioForm.estado"></ion-input>
+         <ion-label position="floating">CNPJ Empresa</ion-label>
+          <ion-input type="text" value={{cnpj}} [(ngModel)] = "funcionarioForm.cnpj"></ion-input>
       </ion-item>
-  
+
+      <ion-item>
+          <ion-label position="floating">Adicionar Peso</ion-label>
+           <ion-input type="text" [(ngModel)] = "funcionarioForm.peso" placeholder="KG"></ion-input>
+       </ion-item>
+
     </ion-list>
   </div>
  
-  <div class="centro">
-    <ion-button class="botao centro" (click) = "criarNovaConta()">
+
+
+
+  <div class="centro" *ngIf="lanca">
+    <ion-button class="botao centro" (click) = "enviarPeso()">
       Enviar
     </ion-button>
   <ion-button class= "botao centro" (click) = "Limpar()">
       Limpar
   </ion-button>
   </div>
+
+  <!--Pagina De Loading-->
+<div class="centro" *ngIf = "spinner">
+    <div class="centro mg-top-30">
+        <img src="assets/Logo_Valoriza.png" class="logo">
+    </div>
+<div class="mg-top-30">  
+  <h2 >Aguarde Um Momento ...</h2>
+  <ion-spinner name="crescent" color="success"></ion-spinner>
+</div>
+</div>
 </ion-content>

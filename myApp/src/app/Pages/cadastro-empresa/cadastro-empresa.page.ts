@@ -10,21 +10,8 @@ import { AlertController } from '@ionic/angular';
 })
 
 export class CadastroEmpresaPage implements OnInit {
-//Imagem Que Vai Aparecer nos Resultados
-  image = 'https://www.visaopontocom.com/wp-content/uploads/2017/02/icone-empresa.png'
-// Mostra Ou Oculta Os Campos Do Formualrio
-  cadastro = true;
-  campos = false;
-  spinner = false;
-  camposocultar = true;
-  condicao;
-// Variavel Para Armazenamento Das Empresas
-  empresas;
 
-//Variaveis Para Tratar Os Planos
-  planos;
-
-//Decreta Campos Nos Formularios
+//Campos No Formulario
 cadastroEmpresaForm = {
   nome:'',
   cnpj:'',
@@ -46,12 +33,25 @@ cadastroEmpresaForm = {
   datainicio:'',
   datatermino:''
 }
+/*
+Variaveis De Controle Da Pagina
+E de Imagem
+*/
+  image = 'https://www.visaopontocom.com/wp-content/uploads/2017/02/icone-empresa.png'
+  cadastro = true;
+  campos = false;
+  spinner = false;
+  camposocultar = true;
+
+//Variaveis De Armazenamento
+  condicao;
+  empresas;
+  planos;
 
 // Construtor
   constructor(   
     private firebaseProvider: FirebaseProvider,
-    public alertController: AlertController,
-    
+    public alertController: AlertController 
     ) {
       this.getIdEmpresas();
       this.getPlanos();
@@ -224,24 +224,24 @@ criarNovaEmpresa(){
      datatermino:this.cadastroEmpresaForm.datatermino
   };
 
-    //Manda Dados Para O servidor
-     this.firebaseProvider.postEmpresa(data)
-     .then(() =>{
-       var alerta = 2;
-       //Apresenta Alerta
-       this.presentAlert(alerta ,null);
-       //Para A Tela De Loading 
-       this.paraSpinner();
-        })   
-    
-     .catch ((err) =>{
-      var alerta = 3;
-      //Apresenta Alerta De Erro
-      this.presentAlert(alerta,null); 
-      //Para Spinner De Loading
-      this.paraSpinner();  
-  }) 
- }
+   //Manda Dados Para O servidor
+    this.firebaseProvider.postEmpresa(data)
+    .then(() =>{
+      var alerta = 2;
+      //Apresenta Alerta
+      this.presentAlert(alerta ,null);
+      //Para A Tela De Loading 
+      this.paraSpinner();
+       })   
+   
+    .catch ((err) =>{
+     var alerta = 3;
+     //Apresenta Alerta De Erro
+     this.presentAlert(alerta,null); 
+     //Para Spinner De Loading
+     this.paraSpinner();  
+ }) 
+}
 
   // Loading 
   rodarSpinner(){
