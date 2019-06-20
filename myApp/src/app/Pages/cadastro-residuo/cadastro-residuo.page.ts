@@ -73,7 +73,8 @@ cadastroForm = {
     }
   
   VerificaId(){
-    this.firebaseProvider.getIdResiduo();
+    this.firebaseProvider.getResiduos();
+    
   }
   
 

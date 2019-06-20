@@ -59,7 +59,7 @@ E de Imagem
 
 //Puxa Empresas
 getIdEmpresas(){
-    this.firebaseProvider.getIdEmpresas()
+    this.firebaseProvider.getEmpresas()
     .then((array) =>{
     this.empresas = array;
     for(let i in this.empresas){
@@ -92,7 +92,6 @@ verifica(){
     }
     else{
       if(this.cadastroEmpresaForm.municipio == ''){
-  
         this.presentAlert(1,'Preencha o Campo Municipio')
       }else{
         if(this.cadastroEmpresaForm.endereco == ''){
@@ -165,26 +164,7 @@ verifica(){
                                        }
                                      }
                                      this.verificaEmpresa();
-                                   }
-                                 }
-                               }
-                              }
-                            }
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-}
-}
+}}}}}}}}}}}}}}}}}}}}
 
 //Verifica Se A Empresa Ja Esta Cadastrada 
 verificaEmpresa(){

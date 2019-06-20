@@ -1,47 +1,46 @@
 import { Component, OnInit } from '@angular/core';
 import { FirebaseProvider } from '../../providers/firebase';
 @Component({
-  selector: 'app-realtime-logs',
-  templateUrl: './realtime-logs.page.html',
-  styleUrls: ['./realtime-logs.page.scss'],
+  selector: 'app-consulta-prestador',
+  templateUrl: './consulta-prestador.page.html',
+  styleUrls: ['./consulta-prestador.page.scss'],
 })
-export class RealtimeLogsPage implements OnInit {
+export class ConsultaPrestadorPage implements OnInit {
   queryText : String;
-  allPesos: any;
-  Pesos: any;
+  allPrestadores: any;
+  Prestador: any;
   informacao;
 
   //Variavel Para Mudar Pagina
   spinner = true;
-  dadosPeso = false;
+  dadosRepresentante = false;
   lista = true;
 
   
   constructor(private firebaseProvider: FirebaseProvider,
     ) {
-      this.getPesos();
+      this.getPrestador();
       this.queryText = '';
     }
     
-    
     // Recupera Dados Das Empresas Do firebase
-    getPesos(){
-      this.firebaseProvider.getlogs()
+    getPrestador(){
+      this.firebaseProvider.getPrestador()
       .then((r) =>{
-      this.Pesos  = r;
-        this.allPesos = this.Pesos;
+      this.Prestador  = r;
+        this.allPrestadores = this.Prestador;
       this.pararSpinner();
       })
     }
     //Metodo Para Ver Informacao Da Empresa Selecionada
     verInfo(p){
       this.informacao = p; 
-      this.dadosPeso = true;
+      this.dadosRepresentante = true;
       this.lista = false;
     }
     //Botao Voltar Para Consulta
     voltarConsulta(){
-      this.dadosPeso = false;
+      this.dadosRepresentante = false;
       this.lista = true;
     }
 
@@ -50,11 +49,11 @@ export class RealtimeLogsPage implements OnInit {
       const val = event.target.value;
 
       if(val && val.trim() != ''){
-        this.Pesos = this.allPesos.filter((Pesos)=>{
-          return(Pesos.placa.toLowerCase().indexOf(val.toLowerCase()) > - 1);
+        this.Prestador = this.allPrestadores.filter((Prestador)=>{
+          return(Prestador.name.toLowerCase().indexOf(val.toLowerCase()) > - 1);
         })
       }else{
-        this.Pesos = this.allPesos;
+        this.Prestador = this.allPrestadores;
       }
     }
 

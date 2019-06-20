@@ -53,6 +53,8 @@ const routes: Routes = [
   { path: 'consulta-residuo', loadChildren: './Pages/consulta-residuo/consulta-residuo.module#ConsultaResiduoPageModule' },
   { path: 'consulta-plano', loadChildren: './Pages/consulta-plano/consulta-plano.module#ConsultaPlanoPageModule' },
   { path: 'realtime-logs', loadChildren: './Pages/realtime-logs/realtime-logs.module#RealtimeLogsPageModule' },
+  { path: 'consulta-representante', loadChildren: './Pages/consulta-representante/consulta-representante.module#ConsultaRepresentantePageModule' },
+  { path: 'consulta-prestador', loadChildren: './Pages/consulta-prestador/consulta-prestador.module#ConsultaPrestadorPageModule' },
 ];
 
 @NgModule({

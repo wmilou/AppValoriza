@@ -12,6 +12,7 @@ import {AngularFireAuthModule} from 'angularfire2/auth'
 import {firebaseConfig} from './Pages/configs/firebase';
 import {AuthProvider } from './providers/auth';
 import {FirebaseProvider } from './providers/firebase';
+import { FunctionsGlobal } from './providers/functionsGlobal';
 
 //Plugins
 import { IonicStorageModule } from '@ionic/storage';
@@ -32,6 +33,7 @@ import { IonicStorageModule } from '@ionic/storage';
   providers: [
     FirebaseProvider,
     AuthProvider,
+    FunctionsGlobal,
     StatusBar,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }

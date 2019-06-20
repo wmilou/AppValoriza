@@ -5,9 +5,7 @@ import { AngularFirestore } from "angularfire2/firestore";
 
 @Injectable()
 export class FirebaseProvider {
-  constructor(private afs: AngularFirestore) {
-    
-   }
+  constructor(private afs: AngularFirestore) {}
 
 //Cria usuario no firebase
 postUser = data =>
@@ -71,10 +69,10 @@ getUser(uid){
       })
     }
 
-// Puxa Os Id Das Empresas
-  getIdEmpresas(){
+  //Retorna Os Prestadores de serviço 
+  getPrestador(){
     return new Promise((resolve, reject) =>{
-      this.afs.firestore.collection('Empresas').get()
+      this.afs.firestore.collection('Prestador-Servico').get()
       .then((r) =>{
         let array = [];
           r.forEach((d) => {
@@ -82,32 +80,32 @@ getUser(uid){
           item.id =  d.id;
           array.push(item);
           });
-          resolve(array);
-          return array;    
+          resolve(array);    
         })
       })
     }
 
-//Pega Informaçoes Do Residuo no Banco
-getIdResiduo(){
-  return new Promise((resolve, reject) =>{
-    this.afs.firestore.collection('Empresas').get()
-    .then((r) =>{
-      let array = [];
-        r.forEach((d) => {
-        let item = d.data();
-        item.id =  d.id;
-        array.push(item);
-        });
-        resolve(array);    
+  //Retorna Os Representante
+  getRepresentante(){
+    return new Promise((resolve, reject) =>{
+      this.afs.firestore.collection('Representantes').get()
+      .then((r) =>{
+        let array = [];
+          r.forEach((d) => {
+          let item = d.data();
+          item.id =  d.id;
+          array.push(item);
+          });
+          resolve(array);    
+        })
       })
-    })
-  }
+    }
+
 
   //Pega Informaçoes Do Residuo no Banco
-getIdlogs(){
+getlogs(){
   return new Promise((resolve, reject) =>{
-    this.afs.firestore.collection('logs').get()
+    this.afs.firestore.collection('logs').orderBy('data','desc').get()
     .then((r) =>{
       let array = [];
         r.forEach((d) => {

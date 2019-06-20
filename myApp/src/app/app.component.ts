@@ -62,6 +62,16 @@ export class AppComponent {
           icon: 'arrow-dropright'
         },
         {
+          title:'Consulta Prestador',
+          url:'/consulta-prestador',
+          icon: 'arrow-dropright'
+        },
+        {
+          title:'Consulta Representante',
+          url:'/consulta-representante',
+          icon: 'arrow-dropright'
+        },
+        {
           title:'Consulta Residuo', 
           url: '/consulta-residuo',
           icon: 'arrow-dropright'
