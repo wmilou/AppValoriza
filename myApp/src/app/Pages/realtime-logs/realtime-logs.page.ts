@@ -35,7 +35,8 @@ export class RealtimeLogsPage implements OnInit {
     }
     //Metodo Para Ver Informacao Da Empresa Selecionada
     verInfo(p){
-      this.informacao = p; 
+      this.informacao = p;
+      console.log(this.informacao) 
       this.dadosPeso = true;
       this.lista = false;
     }

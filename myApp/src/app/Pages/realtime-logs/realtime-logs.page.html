@@ -28,13 +28,12 @@
           clearInput>
         </ion-searchbar>
     </div>
-    <!--Lista De Planos-->
+    <!--Lista De Pesos-->
     <ion-list >
       <ion-item class="list-margin" *ngFor="let p of Pesos" (click)="verInfo(p)">
         <ion-label>
           <p>Motorista: {{p.nome}}</p>
           <p>Placa : {{p.placa}}</p>
-          <p>Peso Kg {{p.peso}}</p>
         </ion-label>
       </ion-item>
     </ion-list>
@@ -52,9 +51,9 @@
         <ion-list>
             <ion-item>Nome Motorista : {{informacao.nome}}</ion-item>
             <ion-item>Placa: {{informacao.placa}}</ion-item>
-            <ion-item>Peso Carga: Kg {{informacao.peso}}</ion-item>
             <ion-item>Empresa: {{informacao.nomeEmpresa}}</ion-item>
             <ion-item>CNPJ: {{informacao.cnpj}}</ion-item>
+            <ion-item>{{informacao.peso | json}}</ion-item>
        </ion-list>
        <div class="padding-40">
           <div class="botoes centro" (click) = "voltarConsulta()">

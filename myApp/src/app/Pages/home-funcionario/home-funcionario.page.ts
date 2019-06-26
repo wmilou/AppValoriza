@@ -6,6 +6,7 @@ import { FunctionsGlobal } from '../../providers/functionsGlobal';
 import { Storage } from '@ionic/storage';
 import { AlertController } from '@ionic/angular';
 import { isNull } from 'util';
+import {NgForm} from '@angular/forms';
 
 @Component({
   selector: 'app-home-funcionario',
@@ -45,9 +46,33 @@ export class HomeFuncionarioPage implements OnInit {
       peso:'',
       consultaEmpresa:''
     }
-    pesosForm = {
-      pesos:'',
-    } 
+    pesosForm
+
+    onSubmit(f: NgForm) {
+      this.rodarSpinner();
+      this.pesosForm = f.value
+      console.log(this.pesosForm);
+      // Coloca Campos No DB
+      let data = {
+        placa:this.funcionarioForm.placa,
+        nomeEmpresa:this.representante,
+        nome:this.funcionarioForm.nome,
+        cnpj:this.cnpj,
+        material:this.pesosForm,
+        peso:this.pesosForm,
+        data:this.functionsGlobal.dataHoje(),
+      }
+     this.firebaseProvider.postPeso(data)
+     .then(() =>{
+       this.paraSpinner();
+       this.presentAlert(2, null);
+      }) 
+     .catch (() =>{
+        this.paraSpinner();
+        this.presentAlert(3, null);
+      })
+      console.log(this.pesosForm);
+    }
     
     //Limpa Campos
     Limpar(){  
@@ -103,26 +128,9 @@ export class HomeFuncionarioPage implements OnInit {
 
   //Envia O Peso
     enviarPeso(){
-    this.rodarSpinner();
-      // Coloca Campos No DB
-      let data = {
-        placa:this.funcionarioForm.placa,
-        nomeEmpresa:this.representante,
-        nome:this.funcionarioForm.nome,
-        cnpj:this.cnpj,
-        peso:this.funcionarioForm.peso,
-        data:this.functionsGlobal.dataHoje(),
-      }
-     this.firebaseProvider.postPeso(data)
-     .then(() =>{
-       this.paraSpinner();
-       this.presentAlert(2, null);
-      }) 
-     .catch (() =>{
-        this.paraSpinner();
-        this.presentAlert(3, null);
-      })}
+    }
 
+   
   // Loading 
     rodarSpinner(){
       this.lanca = false;

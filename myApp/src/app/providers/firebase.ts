@@ -3,6 +3,7 @@ import { AngularFirestore } from "angularfire2/firestore";
 
 
 
+
 @Injectable()
 export class FirebaseProvider {
   constructor(private afs: AngularFirestore) {}
@@ -84,7 +85,8 @@ getUser(uid){
         })
       })
     }
-
+  
+  
   //Retorna Os Representante
   getRepresentante(){
     return new Promise((resolve, reject) =>{
