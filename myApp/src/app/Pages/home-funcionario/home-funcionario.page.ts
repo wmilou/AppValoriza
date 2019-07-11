@@ -6,26 +6,36 @@ import { FunctionsGlobal } from '../../providers/functionsGlobal';
 import { Storage } from '@ionic/storage';
 import { AlertController } from '@ionic/angular';
 import { isNull } from 'util';
-import {NgForm} from '@angular/forms';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-home-funcionario',
   templateUrl: './home-funcionario.page.html',
   styleUrls: ['./home-funcionario.page.scss'],
 })
+
 export class HomeFuncionarioPage implements OnInit {
-  //Strings De Armazenamento
+  //Variaveis do Codigo
   representante = String;
   cnpj = String;
-  //Controla Spiner e Lança
   lanca = true;
   spinner = false;
   procurarCnpjEmpresa = false;
   clientemostrar = false;
-
   cliente;
   residuo;
 
+  //Decreta Campos No Formulario
+  funcionarioForm = {
+    placa:'',
+    nomeRepresentante:this.representante,
+    nome:'',
+    cnpj:this.cnpj,
+    peso:'',
+    consultaEmpresa:''
+  }  
+  pesosForm
+  
   constructor(
     private alertController:AlertController,
     private firebaseProvider:FirebaseProvider,
@@ -37,22 +47,29 @@ export class HomeFuncionarioPage implements OnInit {
       this.getEmpresa();
       this.getResiduo();
      }
-    //Decreta Campos No Formulario
-    funcionarioForm = {
-      placa:'',
-      nomeRepresentante:this.representante,
-      nome:'',
-      cnpj:this.cnpj,
-      peso:'',
-      consultaEmpresa:''
+//Metodos      
+    //Busca Dados Empresa
+    getEmpresa(){
+      this.storage.get('usuario')
+      .then((res) => {
+        this.representante = res.nome;
+        this.cnpj = res.cnpj 
+      })
     }
-    pesosForm
 
+    //Da Um Get Nos Residuos do Banco 
+    getResiduo(){
+      this.firebaseProvider.getResiduos()
+      .then((r) =>{
+      this.residuo = r;
+    })}
+
+   //Botao De Enviar Pesos
     onSubmit(f: NgForm) {
       this.rodarSpinner();
       this.pesosForm = f.value
       console.log(this.pesosForm);
-      // Coloca Campos No DB
+      // Cria o Obj Com as Variveis 
       let data = {
         placa:this.funcionarioForm.placa,
         nomeEmpresa:this.representante,
@@ -60,8 +77,10 @@ export class HomeFuncionarioPage implements OnInit {
         cnpj:this.cnpj,
         material:this.pesosForm,
         peso:this.pesosForm,
+        cliente:this.cliente.name,
         data:this.functionsGlobal.dataHoje(),
       }
+      //Envia Para o Banco o Obj
      this.firebaseProvider.postPeso(data)
      .then(() =>{
        this.paraSpinner();
@@ -71,10 +90,9 @@ export class HomeFuncionarioPage implements OnInit {
         this.paraSpinner();
         this.presentAlert(3, null);
       })
-      console.log(this.pesosForm);
     }
     
-    //Limpa Campos
+    //Metodo Limpar Campos
     Limpar(){  
       this.funcionarioForm = {
         placa:'',
@@ -84,14 +102,8 @@ export class HomeFuncionarioPage implements OnInit {
         peso:'',
         consultaEmpresa:null
       }}
-
-    getResiduo(){
-      this.firebaseProvider.getResiduos()
-      .then((r) =>{
-      this.residuo = r;
-    })
-    }
-   //Verifica Campos
+    
+    //Verifica Campos DO Formulario
      verificaFunc(){
       if(this.funcionarioForm.placa == ''){
         this.presentAlert(1,'Digite A Placa ')
@@ -109,6 +121,7 @@ export class HomeFuncionarioPage implements OnInit {
         this.procurarCnpjEmpresa = true;
     }
 
+    //Consulta Empresas no Banco Para Conferir com o CNPJ
     btnConsultar(){
         this.cliente = isNull;
         var empresas;
@@ -119,49 +132,38 @@ export class HomeFuncionarioPage implements OnInit {
           if(this.funcionarioForm.consultaEmpresa == empresas[i].cnpj){
             this.cliente = empresas[i];
             this.clientemostrar = true;
-            console.log(this.cliente);
+            this.procurarCnpjEmpresa = false;
+            
          }}}).then(()=>{ 
          if(this.cliente == isNull ){
           this.presentAlert(1,"Empresa Não Encontrada");
         }})
     }
-
-  //Envia O Peso
-    enviarPeso(){
-    }
-
    
-  // Loading 
-    rodarSpinner(){
-      this.lanca = false;
-      this.spinner = true;
-    }
-  //Parar Loading
-    paraSpinner(){
-      this.lanca = true;
-      this.spinner = false;
+    // Loading 
+      rodarSpinner(){
+        this.lanca = false;
+        this.spinner = true;
       }
-  //Deslogar    
-    signOut(){
-      this.afAuth.auth.signOut();
-      this.router.navigate(['login'])
-    }
-  //Busca Dados Empresa
-    getEmpresa(){
-      this.storage.get('usuario')
-      .then((res) => {
-         this.representante = res.nome;
-         this.cnpj = res.cnpj 
-       })
-     }
-
+    //Parar Loading
+      paraSpinner(){
+        this.lanca = true;
+        this.spinner = false;
+        }
+    //Deslogar    
+      signOut(){
+        this.afAuth.auth.signOut();
+        this.router.navigate(['login'])
+      }
+    //Botao Para Voltar Pagina
      btnvoltar(){
        this.procurarCnpjEmpresa = false;
        this.lanca = true;
        this.spinner = false;
        this.Limpar();
      }
-  //Alertas Pre Configurados
+
+    //Alertas Pre Configurados
      async presentAlert(alerta, mensagem) {
       switch(alerta){
         case 1:{

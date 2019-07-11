@@ -125,18 +125,15 @@ export class AppComponent {
           }
       })
 
-      
       this.platform.ready().then(() => {
-      //Muda Cor da Barra De Status
-      this.statusBar.backgroundColorByHexString('#17b336');
-      
+    
+    //Muda Cor da Barra De Status
+      this.statusBar.backgroundColorByHexString('#17b336');  
     });
 
-    
   }
   signOut(){
     this.afAuth.auth.signOut();
     this.router.navigate(['login'])
     }
-
 }

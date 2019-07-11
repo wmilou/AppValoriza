@@ -40,10 +40,8 @@ cadastroEmpresaForm = {
   terminolicenca:'',
   plano:'',
   datainicio:'',
-  datatermino:'',
-  
+  datatermino:'',  
 }
-
 
   // Construtor
   constructor(   
@@ -84,7 +82,6 @@ cadastroEmpresaForm = {
       datainicio:this.cadastroEmpresaForm.datainicio,
       datatermino:this.cadastroEmpresaForm.datatermino
   };
-   
      this.firebaseProvider.postPrestador(data)
      .then(() =>{
        var alerta;
@@ -92,7 +89,6 @@ cadastroEmpresaForm = {
        this.presentAlert(alerta); 
        this.paraSpinner();
         })   
-    
     .catch ((err) =>{
       var alerta;
       alerta = 3;
@@ -107,7 +103,7 @@ cadastroEmpresaForm = {
     this.campos = false;
     this.spinner = true;
   }
-    //Parar Loading
+  //Parar Loading
   paraSpinner(){
     this.cadastro = true;
     this.campos = true;
@@ -122,13 +118,7 @@ cadastroEmpresaForm = {
   ocultarCampos(){
     this.campos = false;
     this.camposocultar = true;
-
   }
-  
-
-
-
-
 
   //Alerta De Sucesso ou Nao
   async presentAlert(alerta) {

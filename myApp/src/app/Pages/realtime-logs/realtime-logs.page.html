@@ -5,7 +5,7 @@
         <ion-buttons slot="start">
           <ion-menu-button></ion-menu-button>
         </ion-buttons>
-              
+<!-- Consulta em Tempo real  -->
         <ion-title class="title">
            Consulta Em Tempo Real
         </ion-title>
@@ -20,7 +20,8 @@
     <ion-content>
     <div>
     <div *ngIf="lista">
-     <!--Barra De Pesquisa --> 
+
+<!--Barra De Pesquisa --> 
     <div>
         <ion-searchbar placeholder="Digite a PLaca..."      
           [(ngModel)]="queryText"
@@ -28,10 +29,12 @@
           clearInput>
         </ion-searchbar>
     </div>
-    <!--Lista De Pesos-->
+
+<!--Lista De Pesos-->
     <ion-list >
       <ion-item class="list-margin" *ngFor="let p of Pesos" (click)="verInfo(p)">
         <ion-label>
+          <p>Cliente: {{p.cliente}}</p>
           <p>Motorista: {{p.nome}}</p>
           <p>Placa : {{p.placa}}</p>
         </ion-label>
@@ -39,7 +42,7 @@
     </ion-list>
     
   
-    <!--Dados Do Plano-->
+<!--Dados Do Peso -->
     </div>
       <div *ngIf="dadosPeso">
           <div class="centro mg-top-30">
@@ -50,10 +53,18 @@
           </div>
         <ion-list>
             <ion-item>Nome Motorista : {{informacao.nome}}</ion-item>
+            {{informacao.cliente}}
             <ion-item>Placa: {{informacao.placa}}</ion-item>
             <ion-item>Empresa: {{informacao.nomeEmpresa}}</ion-item>
             <ion-item>CNPJ: {{informacao.cnpj}}</ion-item>
-            <ion-item>{{informacao.peso | json}}</ion-item>
+         <!-- Apresentaçao dos Pesos -->
+            <ion-card>   
+            <ion-list *ngFor="let peso of resultado">
+              <ion-item>
+              {{peso}}
+              </ion-item>
+            </ion-list>
+            </ion-card>
        </ion-list>
        <div class="padding-40">
           <div class="botoes centro" (click) = "voltarConsulta()">
@@ -62,11 +73,10 @@
           </div>
       </div>
     
-    <!--Spinner De Carregamento-->  
+<!--Spinner De Carregamento-->  
       <div class="centro" *ngIf = "spinner">
         <ion-spinner color="success" ></ion-spinner>
       </div>
     </div>
     </ion-content>
-    </ion-app>
-    
+    </ion-app> 
