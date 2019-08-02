@@ -16,7 +16,8 @@ import { FunctionsGlobal } from './providers/functionsGlobal';
 
 //Plugins
 import { IonicStorageModule } from '@ionic/storage';
-
+import { File } from '@ionic-native/file/ngx';
+import { FileOpener } from '@ionic-native/file-opener/ngx';
  
 @NgModule({
   declarations: [AppComponent],
@@ -31,12 +32,14 @@ import { IonicStorageModule } from '@ionic/storage';
     AngularFireAuthModule
   ],
   providers: [
+    File,
+    FileOpener,
     FirebaseProvider,
     AuthProvider,
     FunctionsGlobal,
     StatusBar,
     SplashScreen,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
   ],
   bootstrap: [AppComponent]
 })

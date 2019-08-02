@@ -55,6 +55,7 @@ const routes: Routes = [
   { path: 'realtime-logs', loadChildren: './Pages/realtime-logs/realtime-logs.module#RealtimeLogsPageModule' },
   { path: 'consulta-representante', loadChildren: './Pages/consulta-representante/consulta-representante.module#ConsultaRepresentantePageModule' },
   { path: 'consulta-prestador', loadChildren: './Pages/consulta-prestador/consulta-prestador.module#ConsultaPrestadorPageModule' },
+  { path: 'relatorio', loadChildren: './Pages/relatorio/relatorio.module#RelatorioPageModule' },
 ];
 
 @NgModule({

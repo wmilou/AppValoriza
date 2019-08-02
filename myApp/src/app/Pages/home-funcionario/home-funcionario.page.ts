@@ -8,6 +8,7 @@ import { AlertController } from '@ionic/angular';
 import { isNull } from 'util';
 import { NgForm } from '@angular/forms';
 
+
 @Component({
   selector: 'app-home-funcionario',
   templateUrl: './home-funcionario.page.html',
@@ -44,8 +45,21 @@ export class HomeFuncionarioPage implements OnInit {
     private router: Router,
     private storage: Storage
     ) {
+      this.dadosFunc();
       this.getEmpresa();
       this.getResiduo();
+     }
+//Busca Dados do Funcionario
+     dadosFunc(){
+      this.storage.get('Funcionario')
+      .then((res) => {
+        this.funcionarioForm.nome = res;
+      })
+
+      this.storage.get('Placa')
+      .then((res) => {
+        this.funcionarioForm.placa = res;
+      })
      }
 //Metodos      
     //Busca Dados Empresa
@@ -68,21 +82,22 @@ export class HomeFuncionarioPage implements OnInit {
     onSubmit(f: NgForm) {
       this.rodarSpinner();
       this.pesosForm = f.value
-      console.log(this.pesosForm);
       // Cria o Obj Com as Variveis 
       let data = {
         placa:this.funcionarioForm.placa,
         nomeEmpresa:this.representante,
         nome:this.funcionarioForm.nome,
         cnpj:this.cnpj,
-        material:this.pesosForm,
         peso:this.pesosForm,
         cliente:this.cliente.name,
-        data:this.functionsGlobal.dataHoje(),
+        dataconsulta:this.functionsGlobal.dataHoje(),
+        data:this.functionsGlobal.dataHojeApresentar(),
+        hora:this.functionsGlobal.horaagora(),
       }
       //Envia Para o Banco o Obj
      this.firebaseProvider.postPeso(data)
      .then(() =>{
+       this.btnvoltar();
        this.paraSpinner();
        this.presentAlert(2, null);
       }) 
@@ -92,16 +107,7 @@ export class HomeFuncionarioPage implements OnInit {
       })
     }
     
-    //Metodo Limpar Campos
-    Limpar(){  
-      this.funcionarioForm = {
-        placa:'',
-        nome:'',
-        nomeRepresentante:this.representante,
-        cnpj:this.cnpj,
-        peso:'',
-        consultaEmpresa:null
-      }}
+
     
     //Verifica Campos DO Formulario
      verificaFunc(){
@@ -116,6 +122,8 @@ export class HomeFuncionarioPage implements OnInit {
 
     //Muda De Pagina Para Consulta Da Empresa
     procurarEmpresa(){
+        this.storage.set('Funcionario',this.funcionarioForm.nome);
+        this.storage.set('Placa',this.funcionarioForm.placa);
         this.lanca = false;
         this.spinner = false;
         this.procurarCnpjEmpresa = true;
@@ -133,6 +141,7 @@ export class HomeFuncionarioPage implements OnInit {
             this.cliente = empresas[i];
             this.clientemostrar = true;
             this.procurarCnpjEmpresa = false;
+            this.lanca = false;
             
          }}}).then(()=>{ 
          if(this.cliente == isNull ){
@@ -158,10 +167,41 @@ export class HomeFuncionarioPage implements OnInit {
     //Botao Para Voltar Pagina
      btnvoltar(){
        this.procurarCnpjEmpresa = false;
+       this.clientemostrar = false;
        this.lanca = true;
        this.spinner = false;
-       this.Limpar();
+       this.Limpar(2);
      }
+
+
+  //Metodo Limpar Campos
+    Limpar(caso){       
+      switch(caso){
+        case 1:{
+          this.cliente = null;
+          this.funcionarioForm = {
+            placa:'',
+            nome:'',
+            nomeRepresentante:this.representante,
+            cnpj:this.cnpj,
+            peso:'',
+            consultaEmpresa:null
+          }}
+          
+        case 2:{
+            this.cliente = null;
+            this.funcionarioForm = {
+              placa : this.funcionarioForm.placa,
+              nome : this.funcionarioForm.nome,
+              nomeRepresentante:this.representante,
+              cnpj:this.cnpj,
+              peso:'',
+              consultaEmpresa:null
+
+            }
+          }
+        }
+      }
 
     //Alertas Pre Configurados
      async presentAlert(alerta, mensagem) {

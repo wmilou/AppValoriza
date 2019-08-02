@@ -13,13 +13,10 @@
 
 
 <ion-content>
-<!--Lanca Pesos-->
+<!--Logo Valoriza-->
   <div class="centro mg-top-30" *ngIf="lanca || procurarCnpjEmpresa">
       <img src="assets/Logo_Valoriza.png" class="logo">
   </div>
-  <div class="mg-top-30" *ngIf=procurarCnpjEmpresa>
-    <h3 class="centro">Lançar Pesos</h3>
-</div>
 
 <!--Formulario Do Funcionario -->
  <div class="padding-40" *ngIf="lanca">
@@ -47,20 +44,21 @@
     </ion-list>
   </div>
  
-
-<!--Botoes De Procurar Criente e Limpar-->
+<!--Botoes De Procurar Cliente e Limpar-->
   <div class="centro" *ngIf="lanca">
     <ion-button class="botao centro" (click) = "verificaFunc()">
       Procurar Cliente
     </ion-button>
-  <ion-button class= "botao centro" (click) = "Limpar()">
+  <ion-button class= "botao centro" (click) = "Limpar(1)">
       Limpar
   </ion-button>
   </div>
 
+
+
 <!--Pagina Para Procura De Empresas-->
-<div *ngIf="procurarCnpjEmpresa"> 
-    <div class="padding-40" *ngIf="!clientemostrar">
+<div *ngIf="procurarCnpjEmpresa">
+    <div class="padding-40">
         <ion-grid>
             <ion-row>
             <ion-col size="8">
@@ -77,8 +75,12 @@
             </ion-row>
             </ion-grid>
         </div>
+      </div>
+        
+
+
 <!-- Nome da Empresa -->
-        <div class="padding-40"  *ngIf="clientemostrar">
+        <div class="padding-40" *ngIf="clientemostrar">
           <ion-list>
             <ion-item>
               {{cliente.name}}
@@ -91,23 +93,30 @@
               </ion-card-header>
 <!-- Formulario de Envio dos pesos  -->
               <ion-card-content>
-                <form #f="ngForm" (ngSubmit)="onSubmit(f)" novalidate >
+                <form #f="ngForm" novalidate >
                   <ion-item *ngFor="let r of residuo">
                       <ion-label position="floating">{{r.nome}}</ion-label>
                       <ion-input name={{r.nome}} ngModel required #first="ngModel"></ion-input>
                   </ion-item>
-                  <button class="botoes centro">Enviar</button>
+                  <ion-grid>
+                      <ion-row  style="height:100%">
+                           <ion-col size="5">
+                              <ion-button class="botao centro" (click) = "onSubmit(f)" >Enviar</ion-button>
+                           </ion-col>
+                           <ion-col size="5">
+                              <ion-button class="botao centro" (click) = "btnvoltar()">
+                                  Voltar
+                                </ion-button>          
+                           </ion-col>
+                      </ion-row>
+                 </ion-grid>
+                  
                 </form>
               </ion-card-content>
-            </ion-card>
+            </ion-card>             
         </div>
-<!--Botoes-->  
-<div class="centro">
-  <ion-button class="botao centro" (click) = "btnvoltar()">
-    Voltar
-  </ion-button>
- </div>
-</div>
+
+
   
 <!--Pagina De Loading-->
 <div class="centro" *ngIf = "spinner">

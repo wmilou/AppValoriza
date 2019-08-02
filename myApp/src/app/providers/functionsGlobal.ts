@@ -7,10 +7,24 @@ export class FunctionsGlobal {
 
    }
   dataHoje() {
-    let jstoday = '';
+    let datahoje = '';
     let now = new Date();
-    jstoday = formatDate(now, 'dd-MM-yyyy HH:mm:ss', 'en-US', '-0300');
-    return jstoday;
+    datahoje = formatDate(now,'yyyyMMdd','en-US' ,'-0300');
+    console.log(datahoje);
+    return datahoje;
 }
-  
+  dataHojeApresentar(){
+    let datahoje = '';
+    let now = new Date();
+    datahoje = formatDate(now,'dd/MM/yyyy','en-US' ,'-0300');
+    console.log(datahoje);
+    return datahoje;
+  }
+  horaagora(){
+    let hora= '';
+    let now = new Date();
+    hora = formatDate(now, 'HH:mm:ss', 'en-US', '-0300');
+    console.log(hora);
+    return hora;
+  }  
 }

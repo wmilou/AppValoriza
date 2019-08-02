@@ -3,7 +3,7 @@
       <ion-toolbar>
     
         <ion-buttons slot="start">
-          <ion-menu-button></ion-menu-button>
+            <ion-menu-button></ion-menu-button>
         </ion-buttons>
 <!-- Consulta em Tempo real  -->
         <ion-title class="title">
@@ -17,30 +17,43 @@
       </ion-toolbar>
     </ion-header>
       
+
     <ion-content>
     <div>
     <div *ngIf="lista">
-
 <!--Barra De Pesquisa --> 
     <div>
-        <ion-searchbar placeholder="Digite a PLaca..."      
-          [(ngModel)]="queryText"
+        
+        <ion-searchbar placeholder="Digite a Pesquisa..."            
+        [(ngModel)]="queryText"
           (ionInput)="filterResiduo($event)"
           clearInput>
+          <ion-buttons slot="primary">
+              <ion-button (click)="downloadPDF()">  
+                  <ion-icon name="cloud-download"></ion-icon>
+              </ion-button>
+          <ion-button (click)="presentAlertCheckbox()">  
+              <ion-icon class="buttonpesquisa" slot="end" name="more" (click)="presentAlertCheckbox()"></ion-icon>
+          </ion-button>
+        </ion-buttons>
         </ion-searchbar>
     </div>
 
 <!--Lista De Pesos-->
+<div id="content" #content>
     <ion-list >
       <ion-item class="list-margin" *ngFor="let p of Pesos" (click)="verInfo(p)">
         <ion-label>
-          <p>Cliente: {{p.cliente}}</p>
-          <p>Motorista: {{p.nome}}</p>
-          <p>Placa : {{p.placa}}</p>
-        </ion-label>
+            <p>-----------------------------------------------------------------------------------------------------------</p>
+            <p>Cliente: {{p.cliente}}</p>
+            <p>Motorista: {{p.nome}}</p>
+            <p>Placa : {{p.placa}}</p>
+            <p>Data : {{p.data}}  &nbsp; &nbsp; Horario: {{p.hora}}</p>
+            <p>-----------------------------------------------------------------------------------------------------------</p>
+       </ion-label>
       </ion-item>
     </ion-list>
-    
+  </div>
   
 <!--Dados Do Peso -->
     </div>
@@ -52,11 +65,12 @@
               <h3 class="centro">Informaçoes Do Peso</h3>
           </div>
         <ion-list>
+            <ion-item>Cliente : {{informacao.cliente}}</ion-item>
             <ion-item>Nome Motorista : {{informacao.nome}}</ion-item>
-            {{informacao.cliente}}
             <ion-item>Placa: {{informacao.placa}}</ion-item>
             <ion-item>Empresa: {{informacao.nomeEmpresa}}</ion-item>
             <ion-item>CNPJ: {{informacao.cnpj}}</ion-item>
+            <ion-item>Data : {{informacao.data}}</ion-item>
          <!-- Apresentaçao dos Pesos -->
             <ion-card>   
             <ion-list *ngFor="let peso of resultado">

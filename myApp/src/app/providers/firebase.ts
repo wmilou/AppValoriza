@@ -98,9 +98,10 @@ export class FirebaseProvider {
 
 
 //Pega Informaçoes Do Residuo no Banco
+// Get logs pesos consulta
 getlogs(){
   return new Promise((resolve, reject) =>{
-    this.afs.firestore.collection('logs').orderBy('data','asc').get()
+    this.afs.firestore.collection('logs').orderBy('data','desc').get()
     .then((r) =>{
       let array = [];
         r.forEach((d) => {
@@ -112,6 +113,22 @@ getlogs(){
       })
     })
   }
+
+  //get logs Relatorio
+  getRelatorio(datainicio,datafim){
+    return new Promise((resolve, reject) =>{
+      this.afs.firestore.collection('logs').orderBy('dataconsulta','desc').where('dataconsulta','>=',datainicio).where('dataconsulta','<=',datafim).get()
+      .then((r) =>{
+        let array = [];
+          r.forEach((d) => {
+          let item = d.data();
+          item.id =  d.id;
+          array.push(item);
+          });
+          resolve(array);    
+        })
+      })
+    }
 
 //Metodos Posts Para Inserçao De Dados
 

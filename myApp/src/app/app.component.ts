@@ -92,7 +92,17 @@ export class AppComponent {
     },
     
     
-    
+    {
+      title: 'Relatorios',
+      children:[
+        {
+          title:'Relatorio', 
+          url: '/relatorio',
+          icon: 'arrow-dropright'
+        },
+
+      ],
+    },
    
     
   ];
