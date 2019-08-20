@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FirebaseProvider } from '../../providers/firebase';
-import { AlertController } from '@ionic/angular';
+import { ToastController } from '@ionic/angular';
 import { AuthProvider} from '../../providers/auth';
 
 @Component({
@@ -42,7 +42,7 @@ camposocultar = true;
   // Construtor
   constructor(   
     private firebaseProvider: FirebaseProvider,
-    public alertController: AlertController,
+    private toastController: ToastController,
     private authProvider: AuthProvider,
     ) {}
  
@@ -74,16 +74,12 @@ camposocultar = true;
   };
      this.firebaseProvider.postPrestador(data)
       .then(() =>{
-        var alerta;
-        alerta = 2;
-        this.presentAlert(alerta); 
+        this.presentAlert("Prestador Cadastrado Com Sucesso"); 
         this.paraSpinner();
         this.criarLoginParaFuncionario();
         })   
       .catch ((err) =>{
-        var alerta;
-        alerta = 3;
-        this.presentAlert(alerta);  
+        this.presentAlert("Não foi Possivel Cadastrar o Prestador");  
         this.paraSpinner();  
     }) 
 }
@@ -102,8 +98,9 @@ camposocultar = true;
   data.cnpj = this.cadastroPrestadorForm.cnpj;
 
   let nome = this.cadastroPrestadorForm.nome.split(" ", 1);
-  data.email = 'funcionario@' + nome[0] +'.com';
-  console.log("Email: "+data.email);
+  let cnpj = this.cadastroPrestadorForm.cnpj.toString().substring(1,4);
+  data.email = 'funcionario@' + nome[0] + cnpj +'.com';
+  console.log("Email: "+ data.email);
   data.password = nome[0] + '@123';
   console.log("Senha: "+ data.password);
  
@@ -145,37 +142,14 @@ camposocultar = true;
   }
 
   //Alerta De Sucesso ou Nao
-  async presentAlert(alerta) {
-    switch(alerta){
-      case 2:{
-        const alert = await this.alertController.create({
-          header: 'Sucesso',
-          message:'Empresa Adicionada Com Sucesso',
-          buttons: ['OK']
-        });
-        await alert.present();
-        break;
-      }
-      case 3:{
-        const alert = await this.alertController.create({
-          header: 'Ops',
-          message:'Essa Empresa Ja Existe',
-          buttons: ['OK']
-        });
-        await alert.present();
-        break;
-      }
-      default:{
-        const alert = await this.alertController.create({
-          header: 'Ops',
-          message:'Alguma Coisa Deu Errada',
-          buttons: ['OK']
-        });
-        await alert.present();
-        break;
-      }
-      }
-    }
+  async presentAlert(mensagem) {
+    const toast = await this.toastController.create({
+      message: mensagem,
+      duration: 5000
+    });
+    toast.present();
+  }
+
   ngOnInit() {
   }
 
