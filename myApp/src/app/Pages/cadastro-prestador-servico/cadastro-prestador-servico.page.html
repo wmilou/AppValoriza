@@ -8,123 +8,104 @@
     </ion-title>
   </ion-toolbar>
 </ion-header>
-<!--Pagina de cadstro de nova empresa -->
+<!--Pagina de cadastro de Novo Prestador-->
 <ion-content>
 <div *ngIf = "cadastro">
   <div class="centro mg-top-30">
-      <img src="assets/Logo_Valoriza.png" class="logo">
+    <img src="assets/Logo_Valoriza.png" class="logo">
   </div>
   <div class="mg-top-30">
-      <h3 class="centro">Cadastrar Novo Prestador</h3>
+    <h3 class="centro">Cadastrar Novo Prestador</h3>
   </div>
-    
-  
-  <div class="padding-40">
+<!--Campos Do formulario-->
+<div class="padding-40">
   <ion-list >
-      <!--Campos Do formulario -->
-      <ion-item>
-          <ion-label position="floating">Empresa</ion-label>
-           <ion-input type="text" [(ngModel)] = "cadastroEmpresaForm.nome"></ion-input>
-       </ion-item>
-   
-  
-      <ion-item>
-         <ion-label position="floating">Cnpj</ion-label>
-          <ion-input type="number" [(ngModel)] = "cadastroEmpresaForm.cnpj"></ion-input>
-      </ion-item>
-
-      <ion-item *ngIf = "campos">
-          <ion-label position="floating">UF</ion-label>
-           <ion-input type="text" [(ngModel)] = "cadastroEmpresaForm.estado"></ion-input>
-       </ion-item>
     
-
-     <ion-item *ngIf = "campos">
+    <ion-item>
+        <ion-label position="floating">Empresa</ion-label>
+        <ion-input type="text" [(ngModel)] = "cadastroPrestadorForm.nome"></ion-input>
+    </ion-item>
+    <ion-item>
+        <ion-label position="floating">Cnpj</ion-label>
+        <ion-input type="number" [(ngModel)] = "cadastroPrestadorForm.cnpj"></ion-input>
+    </ion-item>
+    <ion-item *ngIf = "campos">
+          <ion-label position="floating">UF</ion-label>
+          <ion-input type="text" [(ngModel)] = "cadastroPrestadorForm.estado"></ion-input>
+    </ion-item>
+    <ion-item *ngIf = "campos">
         <ion-label position="floating">Municipio</ion-label>
-         <ion-input type="text" [(ngModel)] = "cadastroEmpresaForm.municipio"></ion-input>
-     </ion-item>
-
-     <ion-item *ngIf = "campos">
-         <ion-label position="floating">Endereço</ion-label>
-          <ion-input type="text" [(ngModel)] = "cadastroEmpresaForm.endereco"></ion-input>
-      </ion-item>
-      <ion-item *ngIf = "campos">
+        <ion-input type="text" [(ngModel)] = "cadastroPrestadorForm.municipio"></ion-input>
+    </ion-item>
+    <ion-item *ngIf = "campos">
+        <ion-label position="floating">Endereço</ion-label>
+        <ion-input type="text" [(ngModel)] = "cadastroPrestadorForm.endereco"></ion-input>
+    </ion-item>
+    <ion-item *ngIf = "campos">
         <ion-label position="floating">Numero</ion-label>
-         <ion-input type="number" [(ngModel)] = "cadastroEmpresaForm.numero"></ion-input>
-     </ion-item>
-
-     <ion-item *ngIf = "campos">
-         <ion-label position="floating">Bairro</ion-label>
-          <ion-input type="text" [(ngModel)] = "cadastroEmpresaForm.bairro"></ion-input>
-      </ion-item>
-      <ion-item *ngIf = "campos">
+        <ion-input type="number" [(ngModel)] = "cadastroPrestadorForm.numero"></ion-input>
+    </ion-item>
+    <ion-item *ngIf = "campos">
+        <ion-label position="floating">Bairro</ion-label>
+        <ion-input type="text" [(ngModel)] = "cadastroPrestadorForm.bairro"></ion-input>
+    </ion-item>
+    <ion-item *ngIf = "campos">
         <ion-label position="floating">CEP</ion-label>
-         <ion-input type="text" [(ngModel)] = "cadastroEmpresaForm.cep"></ion-input>
-     </ion-item>
-
-     <ion-item *ngIf = "campos">
-         <ion-label position="floating">Telefone</ion-label>
-          <ion-input type="number" [(ngModel)] = "cadastroEmpresaForm.telefone"></ion-input>
-      </ion-item>
-      <ion-item *ngIf = "campos">
+        <ion-input type="text" [(ngModel)] = "cadastroPrestadorForm.cep"></ion-input>
+    </ion-item>
+    <ion-item *ngIf = "campos">
+        <ion-label position="floating">Telefone</ion-label>
+        <ion-input type="number" [(ngModel)] = "cadastroPrestadorForm.telefone"></ion-input>
+    </ion-item>
+    <ion-item *ngIf = "campos">
         <ion-label position="floating">Contato</ion-label>
-         <ion-input type="text" [(ngModel)] = "cadastroEmpresaForm.contato"></ion-input>
-     </ion-item>
-     <ion-item *ngIf = "campos">
-      <ion-label position="floating">E-MAIL</ion-label>
-       <ion-input type="text" [(ngModel)] = "cadastroEmpresaForm.email"></ion-input>
+        <ion-input type="text" [(ngModel)] = "cadastroPrestadorForm.contato"></ion-input>
+    </ion-item>
+    <ion-item *ngIf = "campos">
+        <ion-label position="floating">E-MAIL</ion-label>
+        <ion-input type="text" [(ngModel)] = "cadastroPrestadorForm.email"></ion-input>
    </ion-item>
-     <ion-item *ngIf = "campos">
-         <ion-label position="floating">Ramo</ion-label>
-          <ion-input type="text" [(ngModel)] = "cadastroEmpresaForm.ramo"></ion-input>
-      </ion-item>
-      <ion-item *ngIf = "campos">
+    <ion-item *ngIf = "campos">
+        <ion-label position="floating">Ramo</ion-label>
+        <ion-input type="text" [(ngModel)] = "cadastroPrestadorForm.ramo"></ion-input>
+    </ion-item>
+    <ion-item *ngIf = "campos">
         <ion-label position="floating">Numero Da Licença De Operaçao</ion-label>
-         <ion-input type="text" [(ngModel)] = "cadastroEmpresaForm.cadri" [brmasker]="{type:num, len:9}"></ion-input>
-     </ion-item>
-     
-      <ion-item *ngIf = "campos">
+        <ion-input type="text" [(ngModel)] = "cadastroPrestadorForm.cadri" [brmasker]="{type:num, len:9}"></ion-input>
+    </ion-item>
+    <ion-item *ngIf = "campos">
         <ion-label position="floating">Data Termino Licença</ion-label>
-        <ion-datetime display-format="MM/DD/YYYY"   max="2050-12-31"[(ngModel)] = "cadastroEmpresaForm.terminolicenca"></ion-datetime>
-     </ion-item>
-
-      <ion-item *ngIf = "campos">
+        <ion-datetime display-format="MM/DD/YYYY"   max="2050-12-31"[(ngModel)] = "cadastroPrestadorForm.terminolicenca"></ion-datetime>
+    </ion-item>
+    <ion-item *ngIf = "campos">
         <ion-label position="floating">Bandeira</ion-label>
-         <ion-input type="text" [(ngModel)] = "cadastroEmpresaForm.bandeira"></ion-input>
-     </ion-item>
-
-     <ion-item *ngIf = "campos">
-         <ion-label position="floating">Potencial</ion-label>
-          <ion-input type="text" [(ngModel)] = "cadastroEmpresaForm.potencial"></ion-input>
-      </ion-item>
-      <ion-item *ngIf = "campos">
+        <ion-input type="text" [(ngModel)] = "cadastroPrestadorForm.bandeira"></ion-input>
+    </ion-item>
+    <ion-item *ngIf = "campos">
+        <ion-label position="floating">Potencial</ion-label>
+        <ion-input type="text" [(ngModel)] = "cadastroPrestadorForm.potencial"></ion-input>
+    </ion-item>
+    <ion-item *ngIf = "campos">
         <ion-label position="floating">Prestador de Serviço</ion-label>
-         <ion-input type="text" [(ngModel)] = "cadastroEmpresaForm.prestador"></ion-input>
-     </ion-item>
-
-     <ion-item *ngIf = "campos">
-         <ion-label position="floating">Representante</ion-label>
-          <ion-input type="text" [(ngModel)] = "cadastroEmpresaForm.representante"></ion-input>
-      </ion-item>
-      <ion-item *ngIf = "campos">
+        <ion-input type="text" [(ngModel)] = "cadastroPrestadorForm.prestador"></ion-input>
+    </ion-item>
+    <ion-item *ngIf = "campos">
+        <ion-label position="floating">Representante</ion-label>
+        <ion-input type="text" [(ngModel)] = "cadastroPrestadorForm.representante"></ion-input>
+    </ion-item>
+    <ion-item *ngIf = "campos">
         <ion-label position="floating">Plano</ion-label>
-         <ion-input type="text" [(ngModel)] = "cadastroEmpresaForm.plano"></ion-input>
-     </ion-item>
-
-     <ion-item *ngIf = "campos">
+        <ion-input type="text" [(ngModel)] = "cadastroPrestadorForm.plano"></ion-input>
+    </ion-item>
+    <ion-item *ngIf = "campos">
          <ion-label position="floating">Data Inicio Contrato</ion-label>
-         <ion-datetime display-format="MM/DD/YYYY"   max="2050-12-31"[(ngModel)] = "cadastroEmpresaForm.datainicio"></ion-datetime>
-      </ion-item>
-      <ion-item *ngIf = "campos">
+         <ion-datetime display-format="MM/DD/YYYY"   max="2050-12-31"[(ngModel)] = "cadastroPrestadorForm.datainicio"></ion-datetime>
+    </ion-item>
+    <ion-item *ngIf = "campos">
         <ion-label position="floating">Data Termino Contrato</ion-label>
-        <ion-datetime display-format="MM/DD/YYYY"   max="2050-12-31"[(ngModel)] = "cadastroEmpresaForm.datatermino"></ion-datetime>
-     </ion-item>
-       
+        <ion-datetime display-format="MM/DD/YYYY"   max="2050-12-31"[(ngModel)] = "cadastroPrestadorForm.datatermino"></ion-datetime>
+    </ion-item>
     </ion-list>
-
-
-
-
 <!-- Setas De Abrir E fechar Campos a mais -->
     <div class="centro" (click) = "ocultarCampos()" *ngIf="campos">
       <ion-icon class="seta" name="arrow-dropup" ></ion-icon>
@@ -132,29 +113,21 @@
     <div class="centro" (click) = "mostrarCampos()" *ngIf = "camposocultar">
       <ion-icon class="seta" name="arrow-dropdown" ></ion-icon>
     </div>
-
     <div class="padding-20" *ngIf="campos" >  
-      <div class="botoes centro" (click) = "criarNovaEmpresa()">
+      <div class="botoes centro" (click) = "criarNovoPrestador()">
          Cadastrar Prestador
       </div> 
     </div>
-
-
- 
+  </div>
 </div>
-</div>
-
 <!-- Pagina De Loading -->
-  <div class="centro" *ngIf = "spinner">
-      <div class="centro mg-top-30">
-          <img src="assets/Logo_Valoriza.png" class="logo">
-      </div>
+<div class="centro" *ngIf = "spinner">
+    <div class="centro mg-top-30">
+      <img src="assets/Logo_Valoriza.png" class="logo">
+    </div>
   <div class="mg-top-30">  
     <h2 >Aguarde Um Momento ...</h2>
     <ion-spinner name="crescent" color="success"></ion-spinner>
   </div>
-  </div>
-
-
-
+</div>
 </ion-content>

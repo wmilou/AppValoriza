@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FirebaseProvider } from '../../providers/firebase';
 import { AlertController } from '@ionic/angular';
-
+import { AuthProvider} from '../../providers/auth';
 
 @Component({
   selector: 'app-cadastro-prestador-servico',
@@ -10,16 +10,8 @@ import { AlertController } from '@ionic/angular';
 })
 
 export class CadastroPrestadorServicoPage implements OnInit {
- //Imagem Que Vai Aparecer nos Resultados
-  image = 'https://www.visaopontocom.com/wp-content/uploads/2017/02/icone-empresa.png'
-  cadastro = true;
-  campos = false;
-  spinner = false;
-  camposocultar = true;
-
-
 //Decreta Campos Nos Formularios
-cadastroEmpresaForm = {
+cadastroPrestadorForm = {
   nome:'',
   cnpj:'',
   estado:'',
@@ -42,79 +34,111 @@ cadastroEmpresaForm = {
   datainicio:'',
   datatermino:'',  
 }
+cadastro = true;
+campos = false;
+spinner = false;
+camposocultar = true;
 
   // Construtor
   constructor(   
     private firebaseProvider: FirebaseProvider,
     public alertController: AlertController,
-    
-    ) {
-   
-   }
-
-
- //criaNovaEmpresa 
- criarNovaEmpresa(){
+    private authProvider: AuthProvider,
+    ) {}
+ 
+ criarNovoPrestador(){
   this.rodarSpinner();
-   
-  // Coloca Campos No DB
   let data = {
-      image:this.image,
-      name:this.cadastroEmpresaForm.nome,
-      cnpj:this.cadastroEmpresaForm.cnpj,
-      estado:this.cadastroEmpresaForm.estado,
-      municipio:this.cadastroEmpresaForm.municipio,
-      endereco:this.cadastroEmpresaForm.endereco,
-      numero:this.cadastroEmpresaForm.numero,
-      bairro:this.cadastroEmpresaForm.bairro,
-      cep:this.cadastroEmpresaForm.cep,
-      telefone:this.cadastroEmpresaForm.telefone,
-      contato:this.cadastroEmpresaForm.contato,
-      email:this.cadastroEmpresaForm.email,
-      ramo:this.cadastroEmpresaForm.email,
-      bandeira:this.cadastroEmpresaForm.bandeira,
-      potencial:this.cadastroEmpresaForm.potencial,
-      prestador:this.cadastroEmpresaForm.prestador,
-      representante:this.cadastroEmpresaForm.representante,
-      cadri:this.cadastroEmpresaForm.cadri,
-      dataTerminoLicenca:this.cadastroEmpresaForm.terminolicenca,
-      plano:this.cadastroEmpresaForm.plano,
-      datainicio:this.cadastroEmpresaForm.datainicio,
-      datatermino:this.cadastroEmpresaForm.datatermino
+      image:'https://www.visaopontocom.com/wp-content/uploads/2017/02/icone-empresa.png',
+      name:this.cadastroPrestadorForm.nome,
+      cnpj:this.cadastroPrestadorForm.cnpj,
+      estado:this.cadastroPrestadorForm.estado,
+      municipio:this.cadastroPrestadorForm.municipio,
+      endereco:this.cadastroPrestadorForm.endereco,
+      numero:this.cadastroPrestadorForm.numero,
+      bairro:this.cadastroPrestadorForm.bairro,
+      cep:this.cadastroPrestadorForm.cep,
+      telefone:this.cadastroPrestadorForm.telefone,
+      contato:this.cadastroPrestadorForm.contato,
+      email:this.cadastroPrestadorForm.email,
+      ramo:this.cadastroPrestadorForm.email,
+      bandeira:this.cadastroPrestadorForm.bandeira,
+      potencial:this.cadastroPrestadorForm.potencial,
+      prestador:this.cadastroPrestadorForm.prestador,
+      representante:this.cadastroPrestadorForm.representante,
+      cadri:this.cadastroPrestadorForm.cadri,
+      dataTerminoLicenca:this.cadastroPrestadorForm.terminolicenca,
+      plano:this.cadastroPrestadorForm.plano,
+      datainicio:this.cadastroPrestadorForm.datainicio,
+      datatermino:this.cadastroPrestadorForm.datatermino
   };
      this.firebaseProvider.postPrestador(data)
-     .then(() =>{
-       var alerta;
-       alerta = 2;
-       this.presentAlert(alerta); 
-       this.paraSpinner();
+      .then(() =>{
+        var alerta;
+        alerta = 2;
+        this.presentAlert(alerta); 
+        this.paraSpinner();
+        this.criarLoginParaFuncionario();
         })   
-    .catch ((err) =>{
-      var alerta;
-      alerta = 3;
-      this.presentAlert(alerta);  
-      this.paraSpinner();  
-  }) 
- }
+      .catch ((err) =>{
+        var alerta;
+        alerta = 3;
+        this.presentAlert(alerta);  
+        this.paraSpinner();  
+    }) 
+}
 
-  // Loading 
+ criarLoginParaFuncionario(){
+  let data = {
+   uid:'',
+   nome:'',
+   email:'',
+   cnpj:'',
+   password:'',
+   adm:false
+  }
+  //Criaçao Do Login e Senha Automatico 
+  data.nome = this.cadastroPrestadorForm.nome;
+  data.cnpj = this.cadastroPrestadorForm.cnpj;
+
+  let nome = this.cadastroPrestadorForm.nome.split(" ", 1);
+  data.email = 'funcionario@' + nome[0] +'.com';
+  console.log("Email: "+data.email);
+  data.password = nome[0] + '@123';
+  console.log("Senha: "+ data.password);
+ 
+  //Cria Login Para Funcionario
+  this.authProvider.register(data).then((res) => 
+  {
+    let uid = res.user.uid;
+    console.log(res.user.uid);
+    data.uid = uid;
+    //Registra No Banco Informaçoes Do Usuario 
+    this.firebaseProvider.postUser(data)
+      .then(() =>{
+        console.log("Mandou Usuario Para o DB");
+       }) 
+        console.log("Registrou Usuario");
+      });
+  }
+
   rodarSpinner(){
     this.cadastro = false;
     this.campos = false;
     this.spinner = true;
   }
-  //Parar Loading
+
   paraSpinner(){
     this.cadastro = true;
     this.campos = true;
     this.spinner = false;
     }
-  
-  //Mostrar Demais Campos Do Formulario  
+   
   mostrarCampos(){
     this.campos = true;
     this.camposocultar = false;
   }
+
   ocultarCampos(){
     this.campos = false;
     this.camposocultar = true;

@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FirebaseProvider } from '../../providers/firebase';
 import { AlertController } from '@ionic/angular';
-import { AuthProvider} from '../../providers/auth';
 
 @Component({
   selector: 'app-cadastro-empresa',
@@ -34,33 +33,19 @@ cadastroEmpresaForm = {
   datatermino:''
 }
 
-/*
-Variaveis De Controle Da Pagina
-E de Imagem
-*/
   image = 'https://www.visaopontocom.com/wp-content/uploads/2017/02/icone-empresa.png'
   cadastro = true;
   campos = false;
   spinner = false;
   camposocultar = true;
-
-//Variaveis De Armazenamento
   condicao;
   empresas;
   planos;
-  data={
-    nome:'',
-    email:'',
-    cnpj:'',
-    password:'',
-    adm:false
-  }
 
 // Construtor
   constructor(   
     private firebaseProvider: FirebaseProvider,
     public alertController: AlertController,
-    private authProvider: AuthProvider,
     ) {
       this.getIdEmpresas();
       this.getPlanos();
@@ -229,43 +214,6 @@ criarNovaEmpresa(){
      //Para Spinner De Loading
      this.paraSpinner();  
  })
- 
- this.data.nome = this.cadastroEmpresaForm.nome;
- this.data.email = 'funcionario@' + this.cadastroEmpresaForm.nome +'.com';
- console.log("Email: "+this.data.email);
- this.data.cnpj = this.cadastroEmpresaForm.cnpj;
- this.data.password = this.cadastroEmpresaForm.nome + '@123';
- console.log("Senha: "+ this.data.password);
-
-
- 
- //regista usuario funcionario
- this.authProvider.register(this.data).then((res) => {
-  let uid = res.user.uid;
-  console.log(res.user.uid);
-      let data = {
-          uid: uid,
-          nome:this.data.nome,
-          email:this.data.email,
-          adm:this.data.adm,
-          cnpj:this.data.cnpj
-     };
-     this.firebaseProvider.postUser(data)
-     .then(() =>{
-      console.log("Mandou Usuario Para o DB");
-      }) 
-  console.log("Registrou Usuario");
-});
-
- //coloca dados no db
- this.firebaseProvider.postUser(this.data).then((resposta)=>{
-  console.log(resposta);
- }).catch((erro)=>{
-   console.log(erro);
- })
-
- 
- 
 }
 
   // Loading 
