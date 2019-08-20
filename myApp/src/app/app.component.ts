@@ -5,6 +5,7 @@ import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Router } from '@angular/router'
 import { AngularFireAuth } from '@angular/fire/auth';
+import { MenuController } from '@ionic/angular';
 
 @Component({
   selector: 'app-root',
@@ -114,24 +115,29 @@ export class AppComponent {
     private storage: Storage,
     private router: Router,
     private afAuth: AngularFireAuth,
+    private controledomenu: MenuController
   ) {
     this.initializeApp();
   }
 
   // Decide para onde vai o usuario
   initializeApp() {
+      this.controledomenu.enable(false);
       this.storage.get('usuario')
       .then((usuario) => {
           if(usuario.adm == true){
             this.router.navigate(['home']); 
             this.splashScreen.hide();
+            this.controledomenu.enable(true);
           }else{
             if(usuario.adm == false){
               this.router.navigate(['home-funcionario']);
               this.splashScreen.hide();
+              this.controledomenu.enable(false);
             }else
             this.router.navigate(['login']);
             this.splashScreen.hide();
+            this.controledomenu.enable(false);
           }
       })
 
@@ -144,6 +150,7 @@ export class AppComponent {
   }
   signOut(){
     this.afAuth.auth.signOut();
+    this.controledomenu.enable(false);
     this.router.navigate(['login'])
     }
 }

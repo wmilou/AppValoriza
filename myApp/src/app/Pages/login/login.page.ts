@@ -3,7 +3,8 @@ import { Router } from "@angular/router"
 import { AuthProvider} from '../../providers/auth';
 import { FirebaseProvider } from '../../providers/firebase';
 import { AlertController } from '@ionic/angular';
-import { Storage } from '@ionic/storage'
+import { Storage } from '@ionic/storage';
+import { MenuController }  from '@ionic/angular';
 
 @Component({
   selector: 'app-login',
@@ -32,12 +33,12 @@ loginForm = {
     private authProvider: AuthProvider,
     private firebaseProvider: FirebaseProvider,
     public alertController: AlertController,
-    private storage : Storage
+    private storage : Storage,
+    private controledomenu: MenuController
     ) {
-      
+     
    }
- 
-
+   
   // Faz Login Com FireBase
   fazerLogin(){  
     this.rodarSpinner();
@@ -52,12 +53,12 @@ loginForm = {
           if(data.adm == true){
           this.paraSpinner();
           this.router.navigate(['home']);
+          this.controledomenu.enable(true);
         }else{
           this.paraSpinner();
           this.router.navigate(['home-funcionario']);
-        }
-
-        })
+          this.controledomenu.enable(false);
+        }})
       }) 
     })
     .catch ((err) =>{

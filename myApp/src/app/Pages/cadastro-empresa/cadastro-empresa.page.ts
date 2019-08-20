@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FirebaseProvider } from '../../providers/firebase';
 import { AlertController } from '@ionic/angular';
-
+import { AuthProvider} from '../../providers/auth';
 
 @Component({
   selector: 'app-cadastro-empresa',
@@ -33,6 +33,7 @@ cadastroEmpresaForm = {
   datainicio:'',
   datatermino:''
 }
+
 /*
 Variaveis De Controle Da Pagina
 E de Imagem
@@ -47,11 +48,19 @@ E de Imagem
   condicao;
   empresas;
   planos;
+  data={
+    nome:'',
+    email:'',
+    cnpj:'',
+    password:'',
+    adm:false
+  }
 
 // Construtor
   constructor(   
     private firebaseProvider: FirebaseProvider,
-    public alertController: AlertController 
+    public alertController: AlertController,
+    private authProvider: AuthProvider,
     ) {
       this.getIdEmpresas();
       this.getPlanos();
@@ -153,17 +162,16 @@ verifica(){
                               
                                     this.presentAlert(1,'Preencha o Campo Data Termino')
                                   }else{
-                                    for(let i in this.empresas){
-                                          if(this.cadastroEmpresaForm.cnpj == this.empresas[i]){
-                                            this.condicao = true;
+                                      this.firebaseProvider.consultaCnpj(this.cadastroEmpresaForm.cnpj).then((resposta)=>{
+                                        console.log(resposta)
+                                        if(resposta == ''){
+                                            this.condicao = false;
+                                            this.verificaEmpresa();
                                         }else{
-                                          this.condicao = false;
+                                          this.condicao = true;
+                                          this.verificaEmpresa();
                                         }
-                                        if(this.condicao == true){
-                                          break;
-                                       }
-                                     }
-                                     this.verificaEmpresa();
+                                      })
 }}}}}}}}}}}}}}}}}}}}
 
 //Verifica Se A Empresa Ja Esta Cadastrada 
@@ -172,6 +180,7 @@ if (this.condicao == false){
   this.criarNovaEmpresa();
   this.getIdEmpresas();
 }else{if(this.condicao = true){
+  console.log("empresa ja existe")
   this.presentAlert(3,null);
 }}}
 
@@ -212,15 +221,49 @@ criarNovaEmpresa(){
       this.presentAlert(alerta ,null);
       //Para A Tela De Loading 
       this.paraSpinner();
-       })   
-   
-    .catch ((err) =>{
+    }) 
+    .catch ((erro) =>{
      var alerta = 3;
      //Apresenta Alerta De Erro
      this.presentAlert(alerta,null); 
      //Para Spinner De Loading
      this.paraSpinner();  
- }) 
+ })
+ 
+ this.data.nome = this.cadastroEmpresaForm.nome;
+ this.data.email = 'funcionario@' + this.cadastroEmpresaForm.nome +'.com';
+ console.log("Email: "+this.data.email);
+ this.data.cnpj = this.cadastroEmpresaForm.cnpj;
+ this.data.password = this.cadastroEmpresaForm.nome + '@123';
+ console.log("Senha: "+ this.data.password);
+
+ //regista usuario funcionario
+ this.authProvider.register(this.data).then((res) => {
+  let uid = res.user.uid;
+  console.log(res.user.uid);
+      let data = {
+          uid: uid,
+          nome:this.data.nome,
+          email:this.data.email,
+          adm:this.data.adm,
+          cnpj:this.data.cnpj
+     };
+     this.firebaseProvider.postUser(data)
+     .then(() =>{
+      console.log("Mandou Usuario Para o DB");
+      }) 
+  console.log("Registrou Usuario");
+});
+
+ //coloca dados no db
+ this.firebaseProvider.postUser(this.data).then((resposta)=>{
+  console.log(resposta);
+ }).catch((erro)=>{
+   console.log(erro);
+ })
+
+ 
+ 
 }
 
   // Loading 

@@ -28,6 +28,21 @@ export class FirebaseProvider {
      })
    }
 
+   consultaCnpj(cnpj){
+    return new Promise((resolve, reject) =>{
+      this.afs.firestore.collection('Empresas').where("cnpj","==",cnpj).get()
+      .then((r) =>{
+       let array = [];
+       r.forEach((d) => {
+         let item = d.data();
+         item.id =  d.id;
+         array.push(item);
+       });
+         resolve(array);    
+       })
+     })
+   }
+
 
 //Retorna Os Residuos Do Banco 
   getResiduos(){

@@ -33,21 +33,18 @@ export class CadastroUsuarioPage implements OnInit {
    
    
    //Verifica Campos 
-   // verifica(){
-   //   if(this.cadastroForm.email == ''){
-   //     this.presentAlert(1);
-   //   }else{
-   //     if(this.cadastroForm.nome == ''){
-   //       this.presentAlert(1);
-   //     }else{
-   //       if(this.cadastroForm.password == ''){
-   //         this.presentAlert(1);
-   //       }else{
-   //         this.criarNovaConta();
-   //       }
-   //     }
-   //   }
-   // }
+   verifica(){
+     if(this.cadastroForm.email == ''){
+       this.presentAlert(1);
+     }else{
+       if(this.cadastroForm.nome == ''){
+         this.presentAlert(1);
+       }else{
+         if(this.cadastroForm.password == ''){
+           this.presentAlert(1);
+         }else{
+           this.criarNovaConta();
+    }}}}
 
    //criaNovaConta
    criarNovaConta(){
@@ -57,7 +54,8 @@ export class CadastroUsuarioPage implements OnInit {
       this.presentAlert(2);
       // Coloca Campos No DB
       let uid = res.user.uid;
-      let data = {
+      console.log(res.user.uid);
+    let data = {
           uid: uid,
           nome:this.cadastroForm.nome,
           email:this.cadastroForm.email,

@@ -12,9 +12,9 @@
 <ion-content>
   <div *ngIf="cadastro">
     <div class="mg-top-30">
-        <h3 class="centro">Cadastrar Novo Usuario</h3>
+        <h3 class="centro">Cadastrar Novo Administrador</h3>
     </div>
-      
+<!--       
 <div class="centro border">
     <ion-grid>
         <ion-row>
@@ -23,7 +23,7 @@
           <ion-col><p>Admin<p></ion-col>
         </ion-row>
       </ion-grid>     
-</div>
+</div> -->
 
 
     <!--Formulario-->
@@ -31,7 +31,8 @@
     <ion-list >
 
           <!--Cadastro Empresa-->
-          <ion-item *ngIf="cadastroForm.adm == false">
+
+          <!-- <ion-item *ngIf="cadastroForm.adm == false">
               <ion-label position="floating">Nome Empresa</ion-label>
                <ion-input type="text" [(ngModel)] = "cadastroForm.nome"></ion-input>
            </ion-item> 
@@ -45,7 +46,7 @@
           <ion-item *ngIf="cadastroForm.adm == false">
               <ion-label position="floating">Senha</ion-label>
                <ion-input type="password" [(ngModel)] = "cadastroForm.password"></ion-input>
-           </ion-item>
+           </ion-item> -->
 
 
 
