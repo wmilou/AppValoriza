@@ -237,6 +237,8 @@ criarNovaEmpresa(){
  this.data.password = this.cadastroEmpresaForm.nome + '@123';
  console.log("Senha: "+ this.data.password);
 
+
+ 
  //regista usuario funcionario
  this.authProvider.register(this.data).then((res) => {
   let uid = res.user.uid;
