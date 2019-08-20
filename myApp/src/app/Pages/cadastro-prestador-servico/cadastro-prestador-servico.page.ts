@@ -46,7 +46,7 @@ camposocultar = true;
     private authProvider: AuthProvider,
     ) {}
  
- criarNovoPrestador(){
+ criarNovoPrestador(informacaoLogin){
   this.rodarSpinner();
   let data = {
       image:'https://www.visaopontocom.com/wp-content/uploads/2017/02/icone-empresa.png',
@@ -70,18 +70,19 @@ camposocultar = true;
       dataTerminoLicenca:this.cadastroPrestadorForm.terminolicenca,
       plano:this.cadastroPrestadorForm.plano,
       datainicio:this.cadastroPrestadorForm.datainicio,
-      datatermino:this.cadastroPrestadorForm.datatermino
+      datatermino:this.cadastroPrestadorForm.datatermino,
+      login:informacaoLogin.email,
+      senha:informacaoLogin.password
   };
      this.firebaseProvider.postPrestador(data)
       .then(() =>{
         this.presentAlert("Prestador Cadastrado Com Sucesso"); 
         this.paraSpinner();
-        this.criarLoginParaFuncionario();
         })   
       .catch ((err) =>{
         this.presentAlert("Não foi Possivel Cadastrar o Prestador");  
         this.paraSpinner();  
-    }) 
+  }) 
 }
 
  criarLoginParaFuncionario(){
@@ -108,15 +109,16 @@ camposocultar = true;
   this.authProvider.register(data).then((res) => 
   {
     let uid = res.user.uid;
-    console.log(res.user.uid);
     data.uid = uid;
     //Registra No Banco Informaçoes Do Usuario 
     this.firebaseProvider.postUser(data)
       .then(() =>{
         console.log("Mandou Usuario Para o DB");
+        this.criarNovoPrestador(data);
        }) 
-        console.log("Registrou Usuario");
+        console.log("Registrou Usuario");    
       });
+   
   }
 
   rodarSpinner(){

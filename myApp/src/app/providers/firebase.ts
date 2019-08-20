@@ -93,8 +93,7 @@ export class FirebaseProvider {
         })
       })
     }
-  
-  
+    
 //Retorna Os Representante
   getRepresentante(){
     return new Promise((resolve, reject) =>{
