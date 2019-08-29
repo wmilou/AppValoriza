@@ -4,7 +4,6 @@ import { FormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
 import { BrMaskerModule } from 'br-mask';
 import { IonicModule } from '@ionic/angular';
-
 import { HomeFuncionarioPage } from './home-funcionario.page';
 
 const routes: Routes = [
@@ -24,4 +23,4 @@ const routes: Routes = [
   ],
   declarations: [HomeFuncionarioPage]
 })
-export class HomeFuncionarioPageModule {}
+export class HomeFuncionarioPageModule { }

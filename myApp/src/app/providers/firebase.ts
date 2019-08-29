@@ -146,7 +146,7 @@ getlogs(){
 
 //Metodos Posts Para Inserçao De Dados
 
-  // Metodo Cadastra Plano
+  // Metodo para Mandar Pesos
   postPeso = data =>
   this.afs.firestore.collection('logs').add(data);
 

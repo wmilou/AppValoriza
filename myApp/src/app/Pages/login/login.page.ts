@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from "@angular/router"
 import { AuthProvider} from '../../providers/auth';
 import { FirebaseProvider } from '../../providers/firebase';
-import { AlertController } from '@ionic/angular';
+import { ToastController } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
 import { MenuController }  from '@ionic/angular';
 
@@ -11,8 +11,6 @@ import { MenuController }  from '@ionic/angular';
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
 })
-
-
 
 export class LoginPage implements OnInit {
 
@@ -32,7 +30,7 @@ loginForm = {
     private router: Router,
     private authProvider: AuthProvider,
     private firebaseProvider: FirebaseProvider,
-    public alertController: AlertController,
+    private toastController: ToastController,
     private storage : Storage,
     private controledomenu: MenuController
     ) {
@@ -63,7 +61,7 @@ loginForm = {
     })
     .catch ((err) =>{
       this.paraSpinner();
-      this.presentAlert(1);
+      this.presentAlert("Credenciais Incorretas");
     })
     
  }
@@ -79,28 +77,14 @@ paraSpinner(){
   this.spinner = false;
 }
   //Alerta De Sucesso ou Nao
-  async presentAlert(alerta) {
-    switch(alerta){
-      case 1:{
-        const alert = await this.alertController.create({
-          header: 'Ops',
-          message:'Credenciais Incorretas',
-          buttons: ['OK']
+  async presentAlert(mensagem) {
+    
+        const toast = await this.toastController.create({
+          message:mensagem,
+          duration:5000
         });
-        await alert.present();
-        break;
+        await toast.present(); 
       }
-      default:{
-        const alert = await this.alertController.create({
-          header: 'Ops',
-          message:'Alguma Coisa Deu Errada',
-          buttons: ['OK']
-        });
-        await alert.present();
-        break;
-      }
-      }
-    }
   ngOnInit() {
   }
 

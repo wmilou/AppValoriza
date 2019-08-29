@@ -1,6 +1,5 @@
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { HomeFuncionarioPage } from './home-funcionario.page';
 
 describe('HomeFuncionarioPage', () => {
@@ -9,10 +8,10 @@ describe('HomeFuncionarioPage', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ HomeFuncionarioPage ],
+      declarations: [HomeFuncionarioPage],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

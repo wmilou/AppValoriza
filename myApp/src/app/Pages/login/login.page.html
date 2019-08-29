@@ -3,44 +3,45 @@
     <ion-title class="title">Entrar</ion-title>
   </ion-toolbar>
 </ion-header>
-<!--Pagin de login-->
-<ion-content >
-<div *ngIf = "login">
-  <div class="centro mg-top-30">
-      <img src="assets/Logo_Valoriza.png" class="logo">
-  </div>
-
-<!--Campos De login -->
-<div class="padding-40">
-  <ion-list >
-      <ion-item>
-         <ion-label position="floating">Login</ion-label>
-          <ion-input type="email" [(ngModel)] = "loginForm.email"></ion-input>
-      </ion-item>
-      <ion-item>
-         <ion-label position="floating">Senha</ion-label>
-          <ion-input type="password" [(ngModel)] = "loginForm.password" ></ion-input>
-      </ion-item>
-
-    </ion-list>
-  </div>
-
-<!--Botao Que Chama a verificacao-->
-  <div class="padding-40">
-  <div class="botoes centro" (click) = "fazerLogin()">
-    Entrar
-  </div>
-</div>
-</div>
-
-<!--Pagina De loading-->
-<div class="centro" *ngIf = "spinner">
+<!--Pagina de login-->
+<ion-content>
+  <div *ngIf="login">
     <div class="centro mg-top-30">
       <img src="assets/Logo_Valoriza.png" class="logo">
     </div>
-<div class="mg-top-30">  
-  <h2 >Aguarde Um Momento ...</h2>
-  <ion-spinner name="crescent" color="success"></ion-spinner>
-</div>
-</div>
+
+
+    <!--Campos De login -->
+    <div class="padding-40">
+      <ion-list>
+        <ion-item>
+          <ion-label position="floating">Login</ion-label>
+          <ion-input type="email" [(ngModel)]="loginForm.email"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Senha</ion-label>
+          <ion-input type="password" [(ngModel)]="loginForm.password"></ion-input>
+        </ion-item>
+
+      </ion-list>
+    </div>
+
+    <!--Botao Que Chama a verificacao-->
+    <div class="padding-40">
+      <div class="botoes centro" (click)="fazerLogin()">
+        Entrar
+      </div>
+    </div>
+  </div>
+
+  <!--Pagina De loading-->
+  <div class="centro" *ngIf="spinner">
+    <div class="centro mg-top-30">
+      <img src="assets/Logo_Valoriza.png" class="logo">
+    </div>
+    <div class="mg-top-30">
+      <h2>Aguarde Um Momento ...</h2>
+      <ion-spinner name="crescent" color="success"></ion-spinner>
+    </div>
+  </div>
 </ion-content>
