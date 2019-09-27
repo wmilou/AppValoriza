@@ -6,19 +6,21 @@ import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import {AngularFireModule} from 'angularfire2';
-import {AngularFirestoreModule} from 'angularfire2/firestore';
-import {AngularFireAuthModule} from 'angularfire2/auth';
-import {firebaseConfig} from './Pages/configs/firebase';
-import {AuthProvider } from './providers/auth';
-import {FirebaseProvider } from './providers/firebase';
+import { AngularFireModule } from 'angularfire2';
+import { AngularFirestoreModule } from 'angularfire2/firestore';
+import { AngularFireAuthModule } from 'angularfire2/auth';
+import { firebaseConfig } from './Pages/configs/firebase';
+import { AuthProvider } from './providers/auth';
+import { FirebaseProvider } from './providers/firebase';
 import { FunctionsGlobal } from './providers/functionsGlobal';
+import { AngularFireStorageModule } from 'angularfire2/storage';
 
 //Plugins
 import { IonicStorageModule } from '@ionic/storage';
 import { File } from '@ionic-native/file/ngx';
 import { FileOpener } from '@ionic-native/file-opener/ngx';
- 
+import { FileChooser } from '@ionic-native/file-chooser/ngx';
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -29,10 +31,12 @@ import { FileOpener } from '@ionic-native/file-opener/ngx';
     AppRoutingModule,
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFirestoreModule,
-    AngularFireAuthModule
+    AngularFireAuthModule,
+    AngularFireStorageModule
   ],
   providers: [
     File,
+    FileChooser,
     FileOpener,
     FirebaseProvider,
     AuthProvider,
@@ -43,4 +47,4 @@ import { FileOpener } from '@ionic-native/file-opener/ngx';
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }

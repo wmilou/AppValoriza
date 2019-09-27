@@ -2,7 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { FirebaseProvider } from '../../providers/firebase';
 import { ToastController } from '@ionic/angular';
 import { AuthProvider } from '../../providers/auth';
-
+import { FileChooser } from '@ionic-native/file-chooser/ngx';
+import { File } from '@ionic-native/file/ngx';
+import { AngularFireStorage } from 'angularfire2/storage';
+import { Platform } from '@ionic/angular';
 @Component({
   selector: 'app-cadastro-prestador-servico',
   templateUrl: './cadastro-prestador-servico.page.html',
@@ -34,17 +37,37 @@ export class CadastroPrestadorServicoPage implements OnInit {
     datainicio: '',
     datatermino: '',
   }
+  //variavel para armazenamento do documento
+  documentoselecionado;
+
   cadastro = true;
   campos = false;
   spinner = false;
   camposocultar = true;
+  uparMobile = null;
+  uparDesktop = null;
 
   // Construtor
   constructor(
     private firebaseProvider: FirebaseProvider,
     private toastController: ToastController,
     private authProvider: AuthProvider,
-  ) { }
+    private fileChooser: FileChooser,
+    private file: File,
+    private afStorage: AngularFireStorage,
+    private platform: Platform
+  ) {
+    this.verificaPlatafroma();
+  }
+  //verificaçao da platafroma para a mudanda de modo de upar documento
+  verificaPlatafroma() {
+    if (this.platform.is('android')) {
+      this.uparMobile = true;
+    } else {
+      this.uparDesktop = true;
+    }
+  }
+
 
   criarNovoPrestador(informacaoLogin) {
     this.rodarSpinner();
@@ -85,6 +108,41 @@ export class CadastroPrestadorServicoPage implements OnInit {
       })
   }
 
+  DocumentoSelecionado(event) {
+    this.documentoselecionado = event.target.files[0];
+    console.log(this.documentoselecionado);
+    this.uparDocumento(this.documentoselecionado, this.documentoselecionado.name)
+  }
+
+  async selecionarDocumento() {
+    this.fileChooser.open().then((uri) => {
+      alert(uri);
+
+      this.file.resolveLocalFilesystemUrl(uri).then((newuri) => {
+        alert(JSON.stringify(newuri));
+
+        let dirpath = newuri.nativeURL;
+        let dirpathsegments = dirpath.split('/');
+        dirpathsegments.pop();
+        dirpath = dirpathsegments.join('/');
+
+        this.file.readAsArrayBuffer(dirpath, newuri.name).then(async (buffer) => {
+          await this.uparDocumento(buffer, newuri.name);
+        })
+      })
+    })
+  }
+
+  async uparDocumento(buffer, name) {
+    let blob = new Blob([buffer], { type: "pdf" });
+    this.afStorage.ref('pdfs/' + name).put(blob).then((d) => {
+      alert("Done");
+    }).catch((erro) => {
+      alert(JSON.stringify(erro));
+    });
+  }
+
+
   criarLoginParaFuncionario() {
     let data = {
       uid: '',
@@ -117,7 +175,6 @@ export class CadastroPrestadorServicoPage implements OnInit {
         })
       console.log("Registrou Usuario");
     });
-
   }
 
   rodarSpinner() {

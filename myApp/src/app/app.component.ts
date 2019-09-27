@@ -20,70 +20,60 @@ export class AppComponent {
       icon: 'home'
     },
     {
-      title:'Cadastros',
-      children:[
+      title: 'Cadastros',
+      children: [
         {
-          title:'Cadastro Usuario',
-          url:'/cadastro-usuario',
-          icon:'arrow-dropright'
+          title: 'Cadastro Usuario',
+          url: '/cadastro-usuario',
+          icon: 'arrow-dropright'
         },
         {
-          title:'Cadastro Cliente',
-          url:'/cadastro-empresa',
-          icon:'arrow-dropright'
+          title: 'Cadastro Cliente',
+          url: '/cadastro-empresa',
+          icon: 'arrow-dropright'
         },
         {
-          title:'Cadastro Prest. Servico',
-          url:'/cadastro-prestador-servico',
-          icon:'arrow-dropright'
+          title: 'Cadastro Prest. Servico',
+          url: '/cadastro-prestador-servico',
+          icon: 'arrow-dropright'
         },
         {
-          title:'Cadastro Representante',
-          url:'/cadastro-representante-comercial',
-          icon:'arrow-dropright'
+          title: 'Cadastro Residuo',
+          url: '/cadastro-residuo',
+          icon: 'arrow-dropright'
         },
         {
-          title:'Cadastro Residuo',
-          url:'/cadastro-residuo',
-          icon:'arrow-dropright'
-        },
-        {
-          title:'Cadastro Tipos De Planos',
-          url:'/cadastro-tipos-planos',
-          icon:'arrow-dropright'
+          title: 'Cadastro Tipos De Planos',
+          url: '/cadastro-tipos-planos',
+          icon: 'arrow-dropright'
         }
       ]
     },
     {
       title: 'Consulta',
-      children:[
+      children: [
         {
-          title:'Consulta Clientes', 
+          title: 'Consulta Clientes',
           url: '/controle',
           icon: 'arrow-dropright'
         },
         {
-          title:'Consulta Prestador',
-          url:'/consulta-prestador',
+          title: 'Consulta Prestador',
+          url: '/consulta-prestador',
           icon: 'arrow-dropright'
         },
         {
-          title:'Consulta Representante',
-          url:'/consulta-representante',
-          icon: 'arrow-dropright'
-        },
-        {
-          title:'Consulta Residuo', 
+          title: 'Consulta Residuo',
           url: '/consulta-residuo',
           icon: 'arrow-dropright'
         },
         {
-          title:'Consulta Plano', 
+          title: 'Consulta Plano',
           url: '/consulta-plano',
           icon: 'arrow-dropright'
         },
         {
-          title:'Consulta Tempo Real', 
+          title: 'Consulta Tempo Real',
           url: '/realtime-logs',
           icon: 'arrow-dropright'
         },
@@ -91,21 +81,21 @@ export class AppComponent {
 
       ],
     },
-    
-    
+
+
     {
       title: 'Relatorios',
-      children:[
+      children: [
         {
-          title:'Relatorio', 
+          title: 'Relatorio',
           url: '/relatorio',
           icon: 'arrow-dropright'
         },
 
       ],
     },
-   
-    
+
+
   ];
 
   constructor(
@@ -122,35 +112,35 @@ export class AppComponent {
 
   // Decide para onde vai o usuario
   initializeApp() {
-      this.controledomenu.enable(false);
-      this.storage.get('usuario')
+    this.controledomenu.enable(false);
+    this.storage.get('usuario')
       .then((usuario) => {
-          if(usuario.adm == true){
-            this.router.navigate(['home']); 
-            this.splashScreen.hide();
-            this.controledomenu.enable(true);
-          }else{
-            if(usuario.adm == false){
-              this.router.navigate(['home-funcionario']);
-              this.splashScreen.hide();
-              this.controledomenu.enable(false);
-            }else
-            this.router.navigate(['login']);
+        if (usuario.adm == true) {
+          this.router.navigate(['home']);
+          this.splashScreen.hide();
+          this.controledomenu.enable(true);
+        } else {
+          if (usuario.adm == false) {
+            this.router.navigate(['home-funcionario']);
             this.splashScreen.hide();
             this.controledomenu.enable(false);
-          }
+          } else
+            this.router.navigate(['login']);
+          this.splashScreen.hide();
+          this.controledomenu.enable(false);
+        }
       })
 
-      this.platform.ready().then(() => {
-    
-    //Muda Cor da Barra De Status
-      this.statusBar.backgroundColorByHexString('#17b336');  
+    this.platform.ready().then(() => {
+
+      //Muda Cor da Barra De Status
+      this.statusBar.backgroundColorByHexString('#17b336');
     });
 
   }
-  signOut(){
+  signOut() {
     this.afAuth.auth.signOut();
     this.controledomenu.enable(false);
     this.router.navigate(['login'])
-    }
+  }
 }

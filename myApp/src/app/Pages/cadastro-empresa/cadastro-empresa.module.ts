@@ -6,6 +6,7 @@ import { IonicModule } from '@ionic/angular';
 import { BrMaskerModule } from 'br-mask';
 import { CadastroEmpresaPage } from './cadastro-empresa.page';
 
+
 const routes: Routes = [
   {
     path: '',
@@ -23,4 +24,4 @@ const routes: Routes = [
   ],
   declarations: [CadastroEmpresaPage]
 })
-export class CadastroEmpresaPageModule {}
+export class CadastroEmpresaPageModule { }

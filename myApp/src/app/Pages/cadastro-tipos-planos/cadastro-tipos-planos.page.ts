@@ -7,83 +7,76 @@ import { AlertController } from '@ionic/angular';
   templateUrl: './cadastro-tipos-planos.page.html',
   styleUrls: ['./cadastro-tipos-planos.page.scss'],
 })
-export class CadastroTiposPLanosPage implements OnInit{
+export class CadastroTiposPLanosPage implements OnInit {
 
   cadastro = true;
   spinner = false;
 
 
-//Decreta Campos Nos Formularios
-cadastroForm = {
-  valor:'',
-  validadeAnos:'',
-  validadeMeses:'',
-  nome:'',
+  //Decreta Campos Nos Formularios
+  cadastroForm = {
+    valor: '',
+    validadeAnos: '',
+    validadeMeses: '',
+    nome: '',
 
-}
+  }
   // Construtor
   constructor(
     private firebaseProvider: FirebaseProvider,
-    public alertController: AlertController,  
-    ) {}
+    public alertController: AlertController,
+  ) { }
 
 
   //Verifica Campos 
-  verifica(){
-      if(this.cadastroForm.nome == ''){
+  verifica() {
+    if (this.cadastroForm.nome == '') {
+      this.presentAlert(1);
+    } else {
+      if (this.cadastroForm.valor == '') {
         this.presentAlert(1);
-      }else{
-       if(this.cadastroForm.validadeAnos == ''){
-         this.presentAlert(1);
-       }else{
-         if(this.cadastroForm.valor == ''){
-           this.presentAlert(1);
-         }else{
-           if(this.cadastroForm.validadeMeses == ''){
-             this.presentAlert(1);
-          }else{
-           this.criarNovoPlano();
-         }
-        }
-       }
+      }
+      else {
+        this.criarNovoPlano();
       }
     }
+  }
 
- //criaNovaConta
- criarNovoPlano(){
-  this.rodarSpinner();
-      // Coloca Campos No DB
-      let data = {
-          nome:this.cadastroForm.nome,
-          validadeAnos:this.cadastroForm.validadeAnos,
-          validadeMeses:this.cadastroForm.validadeMeses,
-          valor:this.cadastroForm.valor
-     };
+  //criaNovaConta
+  criarNovoPlano() {
+    this.rodarSpinner();
+    // Coloca Campos No DB
+    let data = {
+      nome: this.cadastroForm.nome,
+      validadeAnos: this.cadastroForm.validadeAnos,
+      validadeMeses: this.cadastroForm.validadeMeses,
+      valor: this.cadastroForm.valor
+    };
 
-     this.firebaseProvider.postPlano(data)
-     .then(() =>{
-       this.paraSpinner();
-       this.presentAlert(2);
-      }) 
-     .catch (() =>{
+    this.firebaseProvider.postPlano(data)
+      .then(() => {
+        this.paraSpinner();
+        this.presentAlert(2);
+      })
+      .catch(() => {
         this.presentAlert(3);
         this.paraSpinner();
-      }) 
- }
+      })
+  }
   // Loading 
-  rodarSpinner(){
+  rodarSpinner() {
     this.cadastro = false;
     this.spinner = true;
   }
-    //Parar Loading
-  paraSpinner(){
+  //Parar Loading
+  paraSpinner() {
     this.cadastro = true;
     this.spinner = false;
-    }
+  }
   //Alerta De Sucesso ou Nao
   async presentAlert(alerta) {
-    switch(alerta){
-      case 1:{
+    switch (alerta) {
+      case 1: {
         const alert = await this.alertController.create({
           header: 'Obrigatorio',
           message: 'Por Favor Preencha Todos Os Campos',
@@ -92,7 +85,7 @@ cadastroForm = {
         await alert.present();
         break;
       }
-      case 2:{
+      case 2: {
         const alert = await this.alertController.create({
           header: 'Sucesso',
           message: 'Plano Criado Com Sucesso',
@@ -101,26 +94,26 @@ cadastroForm = {
         await alert.present();
         break;
       }
-      case 3:{
+      case 3: {
         const alert = await this.alertController.create({
           header: 'Ops',
-          message:'Não Foi Possivel Cadastrar Este Plano',
+          message: 'Não Foi Possivel Cadastrar Este Plano',
           buttons: ['OK']
         });
         await alert.present();
         break;
       }
-      default:{
+      default: {
         const alert = await this.alertController.create({
           header: 'Ops',
-          message:'Alguma Coisa Deu Errada',
+          message: 'Alguma Coisa Deu Errada',
           buttons: ['OK']
         });
         await alert.present();
         break;
-      }
       }
     }
+  }
   ngOnInit() {
   }
 
