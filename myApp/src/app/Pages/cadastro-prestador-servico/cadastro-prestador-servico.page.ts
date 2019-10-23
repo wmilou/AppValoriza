@@ -5,7 +5,6 @@ import { AuthProvider } from '../../providers/auth';
 import { FileChooser } from '@ionic-native/file-chooser/ngx';
 import { File } from '@ionic-native/file/ngx';
 import { AngularFireStorage } from 'angularfire2/storage';
-import { Platform } from '@ionic/angular';
 @Component({
   selector: 'app-cadastro-prestador-servico',
   templateUrl: './cadastro-prestador-servico.page.html',
@@ -44,8 +43,6 @@ export class CadastroPrestadorServicoPage implements OnInit {
   campos = false;
   spinner = false;
   camposocultar = true;
-  uparMobile = null;
-  uparDesktop = null;
 
   // Construtor
   constructor(
@@ -55,18 +52,9 @@ export class CadastroPrestadorServicoPage implements OnInit {
     private fileChooser: FileChooser,
     private file: File,
     private afStorage: AngularFireStorage,
-    private platform: Platform
   ) {
-    this.verificaPlatafroma();
   }
   //verificaçao da platafroma para a mudanda de modo de upar documento
-  verificaPlatafroma() {
-    if (this.platform.is('android')) {
-      this.uparMobile = true;
-    } else {
-      this.uparDesktop = true;
-    }
-  }
 
 
   criarNovoPrestador(informacaoLogin) {
@@ -126,8 +114,9 @@ export class CadastroPrestadorServicoPage implements OnInit {
         dirpathsegments.pop();
         dirpath = dirpathsegments.join('/');
 
-        this.file.readAsArrayBuffer(dirpath, newuri.name).then(async (buffer) => {
-          await this.uparDocumento(buffer, newuri.name);
+        this.file.readAsArrayBuffer(dirpath, newuri.name).then((buffer) => {
+          alert("Upando");
+          this.uparDocumento(buffer, newuri.name);
         })
       })
     })
@@ -138,7 +127,7 @@ export class CadastroPrestadorServicoPage implements OnInit {
     this.afStorage.ref('pdfs/' + name).put(blob).then((d) => {
       alert("Done");
     }).catch((erro) => {
-      alert(JSON.stringify(erro));
+      alert("Erro:" + JSON.stringify(erro));
     });
   }
 

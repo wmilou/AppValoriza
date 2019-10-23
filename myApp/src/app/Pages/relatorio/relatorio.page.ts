@@ -1,9 +1,8 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { FirebaseProvider } from '../../providers/firebase';
 import { AlertController } from '@ionic/angular';
-import { formatDate } from '@angular/common';
 import * as jsPDF from 'jspdf';
-
+import { Platform } from '@ionic/angular';
 
 @Component({
   selector: 'app-relatorio',
@@ -23,6 +22,7 @@ export class RelatorioPage implements OnInit {
   pesos
   resultado = [];
   consultapor
+  botaoRelatorio = true;
 
   //Variaveis para Consulta 
   datainicio;
@@ -32,10 +32,19 @@ export class RelatorioPage implements OnInit {
   constructor(
     private firebaseProvider: FirebaseProvider,
     private alertController: AlertController,
+    private platform: Platform,
   ) {
     this.queryText = '';
+    this.verificaPlataforma();
   }
-
+  verificaPlataforma() {
+    if (this.platform.is('android')) {
+      this.botaoRelatorio = false;
+    }
+    else {
+      this.botaoRelatorio = true;
+    }
+  }
 
   //Metodos
   //gerar PDF

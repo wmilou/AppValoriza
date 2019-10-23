@@ -111,37 +111,6 @@
                     ></ion-input>
                 </ion-item>
                 <ion-item *ngIf="campos">
-                    <ion-label position="floating">Numero Da Licença De Operaçao</ion-label>
-                    <ion-input
-                        type="text"
-                        [(ngModel)]="cadastroPrestadorForm.cadri"
-                        [brmasker]="{type:num, len:9}"
-                    ></ion-input>
-                </ion-item>
-                <ion-item *ngIf="campos && uparDesktop">
-                    <ion-label>Documento Cadri</ion-label>
-                    <ion-input
-                        type="file"
-                        (change)="DocumentoSelecionado($event)"
-                    ></ion-input>
-                </ion-item>
-                <ion-item *ngIf="campos && uparMobile">
-                    <div
-                        class="botoes centro"
-                        (click)="selecionarDocumento()"
-                    >
-                        Selecionar Documento
-                    </div>
-                </ion-item>
-                <ion-item *ngIf="campos">
-                    <ion-label position="floating">Data Termino Licença</ion-label>
-                    <ion-datetime
-                        display-format="MM/DD/YYYY"
-                        max="2050-12-31"
-                        [(ngModel)]="cadastroPrestadorForm.terminolicenca"
-                    ></ion-datetime>
-                </ion-item>
-                <ion-item *ngIf="campos">
                     <ion-label position="floating">Bandeira</ion-label>
                     <ion-input
                         type="text"
@@ -192,6 +161,240 @@
                         [(ngModel)]="cadastroPrestadorForm.datatermino"
                     ></ion-datetime>
                 </ion-item>
+            </ion-list>
+            <ion-list>
+                <ion-item *ngIf="campos">
+                    <h1>Documentos</h1>
+                </ion-item>
+                <!-- Bloco De Documento -->
+                <ion-list>
+                    <ion-item *ngIf="campos">
+                        <h3>Cadri</h3>
+                    </ion-item>
+                    <ion-item *ngIf="campos">
+                        <ion-label>Documento Cadri :</ion-label>
+                        <ion-input
+                            type="file"
+                            (change)="DocumentoSelecionado($event)"
+                        ></ion-input>
+                    </ion-item>
+                    <ion-item *ngIf="campos">
+                        <ion-label position="floating">Validade</ion-label>
+                        <ion-datetime
+                            display-format="MM/DD/YYYY"
+                            max="2050-12-31"
+                            [(ngModel)]="cadastroPrestadorForm.terminolicenca"
+                        ></ion-datetime>
+                    </ion-item>
+                </ion-list>
+                <!-- Fim Bloco Documento -->
+                <!-- Bloco De Documento -->
+                <ion-list>
+                    <ion-item *ngIf="campos">
+                        <h3>Licença De Operaçao</h3>
+                    </ion-item>
+                    <ion-item *ngIf="campos">
+                        <ion-label>Documento Licença de operaçao :</ion-label>
+                        <ion-input
+                            type="file"
+                            (change)="DocumentoSelecionado($event)"
+                        ></ion-input>
+                    </ion-item>
+                    <ion-item *ngIf="campos">
+                        <ion-label position="floating">Validade</ion-label>
+                        <ion-datetime
+                            display-format="MM/DD/YYYY"
+                            max="2050-12-31"
+                            [(ngModel)]="cadastroPrestadorForm.terminolicenca"
+                        ></ion-datetime>
+                    </ion-item>
+                </ion-list>
+                <!-- Fim Bloco Documento -->
+                <!-- Bloco De Documento -->
+                <ion-list>
+                    <ion-item *ngIf="campos">
+                        <h3>Alvara</h3>
+                    </ion-item>
+
+                    <ion-item *ngIf="campos">
+                        <ion-label>Documento Alvara :</ion-label>
+                        <ion-input
+                            type="file"
+                            (change)="DocumentoSelecionado($event)"
+                        ></ion-input>
+                    </ion-item>
+                    <ion-item *ngIf="campos">
+                        <ion-label position="floating">Validade</ion-label>
+                        <ion-datetime
+                            display-format="MM/DD/YYYY"
+                            max="2050-12-31"
+                            [(ngModel)]="cadastroPrestadorForm.terminolicenca"
+                        ></ion-datetime>
+                    </ion-item>
+                </ion-list>
+                <!-- Fim Bloco Documento -->
+                <!-- Bloco De Documento -->
+                <ion-list>
+                    <ion-item *ngIf="campos">
+                        <h3>Certificade De Regularidade</h3>
+                    </ion-item>
+                    <ion-item *ngIf="campos">
+                        <ion-label>Documento CR :</ion-label>
+                        <ion-input
+                            type="file"
+                            (change)="DocumentoSelecionado($event)"
+                        ></ion-input>
+                    </ion-item>
+                    <ion-item *ngIf="campos">
+                        <ion-label position="floating">Validade</ion-label>
+                        <ion-datetime
+                            display-format="MM/DD/YYYY"
+                            max="2050-12-31"
+                            [(ngModel)]="cadastroPrestadorForm.terminolicenca"
+                        ></ion-datetime>
+                    </ion-item>
+                </ion-list>
+                <!-- Fim Bloco Documento -->
+                <!-- Bloco De Documento -->
+                <ion-list>
+                    <ion-item *ngIf="campos">
+                        <h3>
+                            Certificade De licença Do Corpo De Bombeiros
+                        </h3>
+                    </ion-item>
+                    <ion-item *ngIf="campos">
+                        <ion-label>Documento CLCB :</ion-label>
+                        <ion-input
+                            type="file"
+                            (change)="DocumentoSelecionado($event)"
+                        ></ion-input>
+                    </ion-item>
+                    <ion-item *ngIf="campos">
+                        <ion-label position="floating">Validade</ion-label>
+                        <ion-datetime
+                            display-format="MM/DD/YYYY"
+                            max="2050-12-31"
+                            [(ngModel)]="cadastroPrestadorForm.terminolicenca"
+                        ></ion-datetime>
+                    </ion-item>
+                </ion-list>
+                <!-- Fim Bloco Documento -->
+                <!-- Bloco De Documento -->
+                <ion-list>
+                    <ion-item *ngIf="campos">
+                        <h3>
+                            Cadastro Estadual De Vigilância Sanitária
+                        </h3>
+                    </ion-item>
+                    <ion-item *ngIf="campos">
+                        <ion-label>Documento CEVS :</ion-label>
+                        <ion-input
+                            type="file"
+                            (change)="DocumentoSelecionado($event)"
+                        ></ion-input>
+                    </ion-item>
+                    <ion-item *ngIf="campos">
+                        <ion-label position="floating">Validade</ion-label>
+                        <ion-datetime
+                            display-format="MM/DD/YYYY"
+                            max="2050-12-31"
+                            [(ngModel)]="cadastroPrestadorForm.terminolicenca"
+                        ></ion-datetime>
+                    </ion-item>
+                </ion-list>
+                <!-- Fim Bloco Documento -->
+                <!-- Bloco De Documento -->
+                <ion-list>
+                    <ion-item *ngIf="campos">
+                        <h3>
+                            Programa De Prevençoes De Riscos Ambientais
+                        </h3>
+                    </ion-item>
+                    <ion-item *ngIf="campos">
+                        <ion-label>Documento PPRA :</ion-label>
+                        <ion-input
+                            type="file"
+                            (change)="DocumentoSelecionado($event)"
+                        ></ion-input>
+                    </ion-item>
+                    <ion-item *ngIf="campos">
+                        <ion-label position="floating">Validade</ion-label>
+                        <ion-datetime
+                            display-format="MM/DD/YYYY"
+                            max="2050-12-31"
+                            [(ngModel)]="cadastroPrestadorForm.terminolicenca"
+                        ></ion-datetime>
+                    </ion-item>
+                </ion-list>
+                <!-- Fim Bloco Documento -->
+                <!-- Bloco De Documento -->
+                <ion-list>
+                    <ion-item *ngIf="campos">
+                        <h3>
+                            Programa De Controle Medico De Saúde Ocupacional
+                        </h3>
+                    </ion-item>
+                    <ion-item *ngIf="campos">
+                        <ion-label>Documento PCMSO :</ion-label>
+                        <ion-input
+                            type="file"
+                            (change)="DocumentoSelecionado($event)"
+                        ></ion-input>
+                    </ion-item>
+                    <ion-item *ngIf="campos">
+                        <ion-label position="floating">Validade</ion-label>
+                        <ion-datetime
+                            display-format="MM/DD/YYYY"
+                            max="2050-12-31"
+                            [(ngModel)]="cadastroPrestadorForm.terminolicenca"
+                        ></ion-datetime>
+                    </ion-item>
+                </ion-list>
+                <!-- Fim Bloco Documento -->
+                <!-- Bloco De Documento -->
+                <ion-list>
+                    <ion-item *ngIf="campos">
+                        <h3>Certificado PPRA e PCMSO</h3>
+                    </ion-item>
+                    <ion-item *ngIf="campos">
+                        <ion-label>Documento certificade PPRA|PCMSO :</ion-label>
+                        <ion-input
+                            type="file"
+                            (change)="DocumentoSelecionado($event)"
+                        ></ion-input>
+                    </ion-item>
+                    <ion-item *ngIf="campos">
+                        <ion-label position="floating">Validade</ion-label>
+                        <ion-datetime
+                            display-format="MM/DD/YYYY"
+                            max="2050-12-31"
+                            [(ngModel)]="cadastroPrestadorForm.terminolicenca"
+                        ></ion-datetime>
+                    </ion-item>
+                </ion-list>
+                <!-- Fim Bloco Documento -->
+                <!-- Bloco De Documento -->
+                <ion-list>
+                    <ion-item *ngIf="campos">
+                        <h3>Contrato Social</h3>
+                    </ion-item>
+                    <ion-item *ngIf="campos">
+                        <ion-label>Documento Contrato Social :</ion-label>
+                        <ion-input
+                            type="file"
+                            (change)="DocumentoSelecionado($event)"
+                        ></ion-input>
+                    </ion-item>
+                    <ion-item *ngIf="campos">
+                        <ion-label position="floating">Validade</ion-label>
+                        <ion-datetime
+                            display-format="MM/DD/YYYY"
+                            max="2050-12-31"
+                            [(ngModel)]="cadastroPrestadorForm.terminolicenca"
+                        ></ion-datetime>
+                    </ion-item>
+                </ion-list>
+                <!-- Fim Bloco Documento -->
             </ion-list>
             <!-- Setas De Abrir E fechar Campos a mais -->
             <div

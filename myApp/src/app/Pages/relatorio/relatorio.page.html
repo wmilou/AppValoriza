@@ -29,7 +29,7 @@
           (ionInput)="filterResiduo($event)"
           clearInput>
           <ion-buttons slot="primary">
-              <ion-button (click)="downloadPDF()">  
+              <ion-button (click)="downloadPDF()" *ngIf ="botaoRelatorio" >  
                   <ion-icon name="cloud-download"></ion-icon>
               </ion-button>
           <ion-button (click)="presentAlertCheckbox()">  

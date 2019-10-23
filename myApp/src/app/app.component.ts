@@ -108,7 +108,152 @@ export class AppComponent {
     private controledomenu: MenuController
   ) {
     this.initializeApp();
+    this.verificaPlataforma();
   }
+  verificaPlataforma() {
+    if (this.platform.is('android')) {
+      this.appPages = [
+        {
+          title: 'Home',
+          url: '/home',
+          icon: 'home'
+        },
+        {
+          title: 'Consulta',
+          children: [
+            {
+              title: 'Consulta Clientes',
+              url: '/controle',
+              icon: 'arrow-dropright'
+            },
+            {
+              title: 'Consulta Prestador',
+              url: '/consulta-prestador',
+              icon: 'arrow-dropright'
+            },
+            {
+              title: 'Consulta Residuo',
+              url: '/consulta-residuo',
+              icon: 'arrow-dropright'
+            },
+            {
+              title: 'Consulta Plano',
+              url: '/consulta-plano',
+              icon: 'arrow-dropright'
+            },
+            {
+              title: 'Consulta Tempo Real',
+              url: '/realtime-logs',
+              icon: 'arrow-dropright'
+            },
+
+
+          ],
+        },
+
+
+        {
+          title: 'Relatorios',
+          children: [
+            {
+              title: 'Relatorio',
+              url: '/relatorio',
+              icon: 'arrow-dropright'
+            },
+
+          ],
+        },
+
+
+      ];
+    } else {
+      this.appPages = [
+        {
+          title: 'Home',
+          url: '/home',
+          icon: 'home'
+        },
+        {
+          title: 'Cadastros',
+          children: [
+            {
+              title: 'Cadastro Usuario',
+              url: '/cadastro-usuario',
+              icon: 'arrow-dropright'
+            },
+            {
+              title: 'Cadastro Cliente',
+              url: '/cadastro-empresa',
+              icon: 'arrow-dropright'
+            },
+            {
+              title: 'Cadastro Prest. Servico',
+              url: '/cadastro-prestador-servico',
+              icon: 'arrow-dropright'
+            },
+            {
+              title: 'Cadastro Residuo',
+              url: '/cadastro-residuo',
+              icon: 'arrow-dropright'
+            },
+            {
+              title: 'Cadastro Tipos De Planos',
+              url: '/cadastro-tipos-planos',
+              icon: 'arrow-dropright'
+            }
+          ]
+        },
+        {
+          title: 'Consulta',
+          children: [
+            {
+              title: 'Consulta Clientes',
+              url: '/controle',
+              icon: 'arrow-dropright'
+            },
+            {
+              title: 'Consulta Prestador',
+              url: '/consulta-prestador',
+              icon: 'arrow-dropright'
+            },
+            {
+              title: 'Consulta Residuo',
+              url: '/consulta-residuo',
+              icon: 'arrow-dropright'
+            },
+            {
+              title: 'Consulta Plano',
+              url: '/consulta-plano',
+              icon: 'arrow-dropright'
+            },
+            {
+              title: 'Consulta Tempo Real',
+              url: '/realtime-logs',
+              icon: 'arrow-dropright'
+            },
+
+
+          ],
+        },
+
+
+        {
+          title: 'Relatorios',
+          children: [
+            {
+              title: 'Relatorio',
+              url: '/relatorio',
+              icon: 'arrow-dropright'
+            },
+
+          ],
+        },
+
+
+      ];
+    }
+  }
+
 
   // Decide para onde vai o usuario
   initializeApp() {
