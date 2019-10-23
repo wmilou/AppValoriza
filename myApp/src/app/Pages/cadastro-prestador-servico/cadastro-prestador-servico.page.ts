@@ -31,10 +31,19 @@ export class CadastroPrestadorServicoPage implements OnInit {
     prestador: '',
     representante: '',
     cadri: '',
-    terminolicenca: '',
     plano: '',
     datainicio: '',
     datatermino: '',
+    vencimentoCadri: '',
+    vencimentoLO: '',
+    vencimentoAlvara: '',
+    vencimentoCR: '',
+    vencimentoCLCB: '',
+    vencimentoCEVS: '',
+    vencimentoPPRA: '',
+    vencimentoPCMSO: '',
+    vencimentoPPRAePCMSO: '',
+    vencimentoContratoSocial: '',
   }
   //variavel para armazenamento do documento
   documentoselecionado;
@@ -77,13 +86,21 @@ export class CadastroPrestadorServicoPage implements OnInit {
       potencial: this.cadastroPrestadorForm.potencial,
       prestador: this.cadastroPrestadorForm.prestador,
       representante: this.cadastroPrestadorForm.representante,
-      cadri: this.cadastroPrestadorForm.cadri,
-      dataTerminoLicenca: this.cadastroPrestadorForm.terminolicenca,
       plano: this.cadastroPrestadorForm.plano,
       datainicio: this.cadastroPrestadorForm.datainicio,
       datatermino: this.cadastroPrestadorForm.datatermino,
       login: informacaoLogin.email,
-      senha: informacaoLogin.password
+      senha: informacaoLogin.password,
+      vencimentoCadri: this.cadastroPrestadorForm.vencimentoCadri,
+      vencimentoLO: this.cadastroPrestadorForm.vencimentoLO,
+      vencimentoAlvara: this.cadastroPrestadorForm.vencimentoAlvara,
+      vencimentoCR: this.cadastroPrestadorForm.vencimentoCR,
+      vencimentoCLCB: this.cadastroPrestadorForm.vencimentoCLCB,
+      vencimentoCEVS: this.cadastroPrestadorForm.vencimentoCEVS,
+      vencimentoPPRA: this.cadastroPrestadorForm.vencimentoPPRA,
+      vencimentoPCMSO: this.cadastroPrestadorForm.vencimentoPCMSO,
+      vencimentoPPRAePCMSO: this.cadastroPrestadorForm.vencimentoPPRAePCMSO,
+      vencimentoContratoSocial: this.cadastroPrestadorForm.vencimentoContratoSocial,
     };
     this.firebaseProvider.postPrestador(data)
       .then(() => {
