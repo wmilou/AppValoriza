@@ -50,7 +50,7 @@
     "core-js": "^2.5.4",
     "firebase": "^5.10.1",
     "install": "^0.12.2",
-    "jspdf": "^1.5.3",
+    "jspdf": "^2.3.1",
     "ngx-mask-ionic": "^1.1.2",
     "pdfmake": "^0.1.57",
     "primeng": "^7.1.3",
